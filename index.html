@@ -60,6 +60,28 @@
   .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);padding:2px 10px;border-radius:12px;font-size:.8rem;color:var(--dim);margin:2px}
   footer{text-align:center;padding:20px;color:var(--dim);font-size:.85rem;border-top:1px solid var(--line)}
   kbd{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.85em}
+  /* ---- mission mode ---- */
+  .mpills{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+  .mpills button{background:var(--card2);border:1px solid var(--line);color:var(--dim);width:38px;height:38px;border-radius:50%;cursor:pointer;font-family:inherit;font-weight:bold}
+  .mpills button.cur{background:var(--acc);color:#fff;border-color:var(--acc)}
+  .mpills button.done{background:var(--ok);color:#052e22;border-color:var(--ok)}
+  .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  @media(max-width:700px){.mgrid{grid-template-columns:1fr}}
+  .mgrid iframe{width:100%;height:260px;background:#fff;border:1px solid var(--line);border-radius:8px}
+  .mgrid .lbl{font-size:.85rem;color:var(--dim);margin-bottom:4px}
+  #mEd{width:100%;height:260px;background:#0a0a18;color:#e0e7ff;border:1px solid var(--acc);border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:.85rem;resize:vertical;tab-size:2}
+  .checks{margin:10px 0}
+  .checks div{padding:6px 12px;border-radius:8px;margin:4px 0;font-size:.92rem}
+  .cpass{background:#0b3b2a;color:#6ee7b7}
+  .cfail{background:#3f1220;color:#fda4af}
+  .cwait{background:var(--card2);color:var(--dim)}
+  .how{background:#172554;border:1px solid #3b82f6;border-radius:10px;padding:12px 14px;margin:10px 0;font-size:.92rem}
+  .how b{color:#93c5fd}
+  .win{background:linear-gradient(135deg,#065f46,#047857);border-radius:10px;padding:14px;text-align:center;font-weight:bold;margin:10px 0;display:none}
+  .imgbank{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .imgbank figure{background:var(--card2);border-radius:8px;padding:6px;text-align:center;font-size:.75rem;color:var(--dim)}
+  .imgbank img{width:110px;height:74px;object-fit:cover;border-radius:6px;display:block;margin-bottom:4px}
+  .imgbank code{font-size:.7rem;word-break:break-all}
 </style>
 </head>
 <body>
@@ -73,6 +95,7 @@
   <button class="active" onclick="go('d1',this)">วัน 1: HTML</button>
   <button onclick="go('d2',this)">วัน 2: CSS</button>
   <button onclick="go('d3',this)">วัน 3: จำลองแข่ง</button>
+  <button onclick="go('train',this)">💪 ภารกิจฝึก</button>
   <button onclick="go('play',this)">🧪 สนามลอง</button>
   <button onclick="go('cheat',this)">📄 สูตรต้องจำ</button>
 </nav>
@@ -354,6 +377,55 @@ nav a:hover { color: #fbbf24; }</code></pre>
   </div>
 </section>
 
+<!-- ================= MISSIONS ================= -->
+<section id="train" class="page">
+  <h2>💪 ภารกิจฝึก — เขียนเอง ตรวจให้อัตโนมัติ</h2>
+  <p class="dim">ดูเป้าหมายฝั่งซ้าย → เขียนโค้ดให้ได้เหมือน → กด "ตรวจคำตอบ" → ผ่านแล้วไปด่านถัดไป. ติดจริง ๆ ค่อยกดดูเฉลย</p>
+
+  <div class="mpills" id="mpills"></div>
+
+  <div class="card">
+    <h3 id="mTitle"></h3>
+    <p id="mGoal"></p>
+    <div class="how" id="mHow"></div>
+
+    <div class="mgrid">
+      <div>
+        <div class="lbl">🎯 เป้าหมาย (ต้องทำให้ได้แบบนี้)</div>
+        <iframe id="mTarget" title="เป้าหมาย"></iframe>
+      </div>
+      <div>
+        <div class="lbl">👀 ผลของคุณ (อัปเดตสดตอนพิมพ์)</div>
+        <iframe id="mFrame" title="ผลของคุณ"></iframe>
+      </div>
+    </div>
+
+    <div class="lbl">⌨️ เขียนโค้ดตรงนี้</div>
+    <textarea id="mEd" spellcheck="false"></textarea>
+
+    <div class="btnrow" style="justify-content:flex-start">
+      <button class="btn2 go" onclick="checkMission()">✔ ตรวจคำตอบ</button>
+      <button class="btn2" onclick="showHint()">💡 ดูเฉลย (ใช้เมื่อจนมุม)</button>
+      <button class="btn2" onclick="resetMission()">↺ เริ่มด่านใหม่</button>
+    </div>
+
+    <div class="checks" id="mChecks"></div>
+    <div class="win" id="mWin">🎉 ผ่านด่าน! เก่งมาก — <button class="btn2 go" onclick="nextMission()">ไปด่านถัดไป ▶</button></div>
+  </div>
+
+  <div class="card">
+    <h3>🖼 คลังรูปจากเน็ต (copy ลิงก์ไปใช้ในโค้ดได้เลย)</h3>
+    <p class="dim">รูปจริงจาก picsum.photos — เว็บแจกรูปฟรีสำหรับฝึกเขียนเว็บ. เปลี่ยนตัวเลขท้าย = เปลี่ยนขนาด</p>
+    <div class="imgbank">
+      <figure><img src="https://picsum.photos/id/237/220/148" alt="หมาดำ"><figcaption>หมา</figcaption><code>https://picsum.photos/id/237/300/200</code></figure>
+      <figure><img src="https://picsum.photos/id/1015/220/148" alt="แม่น้ำกลางหุบเขา"><figcaption>แม่น้ำ</figcaption><code>https://picsum.photos/id/1015/300/200</code></figure>
+      <figure><img src="https://picsum.photos/id/1035/220/148" alt="ภูเขาหิมะ"><figcaption>ภูเขา</figcaption><code>https://picsum.photos/id/1035/300/200</code></figure>
+      <figure><img src="https://picsum.photos/id/1080/220/148" alt="สตรอว์เบอร์รี"><figcaption>สตรอว์เบอร์รี</figcaption><code>https://picsum.photos/id/1080/300/200</code></figure>
+      <figure><img src="https://picsum.photos/id/1084/220/148" alt="วอลรัสริมทะเล"><figcaption>สัตว์ทะเล</figcaption><code>https://picsum.photos/id/1084/300/200</code></figure>
+    </div>
+  </div>
+</section>
+
 <!-- ================= PLAYGROUND ================= -->
 <section id="play" class="page">
   <h2>🧪 สนามลอง — พิมพ์ซ้าย เห็นผลขวา</h2>
@@ -429,6 +501,12 @@ body { font-family: 'Kanit', sans-serif; }</code></pre>
 <footer>ค่ายซ้อมเว็บ 3 วัน — สู้ ๆ วันแข่ง! 💪</footer>
 
 <script>
+// safe storage: falls back to in-memory when localStorage is blocked (data:/sandbox)
+const store = (()=>{ try {
+  localStorage.setItem('_t','1'); localStorage.removeItem('_t'); return localStorage;
+} catch(e){ const m={}; return {
+  getItem:k=>k in m?m[k]:null, setItem:(k,v)=>{m[k]=String(v)}, removeItem:k=>{delete m[k]}
+};}})();
 // ---------- nav ----------
 function go(id, btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
@@ -438,23 +516,23 @@ function go(id, btn){
   window.scrollTo(0,0);
 }
 
-// ---------- checklist + progress (localStorage) ----------
+// ---------- checklist + progress (store) ----------
 function tick(row, id){
   const cb = document.getElementById(id);
   if (event.target !== cb) cb.checked = !cb.checked;
   row.classList.toggle('done', cb.checked);
-  localStorage.setItem('chk_'+id, cb.checked ? '1' : '0');
+  store.setItem('chk_'+id, cb.checked ? '1' : '0');
   updateBars();
 }
 function updateBars(){
   [['d1',['d1a','d1b','d1c','d1d']],['d2',['d2a','d2b','d2c','d2d']]].forEach(([day,ids])=>{
-    const done = ids.filter(i=>localStorage.getItem('chk_'+i)==='1').length;
+    const done = ids.filter(i=>store.getItem('chk_'+i)==='1').length;
     const bar = document.getElementById('bar-'+day);
     if (bar) bar.style.width = (done/ids.length*100)+'%';
   });
 }
 document.querySelectorAll('.chk input').forEach(cb=>{
-  if (localStorage.getItem('chk_'+cb.id)==='1'){
+  if (store.getItem('chk_'+cb.id)==='1'){
     cb.checked = true;
     cb.closest('.chk').classList.add('done');
   }
@@ -621,6 +699,235 @@ ed.addEventListener('keydown', e=>{
     const s=ed.selectionStart; ed.setRangeText('  ',s,ed.selectionEnd,'end'); }
 });
 run();
+
+// ---------- mission engine ----------
+const M = [
+{
+ t:'ด่าน 1: โครงเว็บแรก',
+ goal:'สร้างโครง HTML ครบชุด และมี <h1> เขียนว่าอะไรก็ได้ 1 บรรทัด',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser อ่านไฟล์จากบนลงล่างทีละบรรทัด เจอ DOCTYPE = รู้ว่าเป็น HTML5, เจอ head = เก็บข้อมูลเบื้องหลัง, เจอ body = เริ่มวาดจอ. เจอ h1 = สร้างกล่องตัวหนาใหญ่แล้ววางบนสุด',
+ start:'<!-- พิมพ์โครงเว็บตรงนี้ (จำจากบทเรียนวัน 1) -->\n',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เว็บของฉัน</title>\n</head>\n<body>\n  <h1>สวัสดีชาวโลก</h1>\n</body>\n</html>',
+ checks:[
+  ['มี <!DOCTYPE html> บรรทัดแรก',(d,s)=>/^\s*(<!--[\s\S]*?-->\s*)*<!doctype html>/i.test(s)],
+  ['มี <html> และ </html>',(d,s)=>/<html[\s>]/i.test(s)&&/<\/html>/i.test(s)],
+  ['มี charset UTF-8',(d,s)=>/charset\s*=\s*["']?utf-8/i.test(s)],
+  ['มี <title>',d=>!!d.querySelector('title')],
+  ['มี <h1> พร้อมข้อความ',d=>{const h=d.querySelector('body h1');return h&&h.textContent.trim().length>0}]
+ ]
+},
+{
+ t:'ด่าน 2: ย่อหน้า + ตัวหนา ตัวเอียง',
+ goal:'เพิ่ม <p> อย่างน้อย 2 ย่อหน้า, ย่อหน้าไหนก็ได้มี <b>ตัวหนา</b> และ <i>ตัวเอียง</i> อย่างละ 1 ที่',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> p เป็นกล่อง "block" — จองเต็มความกว้าง เลยขึ้นบรรทัดใหม่เสมอ. ส่วน b/i เป็น "inline" — แทรกในบรรทัดเดิมไม่ตัดบรรทัด. นี่คือเหตุผลที่ p ต่อกันเป็นชั้น แต่ b อยู่กลางประโยคได้',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ฝึกย่อหน้า</title>\n</head>\n<body>\n  <h1>แนะนำตัว</h1>\n  <!-- เพิ่ม p 2 อัน มี b กับ i -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ฝึกย่อหน้า</title>\n</head>\n<body>\n  <h1>แนะนำตัว</h1>\n  <p>ผมชื่อ <b>ต้นกล้า</b> เรียนอยู่ ม.2</p>\n  <p>ชอบ <i>เขียนเว็บ</i> มากที่สุด</p>\n</body>\n</html>',
+ checks:[
+  ['มี <p> อย่างน้อย 2 อัน',d=>d.querySelectorAll('p').length>=2],
+  ['มี <b> ในเนื้อหา',d=>!!d.querySelector('b,strong')],
+  ['มี <i> ในเนื้อหา',d=>!!d.querySelector('i,em')]
+ ]
+},
+{
+ t:'ด่าน 3: ใส่รูปจากเน็ต',
+ goal:'ใส่รูปหมาจากคลังรูปข้างล่าง (copy ลิงก์ picsum) พร้อม alt และ width="300"',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> เจอ <img> browser จะยิงคำขอไปที่ URL ใน src แล้วโหลดรูปมาแปะ. ถ้าโหลดไม่ได้ (เน็ตหลุด/ลิงก์ผิด) จะโชว์ข้อความใน alt แทน — กรรมการเช็ค alt เพราะมันช่วยคนตาบอดที่ใช้โปรแกรมอ่านจอด้วย',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>รูปแรก</title>\n</head>\n<body>\n  <h1>น้องหมา</h1>\n  <!-- ใส่ img ตรงนี้ -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>รูปแรก</title>\n</head>\n<body>\n  <h1>น้องหมา</h1>\n  <img src="https://picsum.photos/id/237/300/200" alt="หมาดำน่ารัก" width="300">\n</body>\n</html>',
+ checks:[
+  ['มี <img> ที่ src เป็นลิงก์ picsum',d=>{const i=d.querySelector('img');return i&&/picsum\.photos/.test(i.getAttribute('src')||'')}],
+  ['มี alt อธิบายรูป',d=>{const i=d.querySelector('img');return i&&(i.getAttribute('alt')||'').trim().length>0}],
+  ['กำหนด width',d=>{const i=d.querySelector('img');return i&&!!i.getAttribute('width')}]
+ ]
+},
+{
+ t:'ด่าน 4: ลิงก์',
+ goal:'ทำลิงก์ 2 อัน: อันแรกไป https://www.google.com อันที่สองไปเว็บอะไรก็ได้',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> <a> ทำให้ข้อความกลายเป็นจุดคลิก. พอคลิก browser อ่านค่า href แล้วพาไป URL นั้น. ข้อความสีน้ำเงินขีดเส้นใต้ = สไตล์อัตโนมัติของ browser (เดี๋ยว CSS เปลี่ยนได้)',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลิงก์</title>\n</head>\n<body>\n  <h1>เว็บโปรดของฉัน</h1>\n  <!-- ลิงก์ 2 อัน -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลิงก์</title>\n</head>\n<body>\n  <h1>เว็บโปรดของฉัน</h1>\n  <p><a href="https://www.google.com">กูเกิล</a></p>\n  <p><a href="https://www.youtube.com">ยูทูบ</a></p>\n</body>\n</html>',
+ checks:[
+  ['มี <a> อย่างน้อย 2 อัน',d=>d.querySelectorAll('a[href]').length>=2],
+  ['อันหนึ่งชี้ไป google.com',d=>[...d.querySelectorAll('a')].some(a=>/google\.com/.test(a.getAttribute('href')||''))],
+  ['ทุกลิงก์มีข้อความให้คลิก',d=>[...d.querySelectorAll('a')].every(a=>a.textContent.trim().length>0)]
+ ]
+},
+{
+ t:'ด่าน 5: ลิสต์ 2 แบบ',
+ goal:'ทำ <ul> ของโปรด 3 ข้อ และ <ol> ขั้นตอนอะไรสักอย่าง 3 ขั้น',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser เจอ ul/ol จะสร้าง "กล่องรายการ" แล้วไล่นับลูก <li> ข้างใน — ul แปะจุดหน้าทุกข้อ, ol แปะเลขเรียง 1 2 3 ให้เองอัตโนมัติ เราไม่ต้องพิมพ์เลขเอง (ลบข้อกลางออก เลขก็เรียงใหม่เอง)',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลิสต์</title>\n</head>\n<body>\n  <h2>ของโปรด</h2>\n  <!-- ul 3 ข้อ -->\n  <h2>ขั้นตอน</h2>\n  <!-- ol 3 ขั้น -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลิสต์</title>\n</head>\n<body>\n  <h2>ของโปรด</h2>\n  <ul>\n    <li>เกม</li>\n    <li>ฟุตบอล</li>\n    <li>เขียนเว็บ</li>\n  </ul>\n  <h2>ขั้นตอนทำมาม่า</h2>\n  <ol>\n    <li>ต้มน้ำ</li>\n    <li>ใส่เส้น</li>\n    <li>ใส่เครื่องปรุง</li>\n  </ol>\n</body>\n</html>',
+ checks:[
+  ['มี <ul> ที่มี <li> ครบ 3',d=>{const u=d.querySelector('ul');return u&&u.querySelectorAll('li').length>=3}],
+  ['มี <ol> ที่มี <li> ครบ 3',d=>{const o=d.querySelector('ol');return o&&o.querySelectorAll('li').length>=3}]
+ ]
+},
+{
+ t:'ด่าน 6: ตาราง',
+ goal:'ตารางเมนูอาหาร: หัวตาราง "เมนู" กับ "ราคา" + ข้อมูล 2 แถว',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser ประกอบตารางจากนอกเข้าใน: table = ทั้งตาราง, tr = แถวหนึ่ง, ช่องในแถวคือ th (หัว, หนา+กลาง) หรือ td (ข้อมูล). จำนวนช่องแต่ละแถวต้องเท่ากัน ไม่งั้นตารางเบี้ยว',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ตาราง</title>\n</head>\n<body>\n  <h2>เมนูร้านฉัน</h2>\n  <table border="1">\n    <!-- แถวหัว th, แถวข้อมูล td -->\n  </table>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ตาราง</title>\n</head>\n<body>\n  <h2>เมนูร้านฉัน</h2>\n  <table border="1">\n    <tr><th>เมนู</th><th>ราคา</th></tr>\n    <tr><td>ข้าวผัด</td><td>50</td></tr>\n    <tr><td>กะเพราไก่</td><td>55</td></tr>\n  </table>\n</body>\n</html>',
+ checks:[
+  ['มี <table>',d=>!!d.querySelector('table')],
+  ['มี <th> อย่างน้อย 2 ช่อง',d=>d.querySelectorAll('th').length>=2],
+  ['มีแถวข้อมูล (td) อย่างน้อย 2 แถว',d=>{const rows=[...d.querySelectorAll('tr')].filter(r=>r.querySelector('td'));return rows.length>=2}]
+ ]
+},
+{
+ t:'ด่าน 7: CSS แรก — ใส่สี',
+ goal:'ใส่ <style> ใน head: พื้นหลัง body สีอ่อน, h1 สีม่วง (#7c3aed) และจัดกลาง (text-align)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser อ่าน HTML เสร็จได้ "ต้นไม้กล่อง" แล้วค่อยเอา CSS มาทาทีละกฎ: หา tag ที่ตรงชื่อ แล้วเปลี่ยนคุณสมบัติ. HTML = โครงกระดูก, CSS = สีผิว+เสื้อผ้า แยกกันคนละหน้าที่',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>สีแรก</title>\n  <style>\n    /* เขียน CSS ตรงนี้ */\n  </style>\n</head>\n<body>\n  <h1>เว็บมีสี</h1>\n  <p>สวยขึ้นเยอะ</p>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>สีแรก</title>\n  <style>\n    body { background-color: #faf5ff; }\n    h1 { color: #7c3aed; text-align: center; }\n  </style>\n</head>\n<body>\n  <h1>เว็บมีสี</h1>\n  <p>สวยขึ้นเยอะ</p>\n</body>\n</html>',
+ checks:[
+  ['มี <style> ใน head',d=>!!d.querySelector('head style')],
+  ['body มี background',(d,s)=>/body\s*{[^}]*background/is.test(s)],
+  ['h1 มี color',(d,s)=>/h1\s*{[^}]*color\s*:/is.test(s)],
+  ['h1 จัดกลาง text-align: center',(d,s)=>/h1\s*{[^}]*text-align\s*:\s*center/is.test(s)]
+ ]
+},
+{
+ t:'ด่าน 8: กล่องสวย',
+ goal:'ทำ div class="box" ใส่ padding, border, border-radius, box-shadow ครบ 4 อย่าง',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ทุก tag คือกล่องซ้อน 4 ชั้น: เนื้อหา → padding (เบาะใน) → border (กำแพง) → margin (ถอยห่างเพื่อนบ้าน). border-radius ลบมุมกำแพงให้โค้ง, box-shadow วาดเงาใต้กล่อง = ดูลอย. กด F12 ใน Chrome ดูกล่องพวกนี้ได้จริง',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>กล่อง</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .box {\n      background: white;\n      width: 300px;\n      /* เพิ่ม padding, border, border-radius, box-shadow */\n    }\n  </style>\n</head>\n<body>\n  <div class="box">\n    <h3>กล่องของฉัน</h3>\n    <p>ทำให้สวยหน่อย</p>\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>กล่อง</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .box {\n      background: white;\n      width: 300px;\n      padding: 20px;\n      border: 2px solid #7c3aed;\n      border-radius: 12px;\n      box-shadow: 0 4px 10px rgba(0,0,0,.2);\n    }\n  </style>\n</head>\n<body>\n  <div class="box">\n    <h3>กล่องของฉัน</h3>\n    <p>ทำให้สวยหน่อย</p>\n  </div>\n</body>\n</html>',
+ checks:[
+  ['.box มี padding',(d,s)=>/\.box\s*{[^}]*padding\s*:/is.test(s)],
+  ['.box มี border',(d,s)=>/\.box\s*{[^}]*border\s*:/is.test(s)],
+  ['.box มี border-radius',(d,s)=>/\.box\s*{[^}]*border-radius\s*:/is.test(s)],
+  ['.box มี box-shadow',(d,s)=>/\.box\s*{[^}]*box-shadow\s*:/is.test(s)]
+ ]
+},
+{
+ t:'ด่าน 9: Flexbox เรียงแถว',
+ goal:'ทำกล่อง 3 ใบใน div class="row" ให้เรียงแนวนอน กลางจอ มีช่องห่าง (display:flex + gap + justify-content)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ปกติ div เป็น block = ต่อกันแนวตั้ง. พอตัวแม่ประกาศ display:flex ตัวแม่จะเปลี่ยนกติกาให้ลูก "เข้าแถวแนวนอน" — gap คือระยะระหว่างลูก, justify-content เลื่อนทั้งแถวซ้าย/กลาง/ขวา. คำสั่งใส่ที่แม่ ไม่ใช่ที่ลูก!',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Flex</title>\n  <style>\n    .row {\n      /* ทำให้ลูกเรียงแนวนอน กลางจอ ห่างกัน 16px */\n    }\n    .item { background: #7c3aed; color: white; padding: 30px; border-radius: 10px; }\n  </style>\n</head>\n<body>\n  <div class="row">\n    <div class="item">1</div>\n    <div class="item">2</div>\n    <div class="item">3</div>\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Flex</title>\n  <style>\n    .row {\n      display: flex;\n      gap: 16px;\n      justify-content: center;\n    }\n    .item { background: #7c3aed; color: white; padding: 30px; border-radius: 10px; }\n  </style>\n</head>\n<body>\n  <div class="row">\n    <div class="item">1</div>\n    <div class="item">2</div>\n    <div class="item">3</div>\n  </div>\n</body>\n</html>',
+ checks:[
+  ['.row มี display: flex',(d,s)=>/\.row\s*{[^}]*display\s*:\s*flex/is.test(s)],
+  ['.row มี gap',(d,s)=>/\.row\s*{[^}]*gap\s*:/is.test(s)],
+  ['.row มี justify-content: center',(d,s)=>/\.row\s*{[^}]*justify-content\s*:\s*center/is.test(s)]
+ ]
+},
+{
+ t:'ด่าน 10: เมนูบาร์ + hover',
+ goal:'ทำ nav 3 ลิงก์ พื้นเข้ม ตัวหนังสือขาว ไม่มีขีดเส้นใต้ + เมาส์ชี้แล้วเปลี่ยนสี (:hover)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> :hover คือ "สถานะ" — browser คอยจับตำแหน่งเมาส์ตลอด พอเมาส์ทับ element ไหน กฎ :hover ของตัวนั้นถูกเปิดใช้ทันที เมาส์ออกก็คืนค่าเดิม. ไม่ต้องเขียนโปรแกรมเลย CSS จัดการเอง',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เมนู</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    /* แต่ง nav และ nav a และ nav a:hover */\n  </style>\n</head>\n<body>\n  <nav>\n    <a href="#">หน้าแรก</a>\n    <a href="#">เกี่ยวกับ</a>\n    <a href="#">ติดต่อ</a>\n  </nav>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เมนู</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    nav { display: flex; gap: 20px; justify-content: center;\n          background: #4c1d95; padding: 14px; }\n    nav a { color: white; text-decoration: none; font-weight: bold; }\n    nav a:hover { color: #fbbf24; }\n  </style>\n</head>\n<body>\n  <nav>\n    <a href="#">หน้าแรก</a>\n    <a href="#">เกี่ยวกับ</a>\n    <a href="#">ติดต่อ</a>\n  </nav>\n</body>\n</html>',
+ checks:[
+  ['nav มีพื้นหลัง (background)',(d,s)=>/nav\s*{[^}]*background/is.test(s)],
+  ['nav a สีขาว + ไม่มีขีดเส้นใต้',(d,s)=>/nav\s+a\s*{[^}]*text-decoration\s*:\s*none/is.test(s)],
+  ['มีกฎ nav a:hover',(d,s)=>/nav\s+a\s*:\s*hover\s*{[^}]*}/is.test(s)]
+ ]
+},
+{
+ t:'ด่าน 11: การ์ดรูปสัตว์',
+ goal:'การ์ด 2 ใบเรียงแถว แต่ละใบมีรูปจากคลัง (picsum) + h3 + p — รวมทุกอย่างที่เรียนมา',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> นี่คือสูตรเว็บจริงทุกเว็บ: กล่องแม่ flex → ลูกเป็นการ์ด → ในการ์ดมีรูป+ข้อความ. img ใส่ width:100% = รูปยืดพอดีการ์ดเสมอไม่ล้น. เว็บขายของ เว็บข่าว ใช้โครงนี้ทั้งนั้น',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>การ์ด</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .row { display: flex; gap: 16px; justify-content: center; }\n    .card {\n      background: white; border-radius: 12px; padding: 16px; width: 220px;\n      box-shadow: 0 4px 12px rgba(0,0,0,.15);\n    }\n    .card img { width: 100%; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <h2 style="text-align:center">สัตว์โลกน่ารัก</h2>\n  <div class="row">\n    <!-- การ์ด 2 ใบ: div.card > img + h3 + p -->\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>การ์ด</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .row { display: flex; gap: 16px; justify-content: center; }\n    .card {\n      background: white; border-radius: 12px; padding: 16px; width: 220px;\n      box-shadow: 0 4px 12px rgba(0,0,0,.15);\n    }\n    .card img { width: 100%; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <h2 style="text-align:center">สัตว์โลกน่ารัก</h2>\n  <div class="row">\n    <div class="card">\n      <img src="https://picsum.photos/id/237/300/200" alt="หมาดำ">\n      <h3>น้องหมา</h3>\n      <p>ซื่อสัตย์ ขี้เล่น</p>\n    </div>\n    <div class="card">\n      <img src="https://picsum.photos/id/1084/300/200" alt="วอลรัส">\n      <h3>วอลรัส</h3>\n      <p>อยู่ทะเลหนาว</p>\n    </div>\n  </div>\n</body>\n</html>',
+ checks:[
+  ['มี .card อย่างน้อย 2 ใบ',d=>d.querySelectorAll('.card').length>=2],
+  ['ทุกการ์ดมีรูป picsum',d=>[...d.querySelectorAll('.card')].every(c=>{const i=c.querySelector('img');return i&&/picsum/.test(i.getAttribute('src')||'')})],
+  ['ทุกการ์ดมี h3 และ p',d=>[...d.querySelectorAll('.card')].every(c=>c.querySelector('h3')&&c.querySelector('p'))]
+ ]
+},
+{
+ t:'ด่าน 12: บอสใหญ่ — เว็บเต็มหน้า',
+ goal:'รวมทุกอย่าง: header ไล่เฉดสี + nav 3 ลิงก์มี hover + main มีรูป 1 + ลิสต์ 1 + ตาราง 1 + footer ชื่อคุณ. หัวข้อ: "จังหวัดของฉัน"',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> นี่คือข้อสอบวันแข่งย่อส่วน. ลำดับมือโปร: โครง header/nav/main/footer ก่อน → เนื้อหาให้ครบ → ค่อยแต่งสี. ทำผ่านด่านนี้ได้ = พร้อมลงสนามจริง',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>จังหวัดของฉัน</title>\n  <style>\n    /* จัดเต็มเลย */\n  </style>\n</head>\n<body>\n  <!-- header + nav + main + footer -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>จังหวัดของฉัน</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; background: #faf5ff; }\n    header { background: linear-gradient(135deg, #7c3aed, #ec4899);\n             color: white; text-align: center; padding: 30px; }\n    nav { display: flex; gap: 20px; justify-content: center;\n          background: #4c1d95; padding: 12px; }\n    nav a { color: white; text-decoration: none; font-weight: bold; }\n    nav a:hover { color: #fbbf24; }\n    main { max-width: 700px; margin: 0 auto; padding: 20px; }\n    table { border-collapse: collapse; }\n    th, td { border: 1px solid #999; padding: 8px 14px; }\n    footer { text-align: center; background: #4c1d95; color: white; padding: 12px; }\n  </style>\n</head>\n<body>\n  <header><h1>จังหวัดของฉัน</h1></header>\n  <nav>\n    <a href="#">หน้าแรก</a>\n    <a href="#">ที่เที่ยว</a>\n    <a href="#">ของกิน</a>\n  </nav>\n  <main>\n    <h2>ธรรมชาติสวย ๆ</h2>\n    <img src="https://picsum.photos/id/1015/400/250" alt="แม่น้ำกลางหุบเขา" width="400">\n    <h2>ของขึ้นชื่อ</h2>\n    <ul>\n      <li>ผลไม้ตามฤดู</li>\n      <li>อาหารพื้นบ้าน</li>\n      <li>งานหัตถกรรม</li>\n    </ul>\n    <h2>เทศกาลประจำปี</h2>\n    <table>\n      <tr><th>เดือน</th><th>งาน</th></tr>\n      <tr><td>เมษายน</td><td>สงกรานต์</td></tr>\n      <tr><td>พฤศจิกายน</td><td>ลอยกระทง</td></tr>\n    </table>\n  </main>\n  <footer>จัดทำโดย ด.ช.ต้นกล้า ม.2</footer>\n</body>\n</html>',
+ checks:[
+  ['มี header + nav + main + footer ครบ',d=>['header','nav','main','footer'].every(t=>d.querySelector(t))],
+  ['header มี gradient',(d,s)=>/header\s*{[^}]*linear-gradient/is.test(s)],
+  ['nav มี 3 ลิงก์ + :hover',(d,s)=>d.querySelectorAll('nav a').length>=3&&/:\s*hover/i.test(s)],
+  ['main มีรูปพร้อม alt',d=>{const i=d.querySelector('main img');return i&&(i.getAttribute('alt')||'').trim().length>0}],
+  ['มีลิสต์ (ul หรือ ol)',d=>!!d.querySelector('main ul, main ol')],
+  ['มีตาราง',d=>!!d.querySelector('main table')],
+  ['footer มีข้อความ',d=>{const f=d.querySelector('footer');return f&&f.textContent.trim().length>0}]
+ ]
+}
+];
+
+let mi = 0;
+const mEd = document.getElementById('mEd');
+function loadMission(i){
+  mi = i;
+  const m = M[i];
+  document.getElementById('mTitle').textContent = m.t;
+  document.getElementById('mGoal').textContent = '🎯 ' + m.goal;
+  document.getElementById('mHow').innerHTML = m.how;
+  document.getElementById('mTarget').srcdoc = m.sol;
+  const saved = store.getItem('mcode_'+i);
+  mEd.value = saved !== null ? saved : m.start;
+  document.getElementById('mFrame').srcdoc = mEd.value;
+  document.getElementById('mWin').style.display = 'none';
+  renderChecks(m.checks.map(()=>null));
+  renderPills();
+}
+function renderPills(){
+  const el = document.getElementById('mpills');
+  el.innerHTML = '';
+  M.forEach((m,i)=>{
+    const b = document.createElement('button');
+    b.textContent = i+1;
+    if (i===mi) b.classList.add('cur');
+    if (store.getItem('mdone_'+i)==='1') b.classList.add('done');
+    b.onclick = ()=>loadMission(i);
+    el.appendChild(b);
+  });
+}
+function renderChecks(results){
+  const m = M[mi];
+  const el = document.getElementById('mChecks');
+  el.innerHTML = '';
+  m.checks.forEach((c,idx)=>{
+    const d = document.createElement('div');
+    const r = results[idx];
+    d.className = r===null ? 'cwait' : r ? 'cpass' : 'cfail';
+    d.textContent = (r===null ? '◻ ' : r ? '✔ ' : '✘ ') + c[0];
+    el.appendChild(d);
+  });
+}
+function checkMission(){
+  const src = mEd.value;
+  const doc = new DOMParser().parseFromString(src, 'text/html');
+  const m = M[mi];
+  const results = m.checks.map(c=>{ try { return !!c[1](doc, src); } catch(e){ return false; } });
+  renderChecks(results);
+  document.getElementById('mFrame').srcdoc = src;
+  if (results.every(r=>r)){
+    store.setItem('mdone_'+mi, '1');
+    document.getElementById('mWin').style.display = 'block';
+    renderPills();
+  }
+}
+function showHint(){
+  if (confirm('ดูเฉลยจริงหรอ? ลองอีกสักรอบก่อนไหม 😏')) {
+    mEd.value = M[mi].sol;
+    document.getElementById('mFrame').srcdoc = mEd.value;
+  }
+}
+function resetMission(){
+  store.removeItem('mcode_'+mi);
+  loadMission(mi);
+}
+function nextMission(){ if (mi < M.length-1) loadMission(mi+1); }
+mEd.addEventListener('input', ()=>{
+  document.getElementById('mFrame').srcdoc = mEd.value;
+  store.setItem('mcode_'+mi, mEd.value);
+});
+mEd.addEventListener('keydown', e=>{
+  if (e.key==='Tab'){ e.preventDefault();
+    const s=mEd.selectionStart; mEd.setRangeText('  ',s,mEd.selectionEnd,'end'); }
+});
+loadMission(0);
 
 // ---------- day 3: topics + timer ----------
 const topics = [
