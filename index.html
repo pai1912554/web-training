@@ -120,6 +120,33 @@
   .imgbank code{font-size:.7rem;word-break:break-all}
   .confetti{position:fixed;top:-12px;width:10px;height:14px;z-index:99;pointer-events:none;animation:cfall linear forwards}
   @keyframes cfall{to{transform:translateY(105vh) rotate(720deg)}}
+  /* ---- block coding ---- */
+  .pzgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:760px){.pzgrid{grid-template-columns:1fr}}
+  .dropzone{background:#0a0a18;border:2px dashed var(--line);border-radius:12px;min-height:220px;padding:10px;transition:.2s}
+  .dropzone.over{border-color:var(--acc);background:#14142e;box-shadow:0 0 16px #8b5cf644}
+  .dz-title{font-size:.85rem;color:var(--dim);margin-bottom:6px}
+  .blk{background:linear-gradient(160deg,#1e1b4b,#312e81);border:1px solid #4c1d95;border-left:5px solid var(--acc);border-radius:8px;padding:8px 12px;margin:6px 0;font-family:Consolas,monospace;font-size:.82rem;cursor:grab;user-select:none;transition:transform .15s,box-shadow .15s;white-space:pre;overflow-x:auto}
+  .blk:hover{transform:translateX(4px);box-shadow:0 4px 12px rgba(0,0,0,.4);border-left-color:var(--acc2)}
+  .blk.dragging{opacity:.4;cursor:grabbing}
+  .blk.correct-pos{border-left-color:var(--ok)}
+  .blk.wrong-pos{border-left-color:#ef4444}
+  .pzpills{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+  .pzpills button{background:var(--card2);border:1px solid var(--line);color:var(--dim);min-width:36px;height:36px;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:bold}
+  .pzpills button.cur{background:#06b6d4;color:#04222a;border-color:#06b6d4}
+  .pzpills button.done{background:var(--ok);color:#052e22;border-color:var(--ok)}
+  .palette{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .pal-blk{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:grab;user-select:none;font-size:.9rem;transition:.2s}
+  .pal-blk:hover{border-color:#06b6d4;transform:translateY(-3px);box-shadow:0 6px 14px rgba(0,0,0,.4)}
+  .canvas-list{background:#0a0a18;border:2px dashed var(--line);border-radius:12px;min-height:160px;padding:10px}
+  .canvas-list.over{border-color:#06b6d4;background:#0e2230}
+  .cv-row{display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:6px 0;cursor:grab}
+  .cv-row.dragging{opacity:.4}
+  .cv-row .nm{flex:1}
+  .cv-row button{background:var(--card);border:1px solid var(--line);color:var(--dim);border-radius:6px;width:28px;height:28px;cursor:pointer}
+  .cv-row button:hover{color:#fff;border-color:var(--acc)}
+  #bdFrame,#pzFrame{width:100%;height:280px;background:#fff;border:1px solid var(--line);border-radius:10px}
+  #bdCode{background:#0a0a18;border:1px solid var(--line);border-radius:10px;padding:12px;font:.8rem/1.5 Consolas,monospace;overflow:auto;max-height:300px;white-space:pre}
 </style>
 </head>
 <body>
@@ -134,6 +161,7 @@
   <button onclick="go('d2',this)">วัน 2: CSS</button>
   <button onclick="go('d3',this)">วัน 3: จำลองแข่ง</button>
   <button onclick="go('train',this)">💪 ภารกิจฝึก</button>
+  <button onclick="go('blocks',this)">🧩 บล็อกโค้ด</button>
   <button onclick="go('real',this)">🏁 คู่มือแข่งจริง</button>
   <button onclick="go('play',this)">🧪 สนามลอง</button>
   <button onclick="go('cheat',this)">📄 สูตรต้องจำ</button>
@@ -486,6 +514,53 @@ nav a:hover { color: #fbbf24; }</code></pre>
       <figure><img src="https://picsum.photos/id/1060/220/148" alt="กาแฟ"><figcaption>กาแฟ</figcaption><code>https://picsum.photos/id/1060/300/200</code></figure>
       <figure><img src="https://picsum.photos/id/1040/220/148" alt="ปราสาท"><figcaption>ปราสาท</figcaption><code>https://picsum.photos/id/1040/300/200</code></figure>
     </div>
+  </div>
+</section>
+
+<!-- ================= BLOCK CODING ================= -->
+<section id="blocks" class="page">
+  <h2>🧩 บล็อกโค้ด — จับ ลาก วาง</h2>
+  <p class="dim">⚠️ วันแข่งต้องพิมพ์เองล้วน — โหมดนี้ไว้ทำความเข้าใจ "ลำดับและโครงสร้าง" พอเข้าใจแล้วกลับไปพิมพ์จริงใน 💪 ภารกิจฝึก</p>
+
+  <div class="card">
+    <h3>🎮 เกมเรียงบล็อก <span class="dim" id="pzScore"></span></h3>
+    <p class="dim">ลากบรรทัดโค้ดจากกล่องซ้ายไปเรียงในกล่องขวาให้ถูกลำดับ (คลิกบล็อกก็ได้ = ส่งไปอีกฝั่ง, ลากในกล่องขวา = สลับตำแหน่ง)</p>
+    <div class="pzpills" id="pzpills"></div>
+    <h4 id="pzTitle" style="margin:8px 0;color:#67e8f9"></h4>
+    <p id="pzDesc" class="dim"></p>
+    <div class="pzgrid">
+      <div>
+        <div class="dz-title">🧺 กล่องบล็อก (คลิกหรือลากไปทางขวา)</div>
+        <div class="dropzone" id="pzTray"></div>
+      </div>
+      <div>
+        <div class="dz-title">🎯 เรียงคำตอบตรงนี้ (บนลงล่าง)</div>
+        <div class="dropzone" id="pzAns"></div>
+      </div>
+    </div>
+    <div class="btnrow" style="justify-content:flex-start">
+      <button class="btn2 go" onclick="checkPz()">✔ ตรวจลำดับ</button>
+      <button class="btn2" onclick="resetPz()">↺ สับใหม่</button>
+    </div>
+    <div class="win" id="pzWin">🎉 เรียงถูกเป๊ะ! ดูผลลัพธ์ข้างล่าง แล้วไปด่านถัดไป</div>
+    <div class="dz-title" style="margin-top:10px">👀 ผลลัพธ์จากบล็อกที่เรียง (อัปเดตสด)</div>
+    <iframe id="pzFrame" title="ผลลัพธ์เรียงบล็อก"></iframe>
+  </div>
+
+  <div class="card">
+    <h3>🏗 โต๊ะประกอบเว็บ — ลากบล็อกสำเร็จรูปมาต่อเป็นเว็บทั้งหน้า</h3>
+    <p class="dim">คลิกหรือลากบล็อกจากจานสี ลงกระดานข้างล่าง → ลากสลับลำดับ / ↑↓ / ✕ ลบ → เว็บโผล่ทันที + กดดูโค้ดจริงที่มันสร้าง</p>
+    <div class="palette" id="bdPalette"></div>
+    <div class="dz-title">🧱 กระดานประกอบ (ลำดับบน = อยู่บนสุดของเว็บ)</div>
+    <div class="canvas-list" id="bdCanvas"></div>
+    <div class="btnrow" style="justify-content:flex-start">
+      <button class="btn2" onclick="bdClear()">🗑 ล้างกระดาน</button>
+      <button class="btn2" onclick="bdToggleCode()">📜 ดู/ซ่อนโค้ดที่สร้าง</button>
+      <button class="btn2 go" onclick="bdCopy()">📋 copy โค้ดไปฝึกพิมพ์ต่อ</button>
+    </div>
+    <div id="bdCode" style="display:none"></div>
+    <div class="dz-title" style="margin-top:10px">🌐 เว็บที่ประกอบได้</div>
+    <iframe id="bdFrame" title="เว็บที่ประกอบ"></iframe>
   </div>
 </section>
 
@@ -1548,6 +1623,211 @@ mEd.addEventListener('keydown', e=>{
     mEd.dispatchEvent(new Event('input')); }
 });
 loadMission(0); renderHero();
+
+// ---------- block coding: parsons puzzles ----------
+const PZ = [
+{t:'ด่าน 1: โครงเว็บ', d:'เรียงโครง HTML จากบนลงล่างให้ถูก', lines:[
+'<!DOCTYPE html>','<html lang="th">','<head>','  <meta charset="UTF-8">','  <title>เว็บแรก</title>','</head>','<body>','  <h1>สวัสดีชาวโลก</h1>','</body>','</html>']},
+{t:'ด่าน 2: ลิสต์', d:'ul ครอบ li — เปิดก่อน ปิดทีหลังเสมอ', lines:[
+'<!DOCTYPE html>','<html>','<body>','  <h2>ของโปรด</h2>','  <ul>','    <li>เกม</li>','    <li>ฟุตบอล</li>','  </ul>','</body>','</html>']},
+{t:'ด่าน 3: ตาราง', d:'ตาราง → แถว → ช่อง จากนอกเข้าใน', lines:[
+'<!DOCTYPE html>','<html>','<body>','  <table border="1">','    <tr><th>เมนู</th><th>ราคา</th></tr>','    <tr><td>ข้าวผัด</td><td>50</td></tr>','  </table>','</body>','</html>']},
+{t:'ด่าน 4: รูปและลิงก์', d:'img อยู่ใน body, ลิงก์ห่อข้อความ', lines:[
+'<!DOCTYPE html>','<html>','<body>','  <h1>น้องหมา</h1>','  <img src="https://picsum.photos/id/237/300/200" alt="หมาดำ">','  <p><a href="https://www.google.com">ไปกูเกิล</a></p>','</body>','</html>']},
+{t:'ด่าน 5: ใส่สีด้วย CSS', d:'style อยู่ใน head — กฎ CSS อยู่ใน style', lines:[
+'<!DOCTYPE html>','<html>','<head>','  <style>','    body { background: #faf5ff; }','    h1 { color: #7c3aed; text-align: center; }','  </style>','</head>','<body>','  <h1>เว็บมีสี</h1>','</body>','</html>']},
+{t:'ด่าน 6: Flexbox', d:'คำสั่ง flex ใส่ที่ตัวแม่ .row', lines:[
+'<!DOCTYPE html>','<html>','<head>','  <style>','    .row { display: flex; gap: 16px; justify-content: center; }','    .item { background: #7c3aed; color: white; padding: 30px; }','  </style>','</head>','<body>','  <div class="row">','    <div class="item">1</div>','    <div class="item">2</div>','  </div>','</body>','</html>']},
+{t:'ด่าน 7: เมนู hover', d:'กฎ :hover ต้องมาหลังกฎปกติ', lines:[
+'<!DOCTYPE html>','<html>','<head>','  <style>','    nav { display: flex; gap: 20px; background: #4c1d95; padding: 14px; }','    nav a { color: white; text-decoration: none; }','    nav a:hover { color: #fbbf24; }','  </style>','</head>','<body>','  <nav>','    <a href="#">หน้าแรก</a>','    <a href="#">ติดต่อ</a>','  </nav>','</body>','</html>']},
+{t:'ด่าน 8: อนิเมชันลอย', d:'ประกาศ keyframes แล้วค่อยเรียกใช้ใน animation', lines:[
+'<!DOCTYPE html>','<html>','<head>','  <style>','    @keyframes ลอย {','      0%, 100% { transform: translateY(0); }','      50% { transform: translateY(-20px); }','    }','    .balloon { font-size: 3rem; animation: ลอย 2s infinite; }','  </style>','</head>','<body>','  <div class="balloon">🎈</div>','</body>','</html>']}
+];
+let pzi = 0, pzTrayArr = [], pzAnsArr = [];
+function pzShuffle(){
+  const src = PZ[pzi].lines.map((l,i)=>i);
+  do { src.sort(()=>Math.random()-.5); } while (src.every((v,i)=>v===i));
+  pzTrayArr = src.slice(); pzAnsArr = [];
+}
+function loadPz(i){
+  pzi = i; pzShuffle();
+  document.getElementById('pzTitle').textContent = PZ[i].t;
+  document.getElementById('pzDesc').textContent = '💡 ' + PZ[i].d;
+  document.getElementById('pzWin').style.display = 'none';
+  renderPz(); renderPzPills();
+}
+function renderPzPills(){
+  const el = document.getElementById('pzpills'); el.innerHTML='';
+  PZ.forEach((p,i)=>{
+    const b=document.createElement('button');
+    b.textContent=i+1;
+    if(i===pzi)b.classList.add('cur');
+    if(store.getItem('pz_'+i)==='1')b.classList.add('done');
+    b.onclick=()=>loadPz(i);
+    el.appendChild(b);
+  });
+  const done = PZ.filter((p,i)=>store.getItem('pz_'+i)==='1').length;
+  document.getElementById('pzScore').textContent = '— ผ่าน '+done+'/'+PZ.length;
+}
+function mkBlk(lineIdx, from){
+  const d = document.createElement('div');
+  d.className='blk'; d.draggable=true;
+  d.textContent = PZ[pzi].lines[lineIdx];
+  d.dataset.line = lineIdx; d.dataset.from = from;
+  d.addEventListener('dragstart', e=>{ d.classList.add('dragging'); e.dataTransfer.setData('text/plain', from+':'+lineIdx); });
+  d.addEventListener('dragend', ()=>d.classList.remove('dragging'));
+  d.addEventListener('click', ()=>{
+    if(from==='tray'){ pzTrayArr = pzTrayArr.filter(x=>x!==lineIdx); pzAnsArr.push(lineIdx); }
+    else { pzAnsArr = pzAnsArr.filter(x=>x!==lineIdx); pzTrayArr.push(lineIdx); }
+    renderPz();
+  });
+  return d;
+}
+function renderPz(){
+  const tray = document.getElementById('pzTray'), ans = document.getElementById('pzAns');
+  tray.innerHTML=''; ans.innerHTML='';
+  pzTrayArr.forEach(i=>tray.appendChild(mkBlk(i,'tray')));
+  pzAnsArr.forEach(i=>ans.appendChild(mkBlk(i,'ans')));
+  document.getElementById('pzFrame').srcdoc = pzAnsArr.map(i=>PZ[pzi].lines[i]).join('\n');
+}
+function dragAfter(container, y){
+  const els=[...container.querySelectorAll('.blk:not(.dragging)')];
+  return els.reduce((best,el)=>{
+    const box=el.getBoundingClientRect(), off=y-box.top-box.height/2;
+    return (off<0 && off>best.off) ? {off, el} : best;
+  },{off:-Infinity, el:null}).el;
+}
+[['pzAns','ans'],['pzTray','tray']].forEach(([id,zone])=>{
+  const el = document.getElementById(id);
+  el.addEventListener('dragover', e=>{ e.preventDefault(); el.classList.add('over'); });
+  el.addEventListener('dragleave', ()=>el.classList.remove('over'));
+  el.addEventListener('drop', e=>{
+    e.preventDefault(); el.classList.remove('over');
+    const [from, idxS] = (e.dataTransfer.getData('text/plain')||'').split(':');
+    const idx = parseInt(idxS); if(isNaN(idx)) return;
+    pzTrayArr = pzTrayArr.filter(x=>x!==idx); pzAnsArr = pzAnsArr.filter(x=>x!==idx);
+    if(zone==='tray'){ pzTrayArr.push(idx); }
+    else {
+      const after = dragAfter(el, e.clientY);
+      if(after==null) pzAnsArr.push(idx);
+      else pzAnsArr.splice(pzAnsArr.indexOf(parseInt(after.dataset.line)),0,idx);
+    }
+    renderPz();
+  });
+});
+function checkPz(){
+  const blocks=[...document.getElementById('pzAns').children];
+  let all = pzAnsArr.length===PZ[pzi].lines.length;
+  blocks.forEach((b,pos)=>{
+    const ok = parseInt(b.dataset.line)===pos;
+    b.classList.toggle('correct-pos', ok);
+    b.classList.toggle('wrong-pos', !ok);
+    if(!ok) all=false;
+  });
+  if(all){
+    store.setItem('pz_'+pzi,'1');
+    document.getElementById('pzWin').style.display='block';
+    confettiBoom(); renderPzPills();
+  }
+}
+function resetPz(){ loadPz(pzi); }
+loadPz(0);
+
+// ---------- block coding: web builder ----------
+const BD_BASE_CSS = 'body { margin: 0; font-family: Tahoma; background: #faf5ff; transition: 0.4s; }\nmain { max-width: 700px; margin: 0 auto; padding: 16px; }';
+const BD = [
+{n:'🎨 หัวเว็บ gradient', html:'<header><h1>เว็บของฉัน</h1><p>ยินดีต้อนรับ</p></header>',
+ css:'header { background: linear-gradient(135deg, #7c3aed, #ec4899); color: white; text-align: center; padding: 34px; }'},
+{n:'🧭 เมนูบาร์', html:'<nav><a href="#">หน้าแรก</a><a href="#">ผลงาน</a><a href="#">ติดต่อ</a></nav>',
+ css:'nav { display: flex; gap: 20px; justify-content: center; background: #4c1d95; padding: 12px; }\nnav a { color: white; text-decoration: none; font-weight: bold; }\nnav a:hover { color: #fbbf24; }'},
+{n:'📝 ย่อหน้าแนะนำ', html:'<main><h2>เกี่ยวกับฉัน</h2><p>ผมกำลังฝึกสร้างเว็บ ชอบ <b>เขียนโค้ด</b> และ <i>เล่นเกม</i> มาก</p></main>', css:''},
+{n:'🐶 รูปหมา', html:'<main style="text-align:center"><img src="https://picsum.photos/id/237/400/240" alt="หมาดำน่ารัก" style="max-width:100%; border-radius: 12px;"></main>', css:''},
+{n:'🙂 รูปโปรไฟล์กลม', html:'<main style="text-align:center"><img src="https://picsum.photos/id/1084/160/160" alt="รูปโปรไฟล์" class="avatar"></main>',
+ css:'.avatar { border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 14px rgba(0,0,0,.3); }'},
+{n:'🃏 การ์ด 3 ใบ', html:'<div class="row"><div class="card3"><h3>ข้อ 1</h3><p>เนื้อหา</p></div><div class="card3"><h3>ข้อ 2</h3><p>เนื้อหา</p></div><div class="card3"><h3>ข้อ 3</h3><p>เนื้อหา</p></div></div>',
+ css:'.row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; padding: 14px; }\n.card3 { background: white; border-radius: 12px; padding: 16px; width: 170px; box-shadow: 0 4px 12px rgba(0,0,0,.14); }'},
+{n:'📊 ตาราง', html:'<main><h2>ตารางข้อมูล</h2><table><tr><th>รายการ</th><th>จำนวน</th></tr><tr><td>อย่างแรก</td><td>10</td></tr><tr><td>อย่างที่สอง</td><td>20</td></tr></table></main>',
+ css:'table { border-collapse: collapse; }\nth, td { border: 1px solid #c4b5fd; padding: 8px 14px; }\nth { background: #ede9fe; }'},
+{n:'📋 ลิสต์', html:'<main><h2>สิ่งที่ชอบ</h2><ul><li>เขียนเว็บ</li><li>เล่นเกม</li><li>ฟังเพลง</li></ul></main>', css:''},
+{n:'📮 ฟอร์มติดต่อ', html:'<main><form><h2>ติดต่อฉัน</h2><input type="text" placeholder="ชื่อของคุณ"><textarea rows="3" placeholder="ข้อความ"></textarea><button type="button">ส่ง</button></form></main>',
+ css:'form { background: white; padding: 18px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,.1); }\ninput, textarea { width: 100%; box-sizing: border-box; padding: 9px; border: 1px solid #ddd6fe; border-radius: 8px; margin: 5px 0 12px; font-family: inherit; }\nform button { background: #7c3aed; color: white; border: none; padding: 10px 26px; border-radius: 20px; cursor: pointer; }'},
+{n:'⚡ ปุ่มทักทาย (JS)', html:'<main style="text-align:center"><button class="jsbtn" onclick="alert(&#39;สวัสดี! ขอบคุณที่กด&#39;)">👋 กดทักทาย</button></main>',
+ css:'.jsbtn { background: #eab308; color: #422006; border: none; padding: 12px 28px; border-radius: 24px; font-size: 16px; cursor: pointer; font-weight: bold; }\n.jsbtn:hover { transform: translateY(-3px); }\n.jsbtn { transition: 0.3s; }'},
+{n:'🌙 ปุ่มโหมดกลางคืน (JS)', html:'<main style="text-align:center"><button class="nightbtn" onclick="document.body.classList.toggle(&#39;dark&#39;)">🌙 สลับโหมด</button></main>',
+ css:'.nightbtn { background: #312e81; color: white; border: none; padding: 10px 24px; border-radius: 20px; cursor: pointer; }\nbody.dark { background: #111827; color: #f9fafb; }\nbody.dark main h2 { color: #f9fafb; }'},
+{n:'🎈 ลูกโป่งลอย (อนิเมชัน)', html:'<main style="text-align:center"><div class="balloon">🎈</div></main>',
+ css:'.balloon { font-size: 3rem; animation: bfloat 2s ease-in-out infinite; display: inline-block; }\n@keyframes bfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-22px); } }'},
+{n:'🦶 ท้ายเว็บ', html:'<footer>จัดทำโดย นักเรียน ม.ต้น สายเขียนเว็บ</footer>',
+ css:'footer { text-align: center; background: #4c1d95; color: white; padding: 12px; margin-top: 18px; }'}
+];
+let bdArr = [];
+try { bdArr = JSON.parse(store.getItem('bd_canvas')||'[]'); } catch(e){ bdArr=[]; }
+function bdGen(){
+  const used = [...new Set(bdArr)];
+  const css = [BD_BASE_CSS, ...used.map(i=>BD[i].css).filter(Boolean)].join('\n');
+  const html = bdArr.map(i=>'  '+BD[i].html).join('\n');
+  return '<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เว็บที่ฉันประกอบ</title>\n  <style>\n' + css.split('\n').map(l=>'    '+l).join('\n') + '\n  <\/style>\n<\/head>\n<body>\n' + html + '\n<\/body>\n<\/html>';
+}
+function bdRender(){
+  const pal = document.getElementById('bdPalette');
+  if(!pal.children.length){
+    BD.forEach((b,i)=>{
+      const d=document.createElement('div');
+      d.className='pal-blk'; d.textContent=b.n; d.draggable=true;
+      d.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain','pal:'+i));
+      d.onclick=()=>{ bdArr.push(i); bdSave(); };
+      pal.appendChild(d);
+    });
+  }
+  const cv = document.getElementById('bdCanvas');
+  cv.innerHTML='';
+  if(!bdArr.length){ cv.innerHTML='<div class="dim" style="padding:20px;text-align:center">ยังว่าง — คลิกหรือลากบล็อกข้างบนลงมา</div>'; }
+  bdArr.forEach((bi,pos)=>{
+    const row=document.createElement('div');
+    row.className='cv-row'; row.draggable=true; row.dataset.pos=pos;
+    row.innerHTML='<span class="nm">'+BD[bi].n+'</span>';
+    const up=document.createElement('button'); up.textContent='↑';
+    up.onclick=e=>{ e.stopPropagation(); if(pos>0){[bdArr[pos-1],bdArr[pos]]=[bdArr[pos],bdArr[pos-1]]; bdSave();} };
+    const dn=document.createElement('button'); dn.textContent='↓';
+    dn.onclick=e=>{ e.stopPropagation(); if(pos<bdArr.length-1){[bdArr[pos+1],bdArr[pos]]=[bdArr[pos],bdArr[pos+1]]; bdSave();} };
+    const del=document.createElement('button'); del.textContent='✕';
+    del.onclick=e=>{ e.stopPropagation(); bdArr.splice(pos,1); bdSave(); };
+    row.append(up,dn,del);
+    row.addEventListener('dragstart',e=>{ row.classList.add('dragging'); e.dataTransfer.setData('text/plain','cv:'+pos); });
+    row.addEventListener('dragend',()=>row.classList.remove('dragging'));
+    cv.appendChild(row);
+  });
+  const doc = bdGen();
+  document.getElementById('bdFrame').srcdoc = doc;
+  document.getElementById('bdCode').innerHTML = hl(doc);
+}
+function bdSave(){ store.setItem('bd_canvas', JSON.stringify(bdArr)); bdRender(); }
+const bdCv = document.getElementById('bdCanvas');
+bdCv.addEventListener('dragover', e=>{ e.preventDefault(); bdCv.classList.add('over'); });
+bdCv.addEventListener('dragleave', ()=>bdCv.classList.remove('over'));
+bdCv.addEventListener('drop', e=>{
+  e.preventDefault(); bdCv.classList.remove('over');
+  const [kind, idxS] = (e.dataTransfer.getData('text/plain')||'').split(':');
+  const idx = parseInt(idxS); if(isNaN(idx)) return;
+  const rows=[...bdCv.querySelectorAll('.cv-row:not(.dragging)')];
+  let insertAt = bdArr.length - (kind==='cv'?1:0);
+  for(let r=0;r<rows.length;r++){
+    const box=rows[r].getBoundingClientRect();
+    if(e.clientY < box.top + box.height/2){ insertAt = r; break; }
+  }
+  if(kind==='pal'){ bdArr.splice(insertAt,0,idx); }
+  else { const item=bdArr.splice(idx,1)[0]; bdArr.splice(insertAt,0,item); }
+  bdSave();
+});
+function bdClear(){ if(confirm('ล้างกระดานทั้งหมด?')){ bdArr=[]; bdSave(); } }
+function bdToggleCode(){
+  const c=document.getElementById('bdCode');
+  c.style.display = c.style.display==='none' ? 'block' : 'none';
+}
+function bdCopy(){
+  navigator.clipboard.writeText(bdGen()).then(()=>alert('copy แล้ว! เอาไปวางใน VS Code หรือ Notepad แล้วลองพิมพ์ตามให้ได้เองทั้งหมด'));
+}
+bdRender();
 
 // ---------- day 3: topics + timer ----------
 const topics = [
