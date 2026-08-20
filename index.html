@@ -147,6 +147,16 @@
   .cv-row button:hover{color:#fff;border-color:var(--acc)}
   #bdFrame,#pzFrame{width:100%;height:280px;background:#fff;border:1px solid var(--line);border-radius:10px}
   #bdCode{background:#0a0a18;border:1px solid var(--line);border-radius:10px;padding:12px;font:.8rem/1.5 Consolas,monospace;overflow:auto;max-height:300px;white-space:pre}
+  /* ---- autocomplete ---- */
+  .ac-box{position:fixed;z-index:200;background:#16162e;border:1px solid var(--acc);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.6);max-height:230px;overflow-y:auto;min-width:230px;font-family:Consolas,monospace;font-size:.82rem}
+  .ac-item{display:flex;gap:10px;align-items:center;padding:5px 10px;cursor:pointer;white-space:nowrap}
+  .ac-item .k{color:#f472b6;font-weight:bold}
+  .ac-item .k.css{color:#7dd3fc}
+  .ac-item .k.val{color:#86efac}
+  .ac-item .k.vr{color:#fbbf24}
+  .ac-item .h{color:#8a8db8;font-size:.75rem;font-family:'Segoe UI',Tahoma,sans-serif}
+  .ac-item.sel{background:#312e81}
+  .ac-foot{padding:4px 10px;border-top:1px solid var(--line);color:#6b6e9e;font-size:.7rem;font-family:'Segoe UI',Tahoma,sans-serif}
 </style>
 </head>
 <body>
@@ -486,7 +496,7 @@ nav a:hover { color: #fbbf24; }</code></pre>
       </div>
     </div>
 
-    <div class="lbl">⌨️ เขียนโค้ดตรงนี้ (มีสีให้อ่านง่าย)</div>
+    <div class="lbl">⌨️ เขียนโค้ดตรงนี้ — มีตัวช่วยแบบ VS Code: พิมพ์ <code>&lt;</code> เด้ง tag ให้เลือก · <code>!</code>+Tab = โครงพร้อมตัวแปรสี · ชื่อ tag+Tab = tag เปิด-ปิด · <code>.ชื่อ</code>+Tab = กล่อง class · พิมพ์ <code>&gt;</code> ปิด tag ให้เอง</div>
     <div class="edwrap">
       <pre id="mHl" aria-hidden="true"><code id="mHlc"></code></pre>
       <textarea id="mEd" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
@@ -727,6 +737,25 @@ body { font-family: 'Kanit', sans-serif; }</code></pre>
   </div>
 
   <div class="card">
+    <h3>📦 สไตล์การเขียนของฉัน — "คิดเป็นกล่อง"</h3>
+    <p>สูตรประจำตัว ใช้ทุกเว็บ ทุกโจทย์:</p>
+    <ol>
+      <li><b>มองหน้าเว็บเป็นกล่องซ้อนกล่อง</b> — ทั้งหน้า = กล่องใหญ่, ข้างในมี กล่องหัว / กล่องเมนู / กล่องเนื้อหา / กล่องท้าย</li>
+      <li><b>ทุกกล่องตั้งชื่อด้วย class</b> — <code>&lt;header class="top"&gt;</code>, <code>&lt;div class="card"&gt;</code> — id ใช้เฉพาะตัวที่มีตัวเดียวจริง ๆ</li>
+      <li><b>สีประกาศเป็นตัวแปรที่ :root ก่อนเสมอ</b> — แล้วทั้งเว็บเรียก <code>var(--main)</code> อยากเปลี่ยนธีมแก้ที่เดียว</li>
+      <li><b>แต่งทีละกล่อง จากนอกเข้าใน</b> — กล่องใหญ่ก่อน (พื้น, จัดกลาง) ค่อยลงกล่องย่อย</li>
+    </ol>
+<pre><code>:root {
+  --main: #7c3aed;   <span class="cmt">/* สีหลัก */</span>
+  --accent: #ec4899; <span class="cmt">/* สีเน้น */</span>
+  --bg: #faf5ff;     <span class="cmt">/* สีพื้น */</span>
+}
+.top     { background: var(--main); }
+.card    { border: 2px solid var(--accent); }</code></pre>
+    <p class="dim">กด <code>!</code>+Tab ในภารกิจฝึก/สนามลอง — โครงสไตล์นี้เด้งมาให้เลย</p>
+  </div>
+
+  <div class="card">
     <h3>ท่องก่อนนอน</h3>
     <ol>
       <li>เนื้อหาครบก่อนสวย</li>
@@ -936,8 +965,6 @@ function tryCode(key){
 ed.value = defaultCode;
 ed.addEventListener('keydown', e=>{
   if (e.ctrlKey && e.key==='Enter') run();
-  if (e.key==='Tab'){ e.preventDefault();
-    const s=ed.selectionStart; ed.setRangeText('  ',s,ed.selectionEnd,'end'); }
 });
 run();
 
@@ -1617,11 +1644,7 @@ mEd.addEventListener('input', ()=>{
   syncHl();
 });
 mEd.addEventListener('scroll', ()=>{ mHl.scrollTop=mEd.scrollTop; mHl.scrollLeft=mEd.scrollLeft; });
-mEd.addEventListener('keydown', e=>{
-  if (e.key==='Tab'){ e.preventDefault();
-    const s=mEd.selectionStart; mEd.setRangeText('  ',s,mEd.selectionEnd,'end');
-    mEd.dispatchEvent(new Event('input')); }
-});
+// Tab + การพิมพ์อัจฉริยะ ถูกดูแลโดย attachAssist (ตัวช่วยพิมพ์แบบ VS Code) ด้านล่าง
 loadMission(0); renderHero();
 
 // ---------- block coding: parsons puzzles ----------
@@ -1828,6 +1851,231 @@ function bdCopy(){
   navigator.clipboard.writeText(bdGen()).then(()=>alert('copy แล้ว! เอาไปวางใน VS Code หรือ Notepad แล้วลองพิมพ์ตามให้ได้เองทั้งหมด'));
 }
 bdRender();
+
+// ---------- ตัวช่วยพิมพ์แบบ VS Code (autocomplete) ----------
+const AC_TAGS = [
+ ['h1','หัวข้อใหญ่สุด'],['h2','หัวข้อรอง'],['h3','หัวข้อย่อย'],['p','ย่อหน้า'],['b','ตัวหนา'],['i','ตัวเอียง'],['u','ขีดเส้นใต้'],
+ ['br','ขึ้นบรรทัดใหม่ (ไม่ต้องปิด)','void'],['hr','เส้นคั่น (ไม่ต้องปิด)','void'],
+ ['img','รูปภาพ','tpl','<img src="" alt="">',10],['a','ลิงก์','tpl','<a href=""></a>',9],
+ ['ul','ลิสต์จุด'],['ol','ลิสต์ตัวเลข'],['li','ข้อในลิสต์'],
+ ['table','ตาราง'],['tr','แถวตาราง'],['th','หัวตาราง'],['td','ช่องข้อมูล'],
+ ['div','กล่องเอนกประสงค์'],['span','กล่องเล็กในบรรทัด'],
+ ['header','ส่วนหัวเว็บ'],['nav','เมนู'],['main','เนื้อหาหลัก'],['footer','ท้ายเว็บ'],['section','แบ่งตอน'],
+ ['form','ฟอร์ม'],['input','ช่องกรอก','tpl','<input type="text" placeholder="">',34],['textarea','ช่องกรอกยาว'],['button','ปุ่ม'],['label','ป้ายช่องกรอก'],
+ ['style','ที่เขียน CSS'],['title','ชื่อบนแท็บ'],['iframe','ฝังหน้าอื่น'],['video','วิดีโอ'],['strong','เน้นหนา'],['em','เน้นเอียง']
+];
+const AC_ATTRS = [
+ ['class','ตั้งชื่อกล่อง (ใช้บ่อยสุด)','tpl','class=""',7],['id','ชื่อเฉพาะตัวเดียว','tpl','id=""',4],
+ ['src','ที่อยู่รูป/ไฟล์','tpl','src=""',5],['alt','คำอธิบายรูป','tpl','alt=""',5],['href','ปลายทางลิงก์','tpl','href=""',6],
+ ['width','ความกว้าง','tpl','width=""',7],['height','ความสูง','tpl','height=""',8],
+ ['onclick','กดแล้วทำอะไร (JS)','tpl','onclick=""',9],['placeholder','ข้อความจางในช่อง','tpl','placeholder=""',13],
+ ['type','ชนิด input','tpl','type=""',6],['border','เส้นขอบตาราง','tpl','border="1"',10],['rows','จำนวนแถว textarea','tpl','rows="4"',9],
+ ['lang','ภาษาของหน้า','tpl','lang="th"',10],['charset','รหัสตัวอักษร','tpl','charset="UTF-8"',16],['rel','ชนิดของ link','tpl','rel="stylesheet"',17]
+];
+const AC_PROPS = [
+ ['color','สีตัวอักษร'],['background','สีพื้นหลัง / gradient'],['background-color','สีพื้นหลังล้วน'],
+ ['background-size','ขนาดพื้นหลัง'],['background-position','ตำแหน่งพื้นหลัง'],
+ ['font-size','ขนาดตัวอักษร'],['font-family','แบบตัวอักษร'],['font-weight','ความหนา'],
+ ['text-align','จัดข้อความ ซ้าย/กลาง/ขวา'],['text-decoration','ขีดเส้นใต้ (none = เอาออก)'],
+ ['letter-spacing','ช่องไฟตัวอักษร'],['line-height','ความสูงบรรทัด (1.8 อ่านสบาย)'],
+ ['padding','เบาะในกล่อง'],['margin','ถอยห่างเพื่อนบ้าน (0 auto = กลางจอ)'],
+ ['border','กำแพงกล่อง'],['border-radius','มุมโค้ง (50% = วงกลม)'],['box-shadow','เงาใต้กล่อง'],
+ ['width','ความกว้าง'],['max-width','กว้างสุดไม่เกิน'],['height','ความสูง'],
+ ['display','ชนิดกล่อง (flex = เรียงแถว)'],['gap','ช่องว่างระหว่างลูก flex'],
+ ['justify-content','จัดลูกตามแนวแกน (center/space-between)'],['align-items','จัดลูกแนวขวาง (center)'],
+ ['flex-direction','ทิศ flex (column = แนวตั้ง)'],['flex-wrap','ตัดขึ้นบรรทัด (wrap)'],
+ ['overflow','ของล้นกล่อง (hidden = ตัดทิ้ง)'],['position','ตำแหน่งพิเศษ'],
+ ['transition','เปลี่ยนค่านุ่ม ๆ (0.3s)'],['transform','ขยับ/หมุน/ซูม'],
+ ['animation','เรียกใช้ keyframes'],['animation-delay','หน่วงก่อนเริ่ม'],
+ ['opacity','ความทึบ 0-1'],['cursor','รูปเมาส์ (pointer = นิ้วชี้)'],['object-fit','รูปพอดีกรอบ (cover)'],['z-index','ชั้นซ้อน']
+];
+const AC_VALS = {
+ 'display':['flex','block','inline-block','grid','none'],
+ 'justify-content':['center','space-between','space-around','flex-start','flex-end'],
+ 'align-items':['center','flex-start','flex-end','stretch'],
+ 'text-align':['center','left','right'],
+ 'flex-direction':['column','row'],
+ 'flex-wrap':['wrap','nowrap'],
+ 'position':['relative','absolute','fixed','sticky'],
+ 'text-decoration':['none','underline'],
+ 'font-weight':['bold','normal'],
+ 'cursor':['pointer','default'],
+ 'overflow':['hidden','auto','scroll'],
+ 'object-fit':['cover','contain'],
+ 'font-family':['Tahoma',"'Kanit', sans-serif",'Consolas, monospace']
+};
+const AC_SNIP_BOILER = '<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เว็บของฉัน</title>\n  <style>\n    :root {\n      --main: #7c3aed;\n      --accent: #ec4899;\n      --bg: #faf5ff;\n    }\n    body { margin: 0; font-family: Tahoma; background: var(--bg); }\n    .top { background: linear-gradient(135deg, var(--main), var(--accent)); color: white; text-align: center; padding: 30px; }\n    .content { max-width: 700px; margin: 0 auto; padding: 16px; }\n    .bottom { text-align: center; background: var(--main); color: white; padding: 12px; }\n  </style>\n</head>\n<body>\n  <header class="top"><h1>ชื่อเว็บ</h1></header>\n  <main class="content">\n    \n  </main>\n  <footer class="bottom">จัดทำโดย ฉันเอง</footer>\n</body>\n</html>';
+const acBox = document.createElement('div');
+acBox.className='ac-box'; acBox.style.display='none';
+document.body.appendChild(acBox);
+let acItems=[], acSel=0, acTa=null, acWordStart=0;
+function acClose(){ acBox.style.display='none'; acItems=[]; }
+function acCaretXY(ta){
+  const div=document.createElement('div');
+  const cs=getComputedStyle(ta);
+  ['font','padding','border','boxSizing','lineHeight','letterSpacing','whiteSpace','wordWrap','width'].forEach(p=>div.style[p]=cs[p]);
+  div.style.position='fixed'; div.style.visibility='hidden'; div.style.whiteSpace='pre'; div.style.overflow='auto';
+  div.style.height=ta.clientHeight+'px'; div.style.width=ta.clientWidth+'px';
+  div.textContent = ta.value.slice(0, ta.selectionStart);
+  const mark=document.createElement('span'); mark.textContent='​';
+  div.appendChild(mark);
+  document.body.appendChild(div);
+  div.scrollTop=ta.scrollTop; div.scrollLeft=ta.scrollLeft;
+  const r=ta.getBoundingClientRect();
+  const x=r.left + mark.offsetLeft - div.scrollLeft, y=r.top + mark.offsetTop - div.scrollTop + parseFloat(cs.lineHeight||18);
+  document.body.removeChild(div);
+  return {x:Math.min(x, innerWidth-260), y:Math.min(y, innerHeight-240)};
+}
+function acContext(ta){
+  const S = ta.value.slice(0, ta.selectionStart);
+  const w = (S.match(/[\w!.฀-๿-]*$/)||[''])[0];
+  const styleOpen = (S.match(/<style[^>]*>/gi)||[]).length, styleClose = (S.match(/<\/style>/gi)||[]).length;
+  const inStyle = styleOpen > styleClose;
+  const lt = S.lastIndexOf('<'), gt = S.lastIndexOf('>');
+  if(!inStyle && lt > gt){
+    const tagPart = S.slice(lt+1);
+    if(/^\/?[\w-]*$/.test(tagPart)) return {mode:'tag', word:tagPart.replace('/',''), start:ta.selectionStart - tagPart.replace('/','').length};
+    return {mode:'attr', word:w, start:ta.selectionStart - w.length};
+  }
+  if(inStyle){
+    const ob = S.lastIndexOf('{'), cb = S.lastIndexOf('}');
+    if(ob > cb){
+      const seg = S.slice(Math.max(S.lastIndexOf(';'), ob)+1);
+      const colon = seg.indexOf(':');
+      if(colon >= 0){
+        const prop = seg.slice(0, colon).trim();
+        return {mode:'value', word:w, start:ta.selectionStart - w.length, prop};
+      }
+      return {mode:'prop', word:w, start:ta.selectionStart - w.length};
+    }
+    if(/var\(\s*[-\w]*$/.test(S) || /--[\w-]*$/.test(S)) return {mode:'cssvar', word:(S.match(/--?[\w-]*$/)||[''])[0], start:ta.selectionStart-((S.match(/--?[\w-]*$/)||[''])[0]).length};
+  }
+  return {mode:'plain', word:w, start:ta.selectionStart - w.length};
+}
+function acCollect(ctx, ta){
+  const q = ctx.word.toLowerCase();
+  const mk = (list)=>list.filter(it=>it.label.toLowerCase().startsWith(q) && it.label.toLowerCase() !== q || (q==='' && ctx.mode!=='plain')).slice(0,8);
+  if(ctx.mode==='tag') return mk(AC_TAGS.map(t=>({label:t[0], hint:t[1], cls:'', apply:acTagApply(t)})));
+  if(ctx.mode==='attr') return mk(AC_ATTRS.map(a=>({label:a[0], hint:a[1], cls:'', tpl:a[3]||a[0]+'=""', off:a[4]!=null?a[4]:(a[0].length+2)})));
+  if(ctx.mode==='prop') return mk(AC_PROPS.map(p=>({label:p[0], hint:p[1], cls:'css', tpl:p[0]+': ;', off:p[0].length+2})));
+  if(ctx.mode==='value'){
+    if(q.startsWith('-') || q.startsWith('v')){
+      const vars=[...new Set((ta.value.match(/--[\w-]+(?=\s*:)/g)||[]))];
+      const vlist = vars.map(v=>({label:'var('+v+')', hint:'ตัวแปรสีของคุณ', cls:'vr', tpl:'var('+v+');', off:('var('+v+');').length}));
+      if(vlist.length && (q==='v'||q.startsWith('-')||q.startsWith('va'))) return vlist.slice(0,8);
+    }
+    const vals = AC_VALS[ctx.prop]||[];
+    return mk(vals.map(v=>({label:v, hint:ctx.prop, cls:'val', tpl:v+';', off:v.length+1})));
+  }
+  if(ctx.mode==='cssvar'){
+    const vars=[...new Set((ta.value.match(/--[\w-]+(?=\s*:)/g)||[]))];
+    return mk(vars.map(v=>({label:v, hint:'ตัวแปรของคุณ', cls:'vr', tpl:'var('+v+')', off:v.length+5, eat:/^var\(\s*[-\w]*$/.test(ta.value.slice(0,ctx.start))?0:0})));
+  }
+  return [];
+}
+function acTagApply(t){
+  const name=t[0];
+  if(t[2]==='void') return {tpl:name+'>', off:name.length+1};
+  if(t[2]==='tpl'){ return {tpl:t[3].slice(1), off:t[4]-1}; }
+  if(name==='script'){ const c='script></scr'+'ipt>'; return {tpl:c, off:7}; }
+  return {tpl:name+'></'+name+'>', off:name.length+1};
+}
+function acShow(ta){
+  const ctx = acContext(ta);
+  if(ctx.mode==='plain' || (ctx.word==='' && ctx.mode==='attr')){ acClose(); return; }
+  acItems = acCollect(ctx, ta);
+  if(!acItems.length){ acClose(); return; }
+  acTa=ta; acWordStart=ctx.start; acSel=0; acCtxMode=ctx.mode;
+  const {x,y}=acCaretXY(ta);
+  acBox.style.left=x+'px'; acBox.style.top=y+'px'; acBox.style.display='block';
+  acRender();
+}
+let acCtxMode='';
+function acRender(){
+  acBox.innerHTML='';
+  acItems.forEach((it,i)=>{
+    const d=document.createElement('div');
+    d.className='ac-item'+(i===acSel?' sel':'');
+    d.innerHTML='<span class="k '+(it.cls||'')+'">'+it.label+'</span><span class="h">'+it.hint+'</span>';
+    d.onmousedown=e=>{ e.preventDefault(); acAccept(i); };
+    acBox.appendChild(d);
+  });
+  const f=document.createElement('div');
+  f.className='ac-foot'; f.textContent='Tab/Enter = เลือก · Esc = ปิด';
+  acBox.appendChild(f);
+}
+function acAccept(i){
+  const it = acItems[i]; if(!it || !acTa) return;
+  const a = it.apply || it;
+  acTa.setRangeText(a.tpl, acWordStart, acTa.selectionStart, 'end');
+  const caret = acWordStart + (a.off!=null ? a.off : a.tpl.length);
+  acTa.selectionStart = acTa.selectionEnd = caret;
+  acClose();
+  acTa.dispatchEvent(new Event('input'));
+  acTa.focus();
+}
+function acSnippet(ta){
+  const S = ta.value.slice(0, ta.selectionStart);
+  const w = (S.match(/[\w!.-]+$/)||[''])[0];
+  if(!w) return false;
+  const start = ta.selectionStart - w.length;
+  if(w==='!'){ ta.setRangeText(AC_SNIP_BOILER, start, ta.selectionStart, 'end');
+    const p = start + AC_SNIP_BOILER.indexOf('<title>')+7;
+    ta.selectionStart=ta.selectionEnd=p; ta.dispatchEvent(new Event('input')); return true; }
+  if(w.startsWith('.') && w.length>1){
+    const cls=w.slice(1), tpl='<div class="'+cls+'"></div>';
+    ta.setRangeText(tpl, start, ta.selectionStart, 'end');
+    ta.selectionStart=ta.selectionEnd=start+tpl.length-6; ta.dispatchEvent(new Event('input')); return true; }
+  const tag = AC_TAGS.find(t=>t[0]===w.toLowerCase());
+  if(tag){ const a=acTagApply(tag); const tpl='<'+a.tpl;
+    ta.setRangeText(tpl, start, ta.selectionStart, 'end');
+    ta.selectionStart=ta.selectionEnd=start+a.off+1; ta.dispatchEvent(new Event('input')); return true; }
+  return false;
+}
+function attachAssist(ta){
+  ta.addEventListener('keydown', e=>{
+    if(acBox.style.display==='block' && acTa===ta){
+      if(e.key==='ArrowDown'){ e.preventDefault(); acSel=(acSel+1)%acItems.length; acRender(); return; }
+      if(e.key==='ArrowUp'){ e.preventDefault(); acSel=(acSel-1+acItems.length)%acItems.length; acRender(); return; }
+      if(e.key==='Tab' || e.key==='Enter'){ e.preventDefault(); acAccept(acSel); return; }
+      if(e.key==='Escape'){ acClose(); return; }
+    }
+    if(e.key==='Tab'){
+      e.preventDefault();
+      if(!acSnippet(ta)){
+        const s=ta.selectionStart; ta.setRangeText('  ',s,ta.selectionEnd,'end');
+        ta.dispatchEvent(new Event('input'));
+      }
+      return;
+    }
+    if(e.key==='>'){
+      const ctx=acContext(ta);
+      if(ctx.mode==='attr' || ctx.mode==='tag'){
+        const S=ta.value.slice(0,ta.selectionStart);
+        const m=S.match(/<([\w-]+)([^<>]*)$/);
+        if(m && !S.endsWith('/') && !m[2].includes('/')){
+          const name=m[1].toLowerCase();
+          const voids=['br','hr','img','input','meta','link'];
+          const isClosing=/<\/[\w-]*$/.test(S);
+          if(!voids.includes(name) && !isClosing){
+            e.preventDefault();
+            const closer = name==='script' ? '></scr'+'ipt>' : '></'+name+'>';
+            const s=ta.selectionStart;
+            ta.setRangeText(closer,s,ta.selectionEnd,'end');
+            ta.selectionStart=ta.selectionEnd=s+1;
+            ta.dispatchEvent(new Event('input'));
+            acClose(); return;
+          }
+        }
+      }
+    }
+  });
+  ta.addEventListener('input', ()=>acShow(ta));
+  ta.addEventListener('blur', ()=>setTimeout(acClose,150));
+  ta.addEventListener('scroll', acClose);
+}
+attachAssist(mEd);
+attachAssist(ed);
 
 // ---------- day 3: topics + timer ----------
 const topics = [
