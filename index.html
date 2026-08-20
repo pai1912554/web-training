@@ -505,7 +505,7 @@ nav a:hover { color: #fbbf24; }</code></pre>
       </div>
     </div>
 
-    <div class="lbl">⌨️ เขียนโค้ดตรงนี้ — มีตัวช่วยแบบ VS Code: พิมพ์ <code>&lt;</code> เด้ง tag ให้เลือก · <code>!</code>+Tab = โครงพร้อมตัวแปรสี · ชื่อ tag+Tab = tag เปิด-ปิด · <code>.ชื่อ</code>+Tab = กล่อง class · พิมพ์ <code>&gt;</code> ปิด tag ให้เอง</div>
+    <div class="lbl">⌨️ เขียนโค้ดตรงนี้ — ตัวช่วยแบบ VS Code: <code>!</code>+Tab = โครง HTML5 (เหมือน VS Code เป๊ะ) · <code>!!</code>+Tab = โครงเต็ม reset+container+nav · <code>&lt;</code> เด้ง tag · Emmet <code>ul&gt;li*3</code> · <code>&gt;</code> ปิด tag ให้เอง</div>
     <div class="edwrap">
       <div class="gutter"><div class="gin" id="mGut">1</div></div>
       <pre id="mHl" aria-hidden="true"><code id="mHlc"></code></pre>
@@ -767,7 +767,8 @@ body { font-family: 'Kanit', sans-serif; }</code></pre>
 }
 .top     { background: var(--main); }
 .card    { border: 2px solid var(--accent); }</code></pre>
-    <p class="dim">กด <code>!</code>+Tab ในภารกิจฝึก/สนามลอง — โครงสไตล์นี้เด้งมาให้เลย</p>
+    <p class="dim">ในภารกิจฝึก/สนามลอง: <code>!</code>+Tab = โครง VS Code เป๊ะ · <code>!!</code>+Tab = โครงเต็มสไตล์ฉัน (reset + .container + nav + hero)</p>
+    <p class="dim">โปรเจกต์จริงใน VS Code: แยก CSS เป็นไฟล์ <code>style.css</code> แล้วดึงด้วย <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> — เว็บซ้อมนี้เป็นไฟล์เดียวเลยรวมใน &lt;style&gt; แทน หลักการเดียวกัน</p>
   </div>
 
   <div class="card">
@@ -1877,7 +1878,9 @@ const AC_TAGS = [
  ['div','กล่องเอนกประสงค์'],['span','กล่องเล็กในบรรทัด'],
  ['header','ส่วนหัวเว็บ'],['nav','เมนู'],['main','เนื้อหาหลัก'],['footer','ท้ายเว็บ'],['section','แบ่งตอน'],
  ['form','ฟอร์ม'],['input','ช่องกรอก','tpl','<input type="text" placeholder="">',34],['textarea','ช่องกรอกยาว'],['button','ปุ่ม'],['label','ป้ายช่องกรอก'],
- ['style','ที่เขียน CSS'],['title','ชื่อบนแท็บ'],['iframe','ฝังหน้าอื่น'],['video','วิดีโอ'],['strong','เน้นหนา'],['em','เน้นเอียง']
+ ['style','ที่เขียน CSS'],['title','ชื่อบนแท็บ'],['iframe','ฝังหน้าอื่น'],['video','วิดีโอ'],['strong','เน้นหนา'],['em','เน้นเอียง'],
+ ['meta','ตั้งค่าหน้า (charset/viewport)','tpl','<meta name="" content="">',12],
+ ['link','ดึงไฟล์ CSS ภายนอก','tpl','<link rel="stylesheet" href="">',30]
 ];
 const AC_ATTRS = [
  ['class','ตั้งชื่อกล่อง (ใช้บ่อยสุด)','tpl','class=""',7],['id','ชื่อเฉพาะตัวเดียว','tpl','id=""',4],
@@ -1885,7 +1888,8 @@ const AC_ATTRS = [
  ['width','ความกว้าง','tpl','width=""',7],['height','ความสูง','tpl','height=""',8],
  ['onclick','กดแล้วทำอะไร (JS)','tpl','onclick=""',9],['placeholder','ข้อความจางในช่อง','tpl','placeholder=""',13],
  ['type','ชนิด input','tpl','type=""',6],['border','เส้นขอบตาราง','tpl','border="1"',10],['rows','จำนวนแถว textarea','tpl','rows="4"',9],
- ['lang','ภาษาของหน้า','tpl','lang="th"',10],['charset','รหัสตัวอักษร','tpl','charset="UTF-8"',16],['rel','ชนิดของ link','tpl','rel="stylesheet"',17]
+ ['lang','ภาษาของหน้า','tpl','lang="th"',10],['charset','รหัสตัวอักษร','tpl','charset="UTF-8"',16],['rel','ชนิดของ link','tpl','rel="stylesheet"',17],
+ ['name','ชื่อ meta (viewport)','tpl','name=""',6],['content','ค่าของ meta','tpl','content=""',9]
 ];
 const AC_PROPS = [
  ['color','สีตัวอักษร'],['background','สีพื้นหลัง / gradient'],['background-color','สีพื้นหลังล้วน'],
@@ -1902,7 +1906,8 @@ const AC_PROPS = [
  ['overflow','ของล้นกล่อง (hidden = ตัดทิ้ง)'],['position','ตำแหน่งพิเศษ'],
  ['transition','เปลี่ยนค่านุ่ม ๆ (0.3s)'],['transform','ขยับ/หมุน/ซูม'],
  ['animation','เรียกใช้ keyframes'],['animation-delay','หน่วงก่อนเริ่ม'],
- ['opacity','ความทึบ 0-1'],['cursor','รูปเมาส์ (pointer = นิ้วชี้)'],['object-fit','รูปพอดีกรอบ (cover)'],['z-index','ชั้นซ้อน']
+ ['opacity','ความทึบ 0-1'],['cursor','รูปเมาส์ (pointer = นิ้วชี้)'],['object-fit','รูปพอดีกรอบ (cover)'],['z-index','ชั้นซ้อน'],
+ ['box-sizing','นับ padding รวมในความกว้าง (border-box)'],['list-style','จุดหน้าลิสต์ (none = เอาออก)'],['min-height','สูงอย่างน้อย (60vh)']
 ];
 const AC_VALS = {
  'display':['flex','block','inline-block','grid','none'],
@@ -1917,9 +1922,14 @@ const AC_VALS = {
  'cursor':['pointer','default'],
  'overflow':['hidden','auto','scroll'],
  'object-fit':['cover','contain'],
- 'font-family':['Tahoma',"'Kanit', sans-serif",'Consolas, monospace']
+ 'font-family':['Tahoma',"'Kanit', sans-serif",'Consolas, monospace'],
+ 'box-sizing':['border-box'],
+ 'list-style':['none']
 };
-const AC_SNIP_BOILER = '<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เว็บของฉัน</title>\n  <style>\n    :root {\n      --main: #7c3aed;\n      --accent: #ec4899;\n      --bg: #faf5ff;\n    }\n    body { margin: 0; font-family: Tahoma; background: var(--bg); }\n    .top { background: linear-gradient(135deg, var(--main), var(--accent)); color: white; text-align: center; padding: 30px; }\n    .content { max-width: 700px; margin: 0 auto; padding: 16px; }\n    .bottom { text-align: center; background: var(--main); color: white; padding: 12px; }\n  </style>\n</head>\n<body>\n  <header class="top"><h1>ชื่อเว็บ</h1></header>\n  <main class="content">\n    \n  </main>\n  <footer class="bottom">จัดทำโดย ฉันเอง</footer>\n</body>\n</html>';
+// ! = โครง VS Code เป๊ะทุกตัวอักษร
+const AC_SNIP_BOILER = '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n</head>\n<body>\n    \n</body>\n</html>';
+// !! = โครงเต็มสไตล์ฉัน: reset + container + nav + hero (เว็บนี้รวม CSS ใน <style> — โปรเจกต์จริงแยกเป็น style.css แล้วใช้ <link>)
+const AC_SNIP_FULL = '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        .container {\n            width: 100%;\n            max-width: 1120px;\n            margin: 0 auto;\n        }\n\n        nav {\n            padding: 1rem;\n            background-color: #333;\n        }\n\n        .nav-con {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n\n        .logo a {\n            font-size: 1.5rem;\n            color: aliceblue;\n            text-decoration: none;\n        }\n\n        .menu {\n            display: flex;\n        }\n\n        .menu li {\n            margin: 0 1rem;\n            list-style: none;\n        }\n\n        .menu li a {\n            color: rgb(214, 217, 220);\n            text-decoration: none;\n        }\n\n        .hero {\n            min-height: 60vh;\n        }\n    </style>\n</head>\n<body>\n    <nav>\n        <div class="container">\n            <div class="nav-con">\n                <div class="logo">\n                    <a href="#">Bloom</a>\n                </div>\n                <ul class="menu">\n                    <li><a href="#">Home</a></li>\n                    <li><a href="#">About</a></li>\n                    <li><a href="#">Services</a></li>\n                    <li><a href="#">Contact</a></li>\n                </ul>\n            </div>\n        </div>\n    </nav>\n    <section class="hero">\n    </section>\n</body>\n</html>';
 const acBox = document.createElement('div');
 acBox.className='ac-box'; acBox.style.display='none';
 document.body.appendChild(acBox);
@@ -1986,6 +1996,13 @@ function acCollect(ctx, ta){
     const vars=[...new Set((ta.value.match(/--[\w-]+(?=\s*:)/g)||[]))];
     return mk(vars.map(v=>({label:v, hint:'ตัวแปรของคุณ', cls:'vr', tpl:'var('+v+')', off:v.length+5, eat:/^var\(\s*[-\w]*$/.test(ta.value.slice(0,ctx.start))?0:0})));
   }
+  if(ctx.mode==='plain' && q.startsWith('!')){
+    const sn=[
+      {label:'!', hint:'โครง HTML5 (เหมือน VS Code)', cls:'', tpl:AC_SNIP_BOILER, off:AC_SNIP_BOILER.indexOf('<body>')+11},
+      {label:'!!', hint:'โครงเต็ม: reset + container + nav + hero', cls:'vr', tpl:AC_SNIP_FULL, off:AC_SNIP_FULL.indexOf('class="hero"')+18}
+    ];
+    return sn.filter(it=>it.label.startsWith(ctx.word));
+  }
   return [];
 }
 function acTagApply(t){
@@ -1997,7 +2014,7 @@ function acTagApply(t){
 }
 function acShow(ta){
   const ctx = acContext(ta);
-  if(ctx.mode==='plain' || (ctx.word==='' && ctx.mode==='attr')){ acClose(); return; }
+  if((ctx.mode==='plain' && !ctx.word.startsWith('!')) || (ctx.word==='' && ctx.mode==='attr')){ acClose(); return; }
   acItems = acCollect(ctx, ta);
   if(!acItems.length){ acClose(); return; }
   acTa=ta; acWordStart=ctx.start; acSel=0; acCtxMode=ctx.mode;
@@ -2061,8 +2078,11 @@ function acSnippet(ta){
   const w = (S.match(/[\w!.#>*-]+$/)||[''])[0];
   if(!w) return false;
   const start = ta.selectionStart - w.length;
+  if(w==='!!'){ ta.setRangeText(AC_SNIP_FULL, start, ta.selectionStart, 'end');
+    ta.selectionStart=ta.selectionEnd=start + AC_SNIP_FULL.indexOf('class="hero"')+18;
+    ta.dispatchEvent(new Event('input')); return true; }
   if(w==='!'){ ta.setRangeText(AC_SNIP_BOILER, start, ta.selectionStart, 'end');
-    const p = start + AC_SNIP_BOILER.indexOf('<title>')+7;
+    const p = start + AC_SNIP_BOILER.indexOf('<body>')+11;
     ta.selectionStart=ta.selectionEnd=p; ta.dispatchEvent(new Event('input')); return true; }
   // Emmet เมื่อมี . # > * ในนิพจน์
   if(/[.#>*]/.test(w)){
