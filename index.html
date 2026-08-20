@@ -61,27 +61,65 @@
   footer{text-align:center;padding:20px;color:var(--dim);font-size:.85rem;border-top:1px solid var(--line)}
   kbd{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.85em}
   /* ---- mission mode ---- */
+  .mhero{position:relative;overflow:hidden;background:linear-gradient(135deg,#312e81,#4c1d95 45%,#831843);border:1px solid #6d28d9;border-radius:18px;padding:22px;margin:14px 0;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .mhero::after{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,transparent 70%,rgba(255,255,255,.08),transparent 75%);animation:sheen 6s linear infinite;pointer-events:none}
+  @keyframes sheen{to{transform:rotate(360deg)}}
+  .lvlring{width:86px;height:86px;flex:none;position:relative}
+  .lvlring svg{transform:rotate(-90deg)}
+  .lvlring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:bold}
+  .lvlring .num b{font-size:1.5rem;color:#fbbf24}
+  .lvlring .num span{font-size:.6rem;color:#c4b5fd}
+  .mstats{flex:1;min-width:200px}
+  .mstats h3{color:#fff;margin:0 0 4px;font-size:1.2rem}
+  .xpbar{height:12px;background:rgba(0,0,0,.35);border-radius:6px;overflow:hidden;margin:8px 0 4px}
+  .xpbar>div{height:100%;background:linear-gradient(90deg,#fbbf24,#f472b6);transition:.6s;box-shadow:0 0 10px #f472b6}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .bdg{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.15);filter:grayscale(1);opacity:.45;transition:.4s}
+  .bdg.got{filter:none;opacity:1;background:rgba(255,255,255,.12);box-shadow:0 0 14px rgba(251,191,36,.5);border-color:#fbbf24}
+  .chgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:14px 0}
+  .chcard{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+  .chcard:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.45);border-color:var(--acc)}
+  .chcard.cur{border-color:#fbbf24;box-shadow:0 0 0 2px #fbbf2455,0 10px 24px rgba(0,0,0,.45)}
+  .chcard .ic{font-size:1.7rem}
+  .chcard h4{margin:6px 0 2px;color:#fff;font-size:.95rem}
+  .chcard .sub{font-size:.75rem;color:var(--dim)}
+  .chcard .cbar{height:6px;background:#0008;border-radius:3px;margin-top:8px;overflow:hidden}
+  .chcard .cbar>div{height:100%;border-radius:3px;transition:.5s}
+  .chcard .pct{position:absolute;top:10px;right:12px;font-size:.7rem;color:var(--dim)}
   .mpills{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-  .mpills button{background:var(--card2);border:1px solid var(--line);color:var(--dim);width:38px;height:38px;border-radius:50%;cursor:pointer;font-family:inherit;font-weight:bold}
-  .mpills button.cur{background:var(--acc);color:#fff;border-color:var(--acc)}
+  .mpills button{background:var(--card2);border:1px solid var(--line);color:var(--dim);min-width:38px;height:38px;border-radius:12px;cursor:pointer;font-family:inherit;font-weight:bold;padding:0 10px;transition:.2s}
+  .mpills button:hover{border-color:var(--acc);color:#fff}
+  .mpills button.cur{background:var(--acc);color:#fff;border-color:var(--acc);box-shadow:0 0 12px #8b5cf680}
   .mpills button.done{background:var(--ok);color:#052e22;border-color:var(--ok)}
+  .mtype{display:inline-block;font-size:.7rem;padding:2px 10px;border-radius:10px;margin-left:8px;vertical-align:middle}
+  .mtype.build{background:#1e3a8a;color:#93c5fd}
+  .mtype.fix{background:#7c2d12;color:#fdba74}
+  .mtype.boss{background:#831843;color:#f9a8d4}
+  .mxp{float:right;color:#fbbf24;font-size:.85rem;font-weight:bold}
   .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
   @media(max-width:700px){.mgrid{grid-template-columns:1fr}}
-  .mgrid iframe{width:100%;height:260px;background:#fff;border:1px solid var(--line);border-radius:8px}
+  .mgrid iframe{width:100%;height:250px;background:#fff;border:1px solid var(--line);border-radius:10px}
   .mgrid .lbl{font-size:.85rem;color:var(--dim);margin-bottom:4px}
-  #mEd{width:100%;height:260px;background:#0a0a18;color:#e0e7ff;border:1px solid var(--acc);border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:.85rem;resize:vertical;tab-size:2}
+  .edwrap{position:relative;border:1px solid var(--acc);border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px #8b5cf62e,0 6px 18px rgba(0,0,0,.35)}
+  .edwrap pre{position:absolute;inset:0;margin:0;border:0;border-radius:0;background:#0a0a18;overflow:auto;padding:12px;font:.85rem/1.5 Consolas,monospace}
+  .edwrap pre code{white-space:pre;display:block;color:#e0e7ff;font:inherit}
+  #mEd{position:relative;z-index:2;width:100%;height:300px;background:transparent;color:transparent;-webkit-text-fill-color:transparent;caret-color:#fff;border:0;outline:none;padding:12px;font:.85rem/1.5 Consolas,monospace;resize:vertical;tab-size:2;white-space:pre;overflow:auto;display:block}
+  #mEd::selection{background:#8b5cf655;color:transparent}
+  .tk-tag{color:#f472b6}.tk-attr{color:#fbbf24}.tk-str{color:#86efac}.tk-cmt{color:#64748b;font-style:italic}.tk-prop{color:#7dd3fc}.tk-num{color:#fca5a5}.tk-pn{color:#94a3b8}.tk-doct{color:#a78bfa}
   .checks{margin:10px 0}
-  .checks div{padding:6px 12px;border-radius:8px;margin:4px 0;font-size:.92rem}
-  .cpass{background:#0b3b2a;color:#6ee7b7}
-  .cfail{background:#3f1220;color:#fda4af}
+  .checks div{padding:7px 12px;border-radius:8px;margin:4px 0;font-size:.92rem;border:1px solid transparent}
+  .cpass{background:#0b3b2a;color:#6ee7b7;border-color:#065f46}
+  .cfail{background:#3f1220;color:#fda4af;border-color:#7f1d1d}
   .cwait{background:var(--card2);color:var(--dim)}
-  .how{background:#172554;border:1px solid #3b82f6;border-radius:10px;padding:12px 14px;margin:10px 0;font-size:.92rem}
+  .how{background:linear-gradient(160deg,#172554,#1e1b4b);border:1px solid #3b82f6;border-radius:10px;padding:12px 14px;margin:10px 0;font-size:.92rem}
   .how b{color:#93c5fd}
-  .win{background:linear-gradient(135deg,#065f46,#047857);border-radius:10px;padding:14px;text-align:center;font-weight:bold;margin:10px 0;display:none}
+  .win{background:linear-gradient(135deg,#065f46,#047857);border-radius:12px;padding:16px;text-align:center;font-weight:bold;margin:10px 0;display:none;box-shadow:0 0 24px #34d39955}
   .imgbank{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
   .imgbank figure{background:var(--card2);border-radius:8px;padding:6px;text-align:center;font-size:.75rem;color:var(--dim)}
   .imgbank img{width:110px;height:74px;object-fit:cover;border-radius:6px;display:block;margin-bottom:4px}
   .imgbank code{font-size:.7rem;word-break:break-all}
+  .confetti{position:fixed;top:-12px;width:10px;height:14px;z-index:99;pointer-events:none;animation:cfall linear forwards}
+  @keyframes cfall{to{transform:translateY(105vh) rotate(720deg)}}
 </style>
 </head>
 <body>
@@ -379,8 +417,27 @@ nav a:hover { color: #fbbf24; }</code></pre>
 
 <!-- ================= MISSIONS ================= -->
 <section id="train" class="page">
-  <h2>💪 ภารกิจฝึก — เขียนเอง ตรวจให้อัตโนมัติ</h2>
-  <p class="dim">ดูเป้าหมายฝั่งซ้าย → เขียนโค้ดให้ได้เหมือน → กด "ตรวจคำตอบ" → ผ่านแล้วไปด่านถัดไป. ติดจริง ๆ ค่อยกดดูเฉลย</p>
+  <div class="mhero">
+    <div class="lvlring">
+      <svg width="86" height="86">
+        <circle r="38" cx="43" cy="43" stroke="#00000066" stroke-width="8" fill="none"/>
+        <circle id="lvlArc" r="38" cx="43" cy="43" stroke="#fbbf24" stroke-width="8" fill="none"
+                stroke-linecap="round" stroke-dasharray="238.76" stroke-dashoffset="238.76"/>
+      </svg>
+      <div class="num"><b id="lvlNum">1</b><span>LEVEL</span></div>
+    </div>
+    <div class="mstats">
+      <h3>💪 ภารกิจฝึก — สายเก็บเลเวล</h3>
+      <div class="dim" id="xpText">0 XP</div>
+      <div class="xpbar"><div id="xpFill"></div></div>
+      <div class="dim" id="doneText">ผ่านแล้ว 0 / 0 ด่าน</div>
+      <div class="badges" id="badgeRow"></div>
+    </div>
+  </div>
+
+  <p class="dim">เลือกบท → ทำด่านเรียงไป. ผ่านด่านได้ XP, จบทั้งบทได้เหรียญตรา 🏅 โค้ดที่พิมพ์มีสีอัตโนมัติเหมือน VS Code</p>
+
+  <div class="chgrid" id="chgrid"></div>
 
   <div class="mpills" id="mpills"></div>
 
@@ -400,28 +457,33 @@ nav a:hover { color: #fbbf24; }</code></pre>
       </div>
     </div>
 
-    <div class="lbl">⌨️ เขียนโค้ดตรงนี้</div>
-    <textarea id="mEd" spellcheck="false"></textarea>
+    <div class="lbl">⌨️ เขียนโค้ดตรงนี้ (มีสีให้อ่านง่าย)</div>
+    <div class="edwrap">
+      <pre id="mHl" aria-hidden="true"><code id="mHlc"></code></pre>
+      <textarea id="mEd" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+    </div>
 
-    <div class="btnrow" style="justify-content:flex-start">
+    <div class="btnrow" style="justify-content:flex-start;margin-top:10px">
       <button class="btn2 go" onclick="checkMission()">✔ ตรวจคำตอบ</button>
       <button class="btn2" onclick="showHint()">💡 ดูเฉลย (ใช้เมื่อจนมุม)</button>
       <button class="btn2" onclick="resetMission()">↺ เริ่มด่านใหม่</button>
     </div>
 
     <div class="checks" id="mChecks"></div>
-    <div class="win" id="mWin">🎉 ผ่านด่าน! เก่งมาก — <button class="btn2 go" onclick="nextMission()">ไปด่านถัดไป ▶</button></div>
+    <div class="win" id="mWin">🎉 ผ่านด่าน! <span id="winXp"></span> — <button class="btn2 go" onclick="nextMission()">ไปด่านถัดไป ▶</button></div>
   </div>
 
   <div class="card">
     <h3>🖼 คลังรูปจากเน็ต (copy ลิงก์ไปใช้ในโค้ดได้เลย)</h3>
-    <p class="dim">รูปจริงจาก picsum.photos — เว็บแจกรูปฟรีสำหรับฝึกเขียนเว็บ. เปลี่ยนตัวเลขท้าย = เปลี่ยนขนาด</p>
+    <p class="dim">รูปจริงจาก picsum.photos — เว็บแจกรูปฟรีสำหรับฝึกเขียนเว็บ. ตัวเลขท้ายคือ กว้าง/สูง เปลี่ยนได้</p>
     <div class="imgbank">
       <figure><img src="https://picsum.photos/id/237/220/148" alt="หมาดำ"><figcaption>หมา</figcaption><code>https://picsum.photos/id/237/300/200</code></figure>
       <figure><img src="https://picsum.photos/id/1015/220/148" alt="แม่น้ำกลางหุบเขา"><figcaption>แม่น้ำ</figcaption><code>https://picsum.photos/id/1015/300/200</code></figure>
       <figure><img src="https://picsum.photos/id/1035/220/148" alt="ภูเขาหิมะ"><figcaption>ภูเขา</figcaption><code>https://picsum.photos/id/1035/300/200</code></figure>
       <figure><img src="https://picsum.photos/id/1080/220/148" alt="สตรอว์เบอร์รี"><figcaption>สตรอว์เบอร์รี</figcaption><code>https://picsum.photos/id/1080/300/200</code></figure>
       <figure><img src="https://picsum.photos/id/1084/220/148" alt="วอลรัสริมทะเล"><figcaption>สัตว์ทะเล</figcaption><code>https://picsum.photos/id/1084/300/200</code></figure>
+      <figure><img src="https://picsum.photos/id/1060/220/148" alt="กาแฟ"><figcaption>กาแฟ</figcaption><code>https://picsum.photos/id/1060/300/200</code></figure>
+      <figure><img src="https://picsum.photos/id/1040/220/148" alt="ปราสาท"><figcaption>ปราสาท</figcaption><code>https://picsum.photos/id/1040/300/200</code></figure>
     </div>
   </div>
 </section>
@@ -701,8 +763,18 @@ ed.addEventListener('keydown', e=>{
 run();
 
 // ---------- mission engine ----------
+const CH = [
+  {n:'พื้นฐาน HTML', ic:'🧱', c:'#8b5cf6'},
+  {n:'รูป ลิงก์ ลิสต์ ตาราง', ic:'🖼️', c:'#ec4899'},
+  {n:'CSS พื้นฐาน', ic:'🎨', c:'#3b82f6'},
+  {n:'กล่องและระยะ', ic:'📦', c:'#f59e0b'},
+  {n:'จัดหน้า Flexbox', ic:'🧲', c:'#10b981'},
+  {n:'ตกแต่งขั้นโปร', ic:'✨', c:'#a855f7'},
+  {n:'โปรเจกต์จริง', ic:'🏆', c:'#ef4444'}
+];
 const M = [
-{
+// ============ บท 1: พื้นฐาน HTML ============
+{ch:0,ty:'build',xp:10,
  t:'ด่าน 1: โครงเว็บแรก',
  goal:'สร้างโครง HTML ครบชุด และมี <h1> เขียนว่าอะไรก็ได้ 1 บรรทัด',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser อ่านไฟล์จากบนลงล่างทีละบรรทัด เจอ DOCTYPE = รู้ว่าเป็น HTML5, เจอ head = เก็บข้อมูลเบื้องหลัง, เจอ body = เริ่มวาดจอ. เจอ h1 = สร้างกล่องตัวหนาใหญ่แล้ววางบนสุด',
@@ -714,10 +786,20 @@ const M = [
   ['มี charset UTF-8',(d,s)=>/charset\s*=\s*["']?utf-8/i.test(s)],
   ['มี <title>',d=>!!d.querySelector('title')],
   ['มี <h1> พร้อมข้อความ',d=>{const h=d.querySelector('body h1');return h&&h.textContent.trim().length>0}]
- ]
-},
-{
- t:'ด่าน 2: ย่อหน้า + ตัวหนา ตัวเอียง',
+ ]},
+{ch:0,ty:'build',xp:10,
+ t:'ด่าน 2: หัวข้อ 3 ระดับ',
+ goal:'ทำหน้า "สัตว์ที่ชอบ": h1 ชื่อเรื่อง 1 อัน, h2 หมวด 2 อัน, ใต้แต่ละ h2 มี h3 อย่างน้อย 1 อัน',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> h1-h6 คือ "ลำดับชั้น" ไม่ใช่แค่ขนาด — browser และ Google อ่านมันเป็นสารบัญ: h1 ชื่อเรื่องใหญ่สุดมีอันเดียว, h2 บท, h3 หัวข้อย่อยในบท. ใช้ผิดลำดับเว็บยังแสดงได้ แต่คะแนนโครงสร้างหาย',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>สัตว์ที่ชอบ</title>\n</head>\n<body>\n  <!-- h1 หนึ่ง, h2 สอง, h3 ใต้แต่ละ h2 -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>สัตว์ที่ชอบ</title>\n</head>\n<body>\n  <h1>สัตว์ที่ฉันชอบ</h1>\n  <h2>สัตว์บก</h2>\n  <h3>หมา</h3>\n  <h2>สัตว์น้ำ</h2>\n  <h3>ปลาทอง</h3>\n</body>\n</html>',
+ checks:[
+  ['มี h1 แค่ 1 อัน',d=>d.querySelectorAll('h1').length===1],
+  ['มี h2 อย่างน้อย 2 อัน',d=>d.querySelectorAll('h2').length>=2],
+  ['มี h3 อย่างน้อย 2 อัน',d=>d.querySelectorAll('h3').length>=2]
+ ]},
+{ch:0,ty:'build',xp:10,
+ t:'ด่าน 3: ย่อหน้า + ตัวหนา ตัวเอียง',
  goal:'เพิ่ม <p> อย่างน้อย 2 ย่อหน้า, ย่อหน้าไหนก็ได้มี <b>ตัวหนา</b> และ <i>ตัวเอียง</i> อย่างละ 1 ที่',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> p เป็นกล่อง "block" — จองเต็มความกว้าง เลยขึ้นบรรทัดใหม่เสมอ. ส่วน b/i เป็น "inline" — แทรกในบรรทัดเดิมไม่ตัดบรรทัด. นี่คือเหตุผลที่ p ต่อกันเป็นชั้น แต่ b อยู่กลางประโยคได้',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ฝึกย่อหน้า</title>\n</head>\n<body>\n  <h1>แนะนำตัว</h1>\n  <!-- เพิ่ม p 2 อัน มี b กับ i -->\n</body>\n</html>',
@@ -726,10 +808,33 @@ const M = [
   ['มี <p> อย่างน้อย 2 อัน',d=>d.querySelectorAll('p').length>=2],
   ['มี <b> ในเนื้อหา',d=>!!d.querySelector('b,strong')],
   ['มี <i> ในเนื้อหา',d=>!!d.querySelector('i,em')]
- ]
-},
-{
- t:'ด่าน 3: ใส่รูปจากเน็ต',
+ ]},
+{ch:0,ty:'build',xp:10,
+ t:'ด่าน 4: เส้นคั่น ขึ้นบรรทัด และ comment',
+ goal:'ใส่ <hr> คั่นระหว่างสองส่วน, ใช้ <br> ขึ้นบรรทัดในที่อยู่ 3 บรรทัด, และซ่อน comment ไว้ 1 อัน',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> hr กับ br เป็น tag "โดดเดี่ยว" ไม่มีตัวปิด เพราะมันไม่ห่ออะไร — สั่งงานจุดเดียวจบ. ส่วน &lt;!-- --&gt; browser อ่านแล้ว "ข้าม" ทั้งก้อน ใช้จดโน้ตบอกตัวเอง/กรรมการว่าส่วนนี้คืออะไร มือโปรใช้แบ่งโซนโค้ด',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ที่อยู่</title>\n</head>\n<body>\n  <h1>ติดต่อฉัน</h1>\n  <p>อีเมล: hello@example.com</p>\n  <!-- ใส่ hr คั่น แล้วเขียนที่อยู่ 3 บรรทัดใน p เดียวด้วย br -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ที่อยู่</title>\n</head>\n<body>\n  <h1>ติดต่อฉัน</h1>\n  <p>อีเมล: hello@example.com</p>\n  <hr>\n  <!-- ส่วนที่อยู่บ้าน -->\n  <p>บ้านเลขที่ 99 หมู่ 5<br>ตำบลในเมือง อำเภอเมือง<br>จังหวัดของฉัน 40000</p>\n</body>\n</html>',
+ checks:[
+  ['มี <hr>',d=>!!d.querySelector('hr')],
+  ['มี <br> อย่างน้อย 2 อัน',d=>d.querySelectorAll('br').length>=2],
+  ['มี comment ซ่อนอยู่',(d,s)=>/<!--(?![\s\S]*?พิมพ์โครง)[\s\S]*?-->/.test(s.replace(/<!-- ใส่ hr[\s\S]*?-->/,''))||(s.match(/<!--/g)||[]).length>=1&&!/ใส่ hr คั่น/.test(s)]
+ ]},
+{ch:0,ty:'fix',xp:15,
+ t:'ด่าน 5: 🔧 ซ่อมเว็บพัง (HTML)',
+ goal:'โค้ดนี้มีบั๊ก 3 จุด: tag สะกดผิด 1, ลืมปิด tag 1, ลืม charset 1 — หาแล้วซ่อมให้หน้าเว็บถูกต้อง',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser ใจดีเกิน — เจอ tag ผิดมันเดาแล้วแสดงต่อ ไม่มี error ขึ้น! เว็บเลย "พังเงียบ ๆ" หน้าตาเพี้ยนแบบงง ๆ. วิธีมือโปร: ไล่เช็คว่า tag เปิด-ปิดจับคู่ครบ เหมือนเช็ควงเล็บเลข',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <title>ร้านขนมป้าแดง</title>\n</head>\n<body>\n  <h1>ร้านขนมป้าแดง<h1>\n  <pp>ขนมไทยแท้ ทำสดทุกวัน</pp>\n  <p>เปิดทุกวัน 8 โมงเช้า</p>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ร้านขนมป้าแดง</title>\n</head>\n<body>\n  <h1>ร้านขนมป้าแดง</h1>\n  <p>ขนมไทยแท้ ทำสดทุกวัน</p>\n  <p>เปิดทุกวัน 8 โมงเช้า</p>\n</body>\n</html>',
+ checks:[
+  ['เพิ่ม charset UTF-8 แล้ว',(d,s)=>/charset\s*=\s*["']?utf-8/i.test(s)],
+  ['h1 ปิดด้วย </h1> แล้ว',(d,s)=>/<\/h1>/i.test(s)],
+  ['ไม่มี tag <pp> ผิด ๆ เหลืออยู่',(d,s)=>!/<\/?pp[\s>]/i.test(s)],
+  ['ยังมีย่อหน้าครบ 2 อัน',d=>d.querySelectorAll('p').length>=2]
+ ]},
+// ============ บท 2: รูป ลิงก์ ลิสต์ ตาราง ============
+{ch:1,ty:'build',xp:10,
+ t:'ด่าน 6: ใส่รูปจากเน็ต',
  goal:'ใส่รูปหมาจากคลังรูปข้างล่าง (copy ลิงก์ picsum) พร้อม alt และ width="300"',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> เจอ <img> browser จะยิงคำขอไปที่ URL ใน src แล้วโหลดรูปมาแปะ. ถ้าโหลดไม่ได้ (เน็ตหลุด/ลิงก์ผิด) จะโชว์ข้อความใน alt แทน — กรรมการเช็ค alt เพราะมันช่วยคนตาบอดที่ใช้โปรแกรมอ่านจอด้วย',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>รูปแรก</title>\n</head>\n<body>\n  <h1>น้องหมา</h1>\n  <!-- ใส่ img ตรงนี้ -->\n</body>\n</html>',
@@ -738,10 +843,9 @@ const M = [
   ['มี <img> ที่ src เป็นลิงก์ picsum',d=>{const i=d.querySelector('img');return i&&/picsum\.photos/.test(i.getAttribute('src')||'')}],
   ['มี alt อธิบายรูป',d=>{const i=d.querySelector('img');return i&&(i.getAttribute('alt')||'').trim().length>0}],
   ['กำหนด width',d=>{const i=d.querySelector('img');return i&&!!i.getAttribute('width')}]
- ]
-},
-{
- t:'ด่าน 4: ลิงก์',
+ ]},
+{ch:1,ty:'build',xp:10,
+ t:'ด่าน 7: ลิงก์',
  goal:'ทำลิงก์ 2 อัน: อันแรกไป https://www.google.com อันที่สองไปเว็บอะไรก็ได้',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> <a> ทำให้ข้อความกลายเป็นจุดคลิก. พอคลิก browser อ่านค่า href แล้วพาไป URL นั้น. ข้อความสีน้ำเงินขีดเส้นใต้ = สไตล์อัตโนมัติของ browser (เดี๋ยว CSS เปลี่ยนได้)',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลิงก์</title>\n</head>\n<body>\n  <h1>เว็บโปรดของฉัน</h1>\n  <!-- ลิงก์ 2 อัน -->\n</body>\n</html>',
@@ -750,10 +854,9 @@ const M = [
   ['มี <a> อย่างน้อย 2 อัน',d=>d.querySelectorAll('a[href]').length>=2],
   ['อันหนึ่งชี้ไป google.com',d=>[...d.querySelectorAll('a')].some(a=>/google\.com/.test(a.getAttribute('href')||''))],
   ['ทุกลิงก์มีข้อความให้คลิก',d=>[...d.querySelectorAll('a')].every(a=>a.textContent.trim().length>0)]
- ]
-},
-{
- t:'ด่าน 5: ลิสต์ 2 แบบ',
+ ]},
+{ch:1,ty:'build',xp:10,
+ t:'ด่าน 8: ลิสต์ 2 แบบ',
  goal:'ทำ <ul> ของโปรด 3 ข้อ และ <ol> ขั้นตอนอะไรสักอย่าง 3 ขั้น',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser เจอ ul/ol จะสร้าง "กล่องรายการ" แล้วไล่นับลูก <li> ข้างใน — ul แปะจุดหน้าทุกข้อ, ol แปะเลขเรียง 1 2 3 ให้เองอัตโนมัติ เราไม่ต้องพิมพ์เลขเอง (ลบข้อกลางออก เลขก็เรียงใหม่เอง)',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลิสต์</title>\n</head>\n<body>\n  <h2>ของโปรด</h2>\n  <!-- ul 3 ข้อ -->\n  <h2>ขั้นตอน</h2>\n  <!-- ol 3 ขั้น -->\n</body>\n</html>',
@@ -761,10 +864,19 @@ const M = [
  checks:[
   ['มี <ul> ที่มี <li> ครบ 3',d=>{const u=d.querySelector('ul');return u&&u.querySelectorAll('li').length>=3}],
   ['มี <ol> ที่มี <li> ครบ 3',d=>{const o=d.querySelector('ol');return o&&o.querySelectorAll('li').length>=3}]
- ]
-},
-{
- t:'ด่าน 6: ตาราง',
+ ]},
+{ch:1,ty:'build',xp:15,
+ t:'ด่าน 9: ลิสต์ซ้อนลิสต์',
+ goal:'เมนูร้านอาหาร 2 หมวด (ของคาว/ของหวาน) — ul ใหญ่มี 2 ข้อ แต่ละข้อมี ul ย่อยซ้อนข้างใน 2 เมนู',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ลิสต์ซ้อนได้เพราะ li เป็น "กล่อง" ใส่อะไรก็ได้ — รวมถึง ul อีกอัน. browser เจอ ul ใน li จะย่อหน้าเข้าไปอีกชั้นให้เอง. โครงสร้างซ้อนแบบนี้แหละคือหัวใจ HTML: กล่องในกล่องในกล่อง',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เมนู</title>\n</head>\n<body>\n  <h1>เมนูร้านฉัน</h1>\n  <ul>\n    <li>ของคาว\n      <!-- ul ย่อยตรงนี้ -->\n    </li>\n    <li>ของหวาน\n      <!-- ul ย่อยตรงนี้ -->\n    </li>\n  </ul>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เมนู</title>\n</head>\n<body>\n  <h1>เมนูร้านฉัน</h1>\n  <ul>\n    <li>ของคาว\n      <ul>\n        <li>กะเพราไก่</li>\n        <li>ข้าวผัดกุ้ง</li>\n      </ul>\n    </li>\n    <li>ของหวาน\n      <ul>\n        <li>บัวลอย</li>\n        <li>ข้าวเหนียวมะม่วง</li>\n      </ul>\n    </li>\n  </ul>\n</body>\n</html>',
+ checks:[
+  ['มีลิสต์ซ้อนในลิสต์ (ul ใน li)',d=>d.querySelectorAll('li > ul, li > ol').length>=2],
+  ['ลิสต์ย่อยแต่ละอันมี 2 เมนู',d=>[...d.querySelectorAll('li > ul, li > ol')].every(u=>u.querySelectorAll('li').length>=2)]
+ ]},
+{ch:1,ty:'build',xp:15,
+ t:'ด่าน 10: ตาราง',
  goal:'ตารางเมนูอาหาร: หัวตาราง "เมนู" กับ "ราคา" + ข้อมูล 2 แถว',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser ประกอบตารางจากนอกเข้าใน: table = ทั้งตาราง, tr = แถวหนึ่ง, ช่องในแถวคือ th (หัว, หนา+กลาง) หรือ td (ข้อมูล). จำนวนช่องแต่ละแถวต้องเท่ากัน ไม่งั้นตารางเบี้ยว',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ตาราง</title>\n</head>\n<body>\n  <h2>เมนูร้านฉัน</h2>\n  <table border="1">\n    <!-- แถวหัว th, แถวข้อมูล td -->\n  </table>\n</body>\n</html>',
@@ -773,10 +885,21 @@ const M = [
   ['มี <table>',d=>!!d.querySelector('table')],
   ['มี <th> อย่างน้อย 2 ช่อง',d=>d.querySelectorAll('th').length>=2],
   ['มีแถวข้อมูล (td) อย่างน้อย 2 แถว',d=>{const rows=[...d.querySelectorAll('tr')].filter(r=>r.querySelector('td'));return rows.length>=2}]
- ]
-},
-{
- t:'ด่าน 7: CSS แรก — ใส่สี',
+ ]},
+{ch:1,ty:'fix',xp:15,
+ t:'ด่าน 11: 🔧 ซ่อมตารางเบี้ยว',
+ goal:'ตารางนี้เบี้ยว: แถวล่างมีช่องเกิน 1 ช่อง และลืมปิด </table> — ซ่อมให้ทุกแถวมี 2 ช่องเท่ากัน',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser วาดตารางตามจำนวนช่องจริง แถวไหนช่องเกินมันดันตารางบวมออกข้าง — ดูปุ๊บรู้ว่าพัง. เวลาเจอตารางเบี้ยว ให้นับ td ในแต่ละ tr เทียบกับจำนวน th ก่อนเลย',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ตารางคะแนน</title>\n</head>\n<body>\n  <h2>คะแนนสอบ</h2>\n  <table border="1">\n    <tr><th>วิชา</th><th>คะแนน</th></tr>\n    <tr><td>คณิต</td><td>85</td></tr>\n    <tr><td>วิทย์</td><td>90</td><td>ดีมาก</td></tr>\n  \n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ตารางคะแนน</title>\n</head>\n<body>\n  <h2>คะแนนสอบ</h2>\n  <table border="1">\n    <tr><th>วิชา</th><th>คะแนน</th></tr>\n    <tr><td>คณิต</td><td>85</td></tr>\n    <tr><td>วิทย์</td><td>90</td></tr>\n  </table>\n</body>\n</html>',
+ checks:[
+  ['ปิด </table> แล้ว',(d,s)=>/<\/table>/i.test(s)],
+  ['ทุกแถวมี 2 ช่องเท่ากัน',d=>[...d.querySelectorAll('tr')].every(r=>r.querySelectorAll('th,td').length===2)],
+  ['ยังมีข้อมูลครบ 2 แถว',d=>[...d.querySelectorAll('tr')].filter(r=>r.querySelector('td')).length>=2]
+ ]},
+// ============ บท 3: CSS พื้นฐาน ============
+{ch:2,ty:'build',xp:10,
+ t:'ด่าน 12: CSS แรก — ใส่สี',
  goal:'ใส่ <style> ใน head: พื้นหลัง body สีอ่อน, h1 สีม่วง (#7c3aed) และจัดกลาง (text-align)',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser อ่าน HTML เสร็จได้ "ต้นไม้กล่อง" แล้วค่อยเอา CSS มาทาทีละกฎ: หา tag ที่ตรงชื่อ แล้วเปลี่ยนคุณสมบัติ. HTML = โครงกระดูก, CSS = สีผิว+เสื้อผ้า แยกกันคนละหน้าที่',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>สีแรก</title>\n  <style>\n    /* เขียน CSS ตรงนี้ */\n  </style>\n</head>\n<body>\n  <h1>เว็บมีสี</h1>\n  <p>สวยขึ้นเยอะ</p>\n</body>\n</html>',
@@ -786,10 +909,55 @@ const M = [
   ['body มี background',(d,s)=>/body\s*{[^}]*background/is.test(s)],
   ['h1 มี color',(d,s)=>/h1\s*{[^}]*color\s*:/is.test(s)],
   ['h1 จัดกลาง text-align: center',(d,s)=>/h1\s*{[^}]*text-align\s*:\s*center/is.test(s)]
- ]
-},
-{
- t:'ด่าน 8: กล่องสวย',
+ ]},
+{ch:2,ty:'build',xp:15,
+ t:'ด่าน 13: class กับ id',
+ goal:'สร้าง class ชื่อ highlight (พื้นเหลือง) ใช้กับ 2 ที่ + id ชื่อ big (ตัวใหญ่ 30px) ใช้กับ 1 ที่',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> tag selector ทาทุกตัวทั้งหน้า — บางทีเราอยากทาแค่บางตัว. class = ป้ายชื่อแปะซ้ำได้หลายตัว (นำหน้าด้วยจุด), id = ชื่อเฉพาะตัวเดียวทั้งหน้า (นำหน้าด้วย #). browser scan หา element ที่แปะป้ายตรงกันแล้วทาสีให้',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ป้ายชื่อ</title>\n  <style>\n    /* .highlight กับ #big */\n  </style>\n</head>\n<body>\n  <h1>ประกาศจากห้องเรียน</h1>\n  <p>พรุ่งนี้สอบวิทย์</p>\n  <p>อย่าลืมเอาดินสอ 2B</p>\n  <p>เลิกเรียน 4 โมง</p>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ป้ายชื่อ</title>\n  <style>\n    .highlight { background-color: yellow; }\n    #big { font-size: 30px; }\n  </style>\n</head>\n<body>\n  <h1 id="big">ประกาศจากห้องเรียน</h1>\n  <p class="highlight">พรุ่งนี้สอบวิทย์</p>\n  <p class="highlight">อย่าลืมเอาดินสอ 2B</p>\n  <p>เลิกเรียน 4 โมง</p>\n</body>\n</html>',
+ checks:[
+  ['มีกฎ .highlight ใน CSS',(d,s)=>/\.highlight\s*{[^}]*background/is.test(s)],
+  ['ใช้ class="highlight" กับ 2 ตัว',d=>d.querySelectorAll('.highlight').length>=2],
+  ['มีกฎ #big ตัวอักษร 30px',(d,s)=>/#big\s*{[^}]*font-size\s*:\s*30px/is.test(s)],
+  ['ใช้ id="big" กับ 1 ตัว',d=>d.querySelectorAll('#big').length===1]
+ ]},
+{ch:2,ty:'build',xp:15,
+ t:'ด่าน 14: ฟอนต์ไทยจาก Google Fonts',
+ goal:'ดึงฟอนต์ Kanit จาก fonts.googleapis.com มาใช้กับทั้ง body (2 บรรทัดจากหน้าสูตรต้องจำ)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> <link> สั่ง browser ไปโหลดไฟล์ฟอนต์จาก server ของ Google ตอนเปิดหน้า แล้ว font-family บอกว่า "ข้อความใช้ฟอนต์ชื่อนี้นะ". ถ้าเน็ตล่มโหลดไม่ได้ browser ใช้ตัวสำรองหลังลูกน้ำ (sans-serif) แทน — เลยต้องใส่สำรองเสมอ',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ฟอนต์สวย</title>\n  <!-- ใส่ link ฟอนต์ตรงนี้ -->\n  <style>\n    /* ใส่ font-family ที่ body */\n  </style>\n</head>\n<body>\n  <h1>ฟอนต์ Kanit สวยมาก</h1>\n  <p>ดูโปรขึ้นทันทีเลยใช่ไหมล่ะ</p>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ฟอนต์สวย</title>\n  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">\n  <style>\n    body { font-family: "Kanit", sans-serif; }\n  </style>\n</head>\n<body>\n  <h1>ฟอนต์ Kanit สวยมาก</h1>\n  <p>ดูโปรขึ้นทันทีเลยใช่ไหมล่ะ</p>\n</body>\n</html>',
+ checks:[
+  ['มี <link> ไป fonts.googleapis.com',d=>[...d.querySelectorAll('link')].some(l=>/fonts\.googleapis\.com/.test(l.getAttribute('href')||''))],
+  ['link มี rel="stylesheet"',d=>[...d.querySelectorAll('link')].some(l=>/fonts\.googleapis/.test(l.getAttribute('href')||'')&&l.getAttribute('rel')==='stylesheet')],
+  ['body ใช้ font-family Kanit',(d,s)=>/body\s*{[^}]*font-family\s*:[^}]*kanit/is.test(s)]
+ ]},
+{ch:2,ty:'build',xp:15,
+ t:'ด่าน 15: แต่งข้อความให้อ่านสบาย',
+ goal:'h1 จัดกลาง + เว้นตัวอักษร (letter-spacing: 2px), p ทุกตัว line-height: 1.8, ลิงก์ไม่มีขีดเส้นใต้',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> browser จัดข้อความเป็น "บรรทัด" — line-height คูณความสูงแต่ละบรรทัด ยิ่งมากยิ่งโปร่งอ่านง่าย (เว็บอ่านสบายใช้ 1.6-1.8). letter-spacing ถ่างช่องไฟตัวอักษร ใช้กับหัวข้อให้ดูหรู. เว็บที่ "ดูแพง" ต่างจากเว็บธรรมดาตรงพวกนี้แหละ',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>อ่านสบาย</title>\n  <style>\n    body { font-family: Tahoma; max-width: 500px; margin: 0 auto; }\n    /* แต่ง h1, p, a ตรงนี้ */\n  </style>\n</head>\n<body>\n  <h1>เคล็ดลับอ่านหนังสือ</h1>\n  <p>อ่านทีละ 25 นาที พัก 5 นาที สมองจะจำได้ดีกว่าอ่านรวดเดียว 3 ชั่วโมง เพราะสมองต้องการเวลาจัดเก็บข้อมูล</p>\n  <p>อ่านเพิ่มได้ที่ <a href="#">บทความเต็ม</a></p>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>อ่านสบาย</title>\n  <style>\n    body { font-family: Tahoma; max-width: 500px; margin: 0 auto; }\n    h1 { text-align: center; letter-spacing: 2px; }\n    p { line-height: 1.8; }\n    a { text-decoration: none; color: #7c3aed; }\n  </style>\n</head>\n<body>\n  <h1>เคล็ดลับอ่านหนังสือ</h1>\n  <p>อ่านทีละ 25 นาที พัก 5 นาที สมองจะจำได้ดีกว่าอ่านรวดเดียว 3 ชั่วโมง เพราะสมองต้องการเวลาจัดเก็บข้อมูล</p>\n  <p>อ่านเพิ่มได้ที่ <a href="#">บทความเต็ม</a></p>\n</body>\n</html>',
+ checks:[
+  ['h1 จัดกลาง + letter-spacing',(d,s)=>/h1\s*{[^}]*text-align\s*:\s*center/is.test(s)&&/h1\s*{[^}]*letter-spacing/is.test(s)],
+  ['p มี line-height',(d,s)=>/(^|[^\w-])p\s*{[^}]*line-height/is.test(s)],
+  ['a ไม่มีขีดเส้นใต้',(d,s)=>/(^|[^\w-])a\s*{[^}]*text-decoration\s*:\s*none/is.test(s)]
+ ]},
+{ch:2,ty:'fix',xp:15,
+ t:'ด่าน 16: 🔧 ซ่อม CSS พัง',
+ goal:'CSS นี้พัง 2 จุด: ลืม ; หลัง background 1 จุด และลืมปิด } ของ h1 — ซ่อมให้สีกลับมาครบ',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> CSS พังต่างจาก HTML — เจอกฎเสีย browser "โยนทิ้งทั้งกฎ" แล้วไปต่อ. ลืม ; ตัวเดียว = คำสั่งถัดไปโดนกลืนหาย, ลืม } = กฎที่เหลือทั้งไฟล์อาจตายยกแผง. เว็บจืดผิดปกติเมื่อไหร่ ให้สงสัย ; กับ } ก่อนเลย',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เว็บจืด</title>\n  <style>\n    body { background: #fff0f5 font-family: Tahoma; }\n    h1 { color: #db2777;\n    p { color: #555; }\n  </style>\n</head>\n<body>\n  <h1>ทำไมเว็บฉันจืด</h1>\n  <p>สีหายไปไหนหมด</p>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เว็บจืด</title>\n  <style>\n    body { background: #fff0f5; font-family: Tahoma; }\n    h1 { color: #db2777; }\n    p { color: #555; }\n  </style>\n</head>\n<body>\n  <h1>ทำไมเว็บฉันจืด</h1>\n  <p>สีหายไปไหนหมด</p>\n</body>\n</html>',
+ checks:[
+  ['background ปิดด้วย ; แล้ว',(d,s)=>/background\s*:\s*#fff0f5\s*;/i.test(s)],
+  ['วงเล็บ { } จับคู่ครบทุกกฎ',(d,s)=>{const st=(s.match(/<style>([\s\S]*?)<\/style>/i)||[])[1]||'';return (st.match(/{/g)||[]).length===(st.match(/}/g)||[]).length&&(st.match(/{/g)||[]).length>=3}],
+  ['กฎ p ยังอยู่ครบ',(d,s)=>/(^|[^\w-])p\s*{[^}]*color/is.test(s)]
+ ]},
+// ============ บท 4: กล่องและระยะ ============
+{ch:3,ty:'build',xp:15,
+ t:'ด่าน 17: กล่องสวย',
  goal:'ทำ div class="box" ใส่ padding, border, border-radius, box-shadow ครบ 4 อย่าง',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> ทุก tag คือกล่องซ้อน 4 ชั้น: เนื้อหา → padding (เบาะใน) → border (กำแพง) → margin (ถอยห่างเพื่อนบ้าน). border-radius ลบมุมกำแพงให้โค้ง, box-shadow วาดเงาใต้กล่อง = ดูลอย. กด F12 ใน Chrome ดูกล่องพวกนี้ได้จริง',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>กล่อง</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .box {\n      background: white;\n      width: 300px;\n      /* เพิ่ม padding, border, border-radius, box-shadow */\n    }\n  </style>\n</head>\n<body>\n  <div class="box">\n    <h3>กล่องของฉัน</h3>\n    <p>ทำให้สวยหน่อย</p>\n  </div>\n</body>\n</html>',
@@ -799,10 +967,42 @@ const M = [
   ['.box มี border',(d,s)=>/\.box\s*{[^}]*border\s*:/is.test(s)],
   ['.box มี border-radius',(d,s)=>/\.box\s*{[^}]*border-radius\s*:/is.test(s)],
   ['.box มี box-shadow',(d,s)=>/\.box\s*{[^}]*box-shadow\s*:/is.test(s)]
- ]
-},
-{
- t:'ด่าน 9: Flexbox เรียงแถว',
+ ]},
+{ch:3,ty:'build',xp:15,
+ t:'ด่าน 18: margin vs padding เห็นกับตา',
+ goal:'กล่อง .a ใส่ padding: 30px (กล่องอ้วนขึ้น), กล่อง .b ใส่ margin: 30px (กล่องถอยห่าง) — รันแล้วสังเกตความต่าง',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> padding ดันจาก "ข้างใน" — พื้นหลังกล่องยืดตาม เนื้อหาไม่ติดขอบ. margin ดันจาก "ข้างนอก" — พื้นหลังไม่ยืด แค่ผลักตัวเองห่างจากคนอื่น. สับสนเมื่อไหร่ท่อง: เบาะใน-ถอยนอก',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>margin vs padding</title>\n  <style>\n    div { background: #ddd6fe; border: 2px solid #7c3aed; width: 220px; }\n    .a { /* padding: 30px */ }\n    .b { /* margin: 30px */ }\n  </style>\n</head>\n<body>\n  <div class="a">กล่อง A — เบาะใน</div>\n  <div class="b">กล่อง B — ถอยห่าง</div>\n  <div>กล่อง C — ธรรมดา</div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>margin vs padding</title>\n  <style>\n    div { background: #ddd6fe; border: 2px solid #7c3aed; width: 220px; }\n    .a { padding: 30px; }\n    .b { margin: 30px; }\n  </style>\n</head>\n<body>\n  <div class="a">กล่อง A — เบาะใน</div>\n  <div class="b">กล่อง B — ถอยห่าง</div>\n  <div>กล่อง C — ธรรมดา</div>\n</body>\n</html>',
+ checks:[
+  ['.a มี padding: 30px',(d,s)=>/\.a\s*{[^}]*padding\s*:\s*30px/is.test(s)],
+  ['.b มี margin: 30px',(d,s)=>/\.b\s*{[^}]*margin\s*:\s*30px/is.test(s)]
+ ]},
+{ch:3,ty:'build',xp:15,
+ t:'ด่าน 19: จัดเนื้อหากลางจอแบบมือโปร',
+ goal:'ทำ div class="page" กว้างไม่เกิน 500px และอยู่กลางจอเสมอ (max-width + margin: 0 auto)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> margin: 0 auto แปลว่า บน-ล่าง 0, ซ้าย-ขวา "อัตโนมัติ" — browser คำนวณที่ว่างสองข้างแล้วแบ่งเท่ากัน กล่องเลยลอยกลางเป๊ะทุกขนาดจอ. เว็บข่าว เว็บบทความ ใช้สูตรนี้ทุกเว็บ เพราะบรรทัดยาวเกินอ่านยาก',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>กลางจอ</title>\n  <style>\n    body { background: #faf5ff; font-family: Tahoma; }\n    .page {\n      background: white; padding: 20px; border-radius: 12px;\n      /* ทำให้กว้างไม่เกิน 500 และอยู่กลาง */\n    }\n  </style>\n</head>\n<body>\n  <div class="page">\n    <h1>บทความของฉัน</h1>\n    <p>เนื้อหาอยู่กลางจอ อ่านง่าย ดูเป็นเว็บจริงทันที</p>\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>กลางจอ</title>\n  <style>\n    body { background: #faf5ff; font-family: Tahoma; }\n    .page {\n      background: white; padding: 20px; border-radius: 12px;\n      max-width: 500px;\n      margin: 0 auto;\n    }\n  </style>\n</head>\n<body>\n  <div class="page">\n    <h1>บทความของฉัน</h1>\n    <p>เนื้อหาอยู่กลางจอ อ่านง่าย ดูเป็นเว็บจริงทันที</p>\n  </div>\n</body>\n</html>',
+ checks:[
+  ['.page มี max-width: 500px',(d,s)=>/\.page\s*{[^}]*max-width\s*:\s*500px/is.test(s)],
+  ['.page มี margin: 0 auto',(d,s)=>/\.page\s*{[^}]*margin\s*:\s*0\s+auto/is.test(s)]
+ ]},
+{ch:3,ty:'build',xp:15,
+ t:'ด่าน 20: รูปโปรไฟล์วงกลม',
+ goal:'ใส่รูปจากคลัง แล้วทำให้กลมด้วย border-radius: 50% + ขอบขาว 4px + เงา',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> border-radius ตัดมุมเป็นวงโค้ง — พอสั่ง 50% ของรูปสี่เหลี่ยมจัตุรัส มุมโค้งชนกันพอดีกลายเป็นวงกลมเป๊ะ. รูปโปรไฟล์กลม ๆ ทุกแอปที่เห็น ใช้เทคนิคบรรทัดเดียวนี้ทั้งนั้น',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>โปรไฟล์</title>\n  <style>\n    body { background: linear-gradient(135deg, #7c3aed, #ec4899); text-align: center; font-family: Tahoma; color: white; }\n    .avatar {\n      /* กลม + ขอบขาว + เงา */\n    }\n  </style>\n</head>\n<body>\n  <h1>โปรไฟล์ของฉัน</h1>\n  <img class="avatar" src="https://picsum.photos/id/237/200/200" alt="รูปโปรไฟล์">\n  <p>สายเขียนเว็บ</p>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>โปรไฟล์</title>\n  <style>\n    body { background: linear-gradient(135deg, #7c3aed, #ec4899); text-align: center; font-family: Tahoma; color: white; }\n    .avatar {\n      border-radius: 50%;\n      border: 4px solid white;\n      box-shadow: 0 6px 16px rgba(0,0,0,.35);\n    }\n  </style>\n</head>\n<body>\n  <h1>โปรไฟล์ของฉัน</h1>\n  <img class="avatar" src="https://picsum.photos/id/237/200/200" alt="รูปโปรไฟล์">\n  <p>สายเขียนเว็บ</p>\n</body>\n</html>',
+ checks:[
+  ['.avatar มี border-radius: 50%',(d,s)=>/\.avatar\s*{[^}]*border-radius\s*:\s*50%/is.test(s)],
+  ['.avatar มีขอบ (border)',(d,s)=>/\.avatar\s*{[^}]*border\s*:/is.test(s)],
+  ['.avatar มีเงา (box-shadow)',(d,s)=>/\.avatar\s*{[^}]*box-shadow/is.test(s)],
+  ['มีรูป picsum ใช้ class avatar',d=>{const i=d.querySelector('img.avatar');return i&&/picsum/.test(i.getAttribute('src')||'')}]
+ ]},
+// ============ บท 5: จัดหน้า Flexbox ============
+{ch:4,ty:'build',xp:15,
+ t:'ด่าน 21: Flexbox เรียงแถว',
  goal:'ทำกล่อง 3 ใบใน div class="row" ให้เรียงแนวนอน กลางจอ มีช่องห่าง (display:flex + gap + justify-content)',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> ปกติ div เป็น block = ต่อกันแนวตั้ง. พอตัวแม่ประกาศ display:flex ตัวแม่จะเปลี่ยนกติกาให้ลูก "เข้าแถวแนวนอน" — gap คือระยะระหว่างลูก, justify-content เลื่อนทั้งแถวซ้าย/กลาง/ขวา. คำสั่งใส่ที่แม่ ไม่ใช่ที่ลูก!',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Flex</title>\n  <style>\n    .row {\n      /* ทำให้ลูกเรียงแนวนอน กลางจอ ห่างกัน 16px */\n    }\n    .item { background: #7c3aed; color: white; padding: 30px; border-radius: 10px; }\n  </style>\n</head>\n<body>\n  <div class="row">\n    <div class="item">1</div>\n    <div class="item">2</div>\n    <div class="item">3</div>\n  </div>\n</body>\n</html>',
@@ -811,10 +1011,30 @@ const M = [
   ['.row มี display: flex',(d,s)=>/\.row\s*{[^}]*display\s*:\s*flex/is.test(s)],
   ['.row มี gap',(d,s)=>/\.row\s*{[^}]*gap\s*:/is.test(s)],
   ['.row มี justify-content: center',(d,s)=>/\.row\s*{[^}]*justify-content\s*:\s*center/is.test(s)]
- ]
-},
-{
- t:'ด่าน 10: เมนูบาร์ + hover',
+ ]},
+{ch:4,ty:'build',xp:15,
+ t:'ด่าน 22: แถบบน โลโก้ซ้าย เมนูขวา',
+ goal:'ทำ .bar ให้โลโก้ชิดซ้าย เมนูชิดขวา ด้วย justify-content: space-between + align-items: center',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> space-between สั่งว่า "ลูกตัวแรกชิดซ้ายสุด ตัวสุดท้ายชิดขวาสุด ที่ว่างอยู่ตรงกลาง". align-items: center จัดกลาง "แนวตั้ง" ให้โลโก้กับเมนูอยู่ระดับเดียวกัน. แถบบนของเกือบทุกเว็บดัง ใช้ 2 บรรทัดนี้',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>แถบบน</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    .bar {\n      background: #4c1d95; color: white; padding: 12px 20px;\n      /* โลโก้ซ้าย เมนูขวา ระดับเดียวกัน */\n    }\n    .menu a { color: white; margin-left: 16px; text-decoration: none; }\n  </style>\n</head>\n<body>\n  <div class="bar">\n    <b>🌟 เว็บฉัน</b>\n    <span class="menu"><a href="#">หน้าแรก</a><a href="#">ผลงาน</a><a href="#">ติดต่อ</a></span>\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>แถบบน</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    .bar {\n      background: #4c1d95; color: white; padding: 12px 20px;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n    .menu a { color: white; margin-left: 16px; text-decoration: none; }\n  </style>\n</head>\n<body>\n  <div class="bar">\n    <b>🌟 เว็บฉัน</b>\n    <span class="menu"><a href="#">หน้าแรก</a><a href="#">ผลงาน</a><a href="#">ติดต่อ</a></span>\n  </div>\n</body>\n</html>',
+ checks:[
+  ['.bar เป็น flex',(d,s)=>/\.bar\s*{[^}]*display\s*:\s*flex/is.test(s)],
+  ['.bar ใช้ space-between',(d,s)=>/\.bar\s*{[^}]*justify-content\s*:\s*space-between/is.test(s)],
+  ['.bar จัดกลางแนวตั้ง align-items',(d,s)=>/\.bar\s*{[^}]*align-items\s*:\s*center/is.test(s)]
+ ]},
+{ch:4,ty:'build',xp:15,
+ t:'ด่าน 23: การ์ด 6 ใบ ตัดขึ้นบรรทัดเอง',
+ goal:'ทำการ์ด 6 ใบใน .row ที่ใส่ flex-wrap: wrap — จอแคบการ์ดจะไหลลงบรรทัดใหม่เองไม่ล้นจอ',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ปกติ flex ยัดลูกทุกตัวในแถวเดียว จอแคบก็บีบจนเละ. flex-wrap: wrap อนุญาตให้ "ตัดขึ้นบรรทัดใหม่" เมื่อที่ไม่พอ — นี่คือหัวใจเว็บ responsive ที่ดูดีทั้งคอมและมือถือ. ลองย่อหน้าต่างผลลัพธ์ดูการ์ดไหลเอง!',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Wrap</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .row {\n      display: flex; gap: 12px; justify-content: center;\n      /* เพิ่มบรรทัดเดียวให้ตัดบรรทัดได้ */\n    }\n    .card { background: white; border-radius: 10px; padding: 16px; width: 140px;\n            box-shadow: 0 3px 8px rgba(0,0,0,.15); text-align: center; }\n  </style>\n</head>\n<body>\n  <div class="row">\n    <div class="card">1</div><div class="card">2</div><div class="card">3</div>\n    <!-- เพิ่มการ์ดให้ครบ 6 -->\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Wrap</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .row {\n      display: flex; gap: 12px; justify-content: center;\n      flex-wrap: wrap;\n    }\n    .card { background: white; border-radius: 10px; padding: 16px; width: 140px;\n            box-shadow: 0 3px 8px rgba(0,0,0,.15); text-align: center; }\n  </style>\n</head>\n<body>\n  <div class="row">\n    <div class="card">1</div><div class="card">2</div><div class="card">3</div>\n    <div class="card">4</div><div class="card">5</div><div class="card">6</div>\n  </div>\n</body>\n</html>',
+ checks:[
+  ['.row มี flex-wrap: wrap',(d,s)=>/\.row\s*{[^}]*flex-wrap\s*:\s*wrap/is.test(s)],
+  ['มีการ์ดครบ 6 ใบ',d=>d.querySelectorAll('.card').length>=6]
+ ]},
+{ch:4,ty:'build',xp:15,
+ t:'ด่าน 24: เมนูบาร์ + hover',
  goal:'ทำ nav 3 ลิงก์ พื้นเข้ม ตัวหนังสือขาว ไม่มีขีดเส้นใต้ + เมาส์ชี้แล้วเปลี่ยนสี (:hover)',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> :hover คือ "สถานะ" — browser คอยจับตำแหน่งเมาส์ตลอด พอเมาส์ทับ element ไหน กฎ :hover ของตัวนั้นถูกเปิดใช้ทันที เมาส์ออกก็คืนค่าเดิม. ไม่ต้องเขียนโปรแกรมเลย CSS จัดการเอง',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เมนู</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    /* แต่ง nav และ nav a และ nav a:hover */\n  </style>\n</head>\n<body>\n  <nav>\n    <a href="#">หน้าแรก</a>\n    <a href="#">เกี่ยวกับ</a>\n    <a href="#">ติดต่อ</a>\n  </nav>\n</body>\n</html>',
@@ -823,10 +1043,43 @@ const M = [
   ['nav มีพื้นหลัง (background)',(d,s)=>/nav\s*{[^}]*background/is.test(s)],
   ['nav a สีขาว + ไม่มีขีดเส้นใต้',(d,s)=>/nav\s+a\s*{[^}]*text-decoration\s*:\s*none/is.test(s)],
   ['มีกฎ nav a:hover',(d,s)=>/nav\s+a\s*:\s*hover\s*{[^}]*}/is.test(s)]
- ]
-},
-{
- t:'ด่าน 11: การ์ดรูปสัตว์',
+ ]},
+{ch:4,ty:'build',xp:20,
+ t:'ด่าน 25: Hero กลางจอเป๊ะ',
+ goal:'ทำ .hero สูง 100vh ข้อความ+ปุ่มอยู่กลางจอทั้งแนวตั้งแนวนอน (flex + flex-direction: column)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> flex ปกติเรียงแนวนอน — flex-direction: column หมุนแกนเป็นแนวตั้ง ทำให้ justify-content คุมแนวตั้งแทน. บวก align-items: center = กลางเป๊ะทั้งสองแกน. 100vh = สูงเต็มจอพอดี. หน้าแรกสวย ๆ ของเว็บดัง เกิดจากสูตรนี้',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Hero</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    .hero {\n      background: linear-gradient(135deg, #4c1d95, #db2777);\n      color: white; height: 100vh;\n      /* จัดลูกกลางจอทั้งตั้งและนอน เรียงแนวตั้ง */\n    }\n    .btn { background: #fbbf24; color: #422006; padding: 12px 28px;\n           border-radius: 24px; text-decoration: none; font-weight: bold; }\n  </style>\n</head>\n<body>\n  <div class="hero">\n    <h1>ยินดีต้อนรับ</h1>\n    <p>สู่เว็บที่เจ๋งที่สุดของฉัน</p>\n    <a class="btn" href="#">เริ่มเลย</a>\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Hero</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    .hero {\n      background: linear-gradient(135deg, #4c1d95, #db2777);\n      color: white; height: 100vh;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n    }\n    .btn { background: #fbbf24; color: #422006; padding: 12px 28px;\n           border-radius: 24px; text-decoration: none; font-weight: bold; }\n  </style>\n</head>\n<body>\n  <div class="hero">\n    <h1>ยินดีต้อนรับ</h1>\n    <p>สู่เว็บที่เจ๋งที่สุดของฉัน</p>\n    <a class="btn" href="#">เริ่มเลย</a>\n  </div>\n</body>\n</html>',
+ checks:[
+  ['.hero เป็น flex แนวตั้ง (column)',(d,s)=>/\.hero\s*{[^}]*flex-direction\s*:\s*column/is.test(s)],
+  ['.hero จัดกลางแนวตั้ง justify-content: center',(d,s)=>/\.hero\s*{[^}]*justify-content\s*:\s*center/is.test(s)],
+  ['.hero จัดกลางแนวนอน align-items: center',(d,s)=>/\.hero\s*{[^}]*align-items\s*:\s*center/is.test(s)],
+  ['มีปุ่ม .btn ใน hero',d=>!!d.querySelector('.hero .btn')]
+ ]},
+// ============ บท 6: ตกแต่งขั้นโปร ============
+{ch:5,ty:'build',xp:15,
+ t:'ด่าน 26: Gradient + เงา = ดูแพง',
+ goal:'header ใส่ linear-gradient 2 สี ตัวหนังสือขาว + การ์ดข้างล่างมี box-shadow นุ่ม ๆ',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> linear-gradient คือ browser คำนวณสีระหว่างจุดสองสีให้ไล่เนียนทีละ pixel — สีเดียวดูแบน สองสีไล่กันดูมีมิติ. เงานุ่ม (เบลอมาก ทึบน้อย) หลอกตาว่าการ์ด "ลอย" อยู่เหนือพื้น. สองอย่างนี้คือความต่างระหว่างเว็บเด็กทำ กับเว็บที่กรรมการหยุดดู',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ดูแพง</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; background: #faf5ff; }\n    header {\n      color: white; text-align: center; padding: 40px;\n      /* ใส่ gradient */\n    }\n    .card {\n      background: white; max-width: 400px; margin: 20px auto;\n      padding: 20px; border-radius: 14px;\n      /* ใส่เงานุ่ม */\n    }\n  </style>\n</head>\n<body>\n  <header><h1>ผลงานของฉัน</h1></header>\n  <div class="card"><h3>โปรเจกต์ 1</h3><p>เว็บแรกในชีวิต</p></div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ดูแพง</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; background: #faf5ff; }\n    header {\n      color: white; text-align: center; padding: 40px;\n      background: linear-gradient(135deg, #7c3aed, #ec4899);\n    }\n    .card {\n      background: white; max-width: 400px; margin: 20px auto;\n      padding: 20px; border-radius: 14px;\n      box-shadow: 0 8px 24px rgba(124, 58, 237, .18);\n    }\n  </style>\n</head>\n<body>\n  <header><h1>ผลงานของฉัน</h1></header>\n  <div class="card"><h3>โปรเจกต์ 1</h3><p>เว็บแรกในชีวิต</p></div>\n</body>\n</html>',
+ checks:[
+  ['header มี linear-gradient',(d,s)=>/header\s*{[^}]*linear-gradient/is.test(s)],
+  ['.card มี box-shadow',(d,s)=>/\.card\s*{[^}]*box-shadow/is.test(s)]
+ ]},
+{ch:5,ty:'build',xp:20,
+ t:'ด่าน 27: ปุ่มเด้งนุ่ม ๆ',
+ goal:'ปุ่ม .btn ใส่ transition: 0.3s แล้วตอน :hover ให้ลอยขึ้น (transform: translateY(-4px)) + เงาเข้มขึ้น',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ไม่มี transition การเปลี่ยนสไตล์จะ "กระตุก" ทันที. transition สั่ง browser ค่อย ๆ เกลี่ยค่าเก่าไปค่าใหม่ใน 0.3 วิ — เกิดเป็นแอนิเมชันนุ่ม ๆ. transform ขยับตำแหน่งโดยไม่กระทบเพื่อนบ้าน (เร็วมากด้วย). hover+transition+transform = สูตรลับเว็บ interactive',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ปุ่มเด้ง</title>\n  <style>\n    body { display: flex; justify-content: center; align-items: center;\n           height: 100vh; margin: 0; background: #f3e8ff; }\n    .btn {\n      background: #7c3aed; color: white; border: none;\n      padding: 14px 32px; border-radius: 26px; font-size: 16px; cursor: pointer;\n      box-shadow: 0 4px 10px rgba(124,58,237,.4);\n      /* ใส่ transition */\n    }\n    /* ใส่ .btn:hover ให้ลอยขึ้น + เงาเข้ม */\n  </style>\n</head>\n<body>\n  <button class="btn">ชี้ฉันสิ</button>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ปุ่มเด้ง</title>\n  <style>\n    body { display: flex; justify-content: center; align-items: center;\n           height: 100vh; margin: 0; background: #f3e8ff; }\n    .btn {\n      background: #7c3aed; color: white; border: none;\n      padding: 14px 32px; border-radius: 26px; font-size: 16px; cursor: pointer;\n      box-shadow: 0 4px 10px rgba(124,58,237,.4);\n      transition: 0.3s;\n    }\n    .btn:hover {\n      transform: translateY(-4px);\n      box-shadow: 0 10px 20px rgba(124,58,237,.55);\n    }\n  </style>\n</head>\n<body>\n  <button class="btn">ชี้ฉันสิ</button>\n</body>\n</html>',
+ checks:[
+  ['.btn มี transition',(d,s)=>/\.btn\s*{[^}]*transition/is.test(s)],
+  ['.btn:hover มี transform',(d,s)=>/\.btn\s*:\s*hover\s*{[^}]*transform/is.test(s)],
+  ['.btn:hover มี box-shadow',(d,s)=>/\.btn\s*:\s*hover\s*{[^}]*box-shadow/is.test(s)]
+ ]},
+{ch:5,ty:'build',xp:20,
+ t:'ด่าน 28: การ์ดรูปสัตว์',
  goal:'การ์ด 2 ใบเรียงแถว แต่ละใบมีรูปจากคลัง (picsum) + h3 + p — รวมทุกอย่างที่เรียนมา',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> นี่คือสูตรเว็บจริงทุกเว็บ: กล่องแม่ flex → ลูกเป็นการ์ด → ในการ์ดมีรูป+ข้อความ. img ใส่ width:100% = รูปยืดพอดีการ์ดเสมอไม่ล้น. เว็บขายของ เว็บข่าว ใช้โครงนี้ทั้งนั้น',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>การ์ด</title>\n  <style>\n    body { background: #f3e8ff; font-family: Tahoma; }\n    .row { display: flex; gap: 16px; justify-content: center; }\n    .card {\n      background: white; border-radius: 12px; padding: 16px; width: 220px;\n      box-shadow: 0 4px 12px rgba(0,0,0,.15);\n    }\n    .card img { width: 100%; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <h2 style="text-align:center">สัตว์โลกน่ารัก</h2>\n  <div class="row">\n    <!-- การ์ด 2 ใบ: div.card > img + h3 + p -->\n  </div>\n</body>\n</html>',
@@ -835,11 +1088,23 @@ const M = [
   ['มี .card อย่างน้อย 2 ใบ',d=>d.querySelectorAll('.card').length>=2],
   ['ทุกการ์ดมีรูป picsum',d=>[...d.querySelectorAll('.card')].every(c=>{const i=c.querySelector('img');return i&&/picsum/.test(i.getAttribute('src')||'')})],
   ['ทุกการ์ดมี h3 และ p',d=>[...d.querySelectorAll('.card')].every(c=>c.querySelector('h3')&&c.querySelector('p'))]
- ]
-},
-{
- t:'ด่าน 12: บอสใหญ่ — เว็บเต็มหน้า',
- goal:'รวมทุกอย่าง: header ไล่เฉดสี + nav 3 ลิงก์มี hover + main มีรูป 1 + ลิสต์ 1 + ตาราง 1 + footer ชื่อคุณ. หัวข้อ: "จังหวัดของฉัน"',
+ ]},
+{ch:5,ty:'build',xp:20,
+ t:'ด่าน 29: ฟอร์มติดต่อสวย ๆ',
+ goal:'ทำ form มีช่องชื่อ (input) ช่องข้อความ (textarea) ปุ่มส่ง (button) แต่งช่องให้มี padding + border-radius',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> input/textarea เป็น element พิเศษ — browser สร้างช่องพิมพ์ให้เองพร้อมระบบ cursor เสร็จสรรพ. placeholder คือข้อความจาง ๆ ที่หายตอนเริ่มพิมพ์. ฟอร์มดิบ ๆ น่าเกลียดมาก แค่ padding + border-radius ก็ดูดีทันที — กรรมการเห็นฟอร์มสวย = คะแนนพิเศษ',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ติดต่อ</title>\n  <style>\n    body { background: #faf5ff; font-family: Tahoma; }\n    form { background: white; max-width: 380px; margin: 30px auto;\n           padding: 24px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,.1); }\n    /* แต่ง input, textarea, button */\n  </style>\n</head>\n<body>\n  <form>\n    <h2>ติดต่อฉัน</h2>\n    <!-- input ชื่อ, textarea ข้อความ, button ส่ง -->\n  </form>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ติดต่อ</title>\n  <style>\n    body { background: #faf5ff; font-family: Tahoma; }\n    form { background: white; max-width: 380px; margin: 30px auto;\n           padding: 24px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,.1); }\n    input, textarea {\n      width: 100%; box-sizing: border-box; padding: 10px;\n      border: 1px solid #ddd6fe; border-radius: 8px; margin: 6px 0 14px;\n      font-family: inherit;\n    }\n    button {\n      background: #7c3aed; color: white; border: none;\n      padding: 12px 28px; border-radius: 22px; cursor: pointer;\n    }\n  </style>\n</head>\n<body>\n  <form>\n    <h2>ติดต่อฉัน</h2>\n    <label>ชื่อของคุณ</label>\n    <input type="text" placeholder="พิมพ์ชื่อ...">\n    <label>ข้อความ</label>\n    <textarea rows="4" placeholder="อยากบอกอะไรฉัน..."></textarea>\n    <button type="button">ส่งข้อความ</button>\n  </form>\n</body>\n</html>',
+ checks:[
+  ['มี input ในฟอร์ม',d=>!!d.querySelector('form input')],
+  ['มี textarea ในฟอร์ม',d=>!!d.querySelector('form textarea')],
+  ['มีปุ่ม button',d=>!!d.querySelector('form button')],
+  ['ช่องกรอกแต่งแล้ว (padding + border-radius)',(d,s)=>/(input|textarea)[^{]*{[^}]*padding/is.test(s)&&/(input|textarea)[^{]*{[^}]*border-radius/is.test(s)]
+ ]},
+// ============ บท 7: โปรเจกต์จริง ============
+{ch:6,ty:'boss',xp:30,
+ t:'ด่าน 30: 👑 บอส — เว็บเต็มหน้า "จังหวัดของฉัน"',
+ goal:'รวมทุกอย่าง: header ไล่เฉดสี + nav 3 ลิงก์มี hover + main มีรูป 1 + ลิสต์ 1 + ตาราง 1 + footer ชื่อคุณ',
  how:'<b>มันเกิดขึ้นได้ยังไง:</b> นี่คือข้อสอบวันแข่งย่อส่วน. ลำดับมือโปร: โครง header/nav/main/footer ก่อน → เนื้อหาให้ครบ → ค่อยแต่งสี. ทำผ่านด่านนี้ได้ = พร้อมลงสนามจริง',
  start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>จังหวัดของฉัน</title>\n  <style>\n    /* จัดเต็มเลย */\n  </style>\n</head>\n<body>\n  <!-- header + nav + main + footer -->\n</body>\n</html>',
  sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>จังหวัดของฉัน</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; background: #faf5ff; }\n    header { background: linear-gradient(135deg, #7c3aed, #ec4899);\n             color: white; text-align: center; padding: 30px; }\n    nav { display: flex; gap: 20px; justify-content: center;\n          background: #4c1d95; padding: 12px; }\n    nav a { color: white; text-decoration: none; font-weight: bold; }\n    nav a:hover { color: #fbbf24; }\n    main { max-width: 700px; margin: 0 auto; padding: 20px; }\n    table { border-collapse: collapse; }\n    th, td { border: 1px solid #999; padding: 8px 14px; }\n    footer { text-align: center; background: #4c1d95; color: white; padding: 12px; }\n  </style>\n</head>\n<body>\n  <header><h1>จังหวัดของฉัน</h1></header>\n  <nav>\n    <a href="#">หน้าแรก</a>\n    <a href="#">ที่เที่ยว</a>\n    <a href="#">ของกิน</a>\n  </nav>\n  <main>\n    <h2>ธรรมชาติสวย ๆ</h2>\n    <img src="https://picsum.photos/id/1015/400/250" alt="แม่น้ำกลางหุบเขา" width="400">\n    <h2>ของขึ้นชื่อ</h2>\n    <ul>\n      <li>ผลไม้ตามฤดู</li>\n      <li>อาหารพื้นบ้าน</li>\n      <li>งานหัตถกรรม</li>\n    </ul>\n    <h2>เทศกาลประจำปี</h2>\n    <table>\n      <tr><th>เดือน</th><th>งาน</th></tr>\n      <tr><td>เมษายน</td><td>สงกรานต์</td></tr>\n      <tr><td>พฤศจิกายน</td><td>ลอยกระทง</td></tr>\n    </table>\n  </main>\n  <footer>จัดทำโดย ด.ช.ต้นกล้า ม.2</footer>\n</body>\n</html>',
@@ -851,16 +1116,141 @@ const M = [
   ['มีลิสต์ (ul หรือ ol)',d=>!!d.querySelector('main ul, main ol')],
   ['มีตาราง',d=>!!d.querySelector('main table')],
   ['footer มีข้อความ',d=>{const f=d.querySelector('footer');return f&&f.textContent.trim().length>0}]
- ]
-}
+ ]},
+{ch:6,ty:'boss',xp:30,
+ t:'ด่าน 31: 👑 บอส — เว็บร้านอาหาร',
+ goal:'ร้านอาหารเต็มรูป: แถบบนแบบด่าน 22 + การ์ดเมนูเด็ด 3 ใบมีรูป + ตารางราคา 3 แถว + ฟุตเตอร์เบอร์โทร',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> โจทย์แข่งชอบให้ทำเว็บ "ธุรกิจสมมติ" — ร้านอาหาร ร้านกาแฟ โรงแรม. โครงเดียวกันหมด: แถบบน → hero/รูปเด่น → การ์ดสินค้า → ตารางข้อมูล → ติดต่อ. ฝึกด่านนี้จนคล่อง โจทย์แนวนี้มาเมื่อไหร่ทำได้ใน 2 ชม.',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ร้านอร่อยดี</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; background: #fffbeb; }\n    /* จัดเต็ม: .bar, .row, .card, table, footer */\n  </style>\n</head>\n<body>\n  <!-- แถบบน + เมนูเด็ด 3 การ์ด + ตารางราคา + footer -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ร้านอร่อยดี</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; background: #fffbeb; }\n    .bar { display: flex; justify-content: space-between; align-items: center;\n           background: #ea580c; color: white; padding: 12px 20px; }\n    .bar a { color: white; margin-left: 14px; text-decoration: none; }\n    .bar a:hover { color: #fde68a; }\n    h2 { text-align: center; color: #ea580c; }\n    .row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }\n    .card { background: white; border-radius: 12px; padding: 14px; width: 200px;\n            box-shadow: 0 4px 12px rgba(0,0,0,.12); }\n    .card img { width: 100%; border-radius: 8px; }\n    table { border-collapse: collapse; margin: 16px auto; }\n    th, td { border: 1px solid #fbbf24; padding: 8px 16px; }\n    th { background: #fef3c7; }\n    footer { text-align: center; background: #ea580c; color: white;\n             padding: 12px; margin-top: 20px; }\n  </style>\n</head>\n<body>\n  <div class="bar">\n    <b>🍜 ร้านอร่อยดี</b>\n    <span><a href="#">เมนู</a><a href="#">ราคา</a><a href="#">ติดต่อ</a></span>\n  </div>\n  <h2>เมนูเด็ดประจำร้าน</h2>\n  <div class="row">\n    <div class="card"><img src="https://picsum.photos/id/1060/300/200" alt="กาแฟร้อน"><h3>กาแฟโบราณ</h3><p>หอมเข้มสูตรลับ</p></div>\n    <div class="card"><img src="https://picsum.photos/id/1080/300/200" alt="สตรอว์เบอร์รีปั่น"><h3>สตรอว์เบอร์รีปั่น</h3><p>ผลไม้สดทุกวัน</p></div>\n    <div class="card"><img src="https://picsum.photos/id/1035/300/200" alt="วิวหน้าร้าน"><h3>มุมวิวสวย</h3><p>นั่งชิลริมเขา</p></div>\n  </div>\n  <h2>ราคา</h2>\n  <table>\n    <tr><th>เมนู</th><th>ราคา (บาท)</th></tr>\n    <tr><td>กาแฟโบราณ</td><td>35</td></tr>\n    <tr><td>สตรอว์เบอร์รีปั่น</td><td>45</td></tr>\n    <tr><td>ขนมปังปิ้ง</td><td>25</td></tr>\n  </table>\n  <footer>โทร 08x-xxx-xxxx | เปิดทุกวัน 8:00-18:00</footer>\n</body>\n</html>',
+ checks:[
+  ['แถบบนใช้ flex space-between',(d,s)=>/\.bar\s*{[^}]*space-between/is.test(s)],
+  ['มีการ์ดเมนู 3 ใบ มีรูปครบ',d=>{const cs=d.querySelectorAll('.card');return cs.length>=3&&[...cs].every(c=>c.querySelector('img'))}],
+  ['มีตารางราคา ข้อมูล 3 แถว',d=>[...d.querySelectorAll('tr')].filter(r=>r.querySelector('td')).length>=3],
+  ['มี :hover สักที่',(d,s)=>/:\s*hover/i.test(s)],
+  ['มี footer ข้อมูลติดต่อ',d=>{const f=d.querySelector('footer');return f&&f.textContent.trim().length>0}]
+ ]},
+{ch:6,ty:'boss',xp:40,
+ t:'ด่าน 32: 👑 บอสใหญ่สุด — เว็บโรงเรียนของฉัน',
+ goal:'ครบทุกวิชา: header gradient + nav 4 ลิงก์ hover + 2 หัวข้อใหญ่ (h2) + รูป 2 รูปมี alt + ตาราง + ลิสต์ + ฟอร์มติดต่อ + footer',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ด่านสุดท้าย = ทุกอย่างที่เรียนมารวมร่าง. ทำได้ใน 1 ชม. = พร้อมแข่งเกินพอ เพราะวันจริงมี 3 ชม. เหลือเวลาขัดเงาอีกเพียบ. เคล็ดลับ: อย่าเพิ่งสวย เอาครบก่อน แล้วค่อยไล่แต่งจากบนลงล่าง',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>โรงเรียนของฉัน</title>\n  <style>\n    /* โชว์ของทุกอย่างที่ฝึกมา */\n  </style>\n</head>\n<body>\n  <!-- header, nav 4 ลิงก์, main (2 ส่วน + รูป 2 + ตาราง + ลิสต์ + form), footer -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>โรงเรียนของฉัน</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; background: #eff6ff; }\n    header { background: linear-gradient(135deg, #2563eb, #34d399);\n             color: white; text-align: center; padding: 34px; }\n    nav { display: flex; gap: 18px; justify-content: center; background: #1e40af; padding: 12px; }\n    nav a { color: white; text-decoration: none; font-weight: bold; }\n    nav a:hover { color: #fde68a; }\n    main { max-width: 700px; margin: 0 auto; padding: 20px; }\n    h2 { color: #1e40af; }\n    img { border-radius: 10px; max-width: 100%; }\n    table { border-collapse: collapse; }\n    th, td { border: 1px solid #93c5fd; padding: 8px 14px; }\n    th { background: #dbeafe; }\n    form { background: white; padding: 18px; border-radius: 12px;\n           box-shadow: 0 4px 12px rgba(0,0,0,.08); }\n    input, textarea { width: 100%; box-sizing: border-box; padding: 8px;\n                      border: 1px solid #bfdbfe; border-radius: 8px; margin: 4px 0 12px; }\n    button { background: #2563eb; color: white; border: none;\n             padding: 10px 24px; border-radius: 20px; cursor: pointer; }\n    footer { text-align: center; background: #1e40af; color: white; padding: 12px; margin-top: 20px; }\n  </style>\n</head>\n<body>\n  <header><h1>โรงเรียนของฉัน</h1><p>เรียนดี กีฬาเด่น เน้นคุณธรรม</p></header>\n  <nav>\n    <a href="#">หน้าแรก</a>\n    <a href="#">ประวัติ</a>\n    <a href="#">กิจกรรม</a>\n    <a href="#">ติดต่อ</a>\n  </nav>\n  <main>\n    <h2>บรรยากาศโรงเรียน</h2>\n    <img src="https://picsum.photos/id/1040/400/240" alt="อาคารเรียน" width="400">\n    <img src="https://picsum.photos/id/1015/400/240" alt="ธรรมชาติรอบโรงเรียน" width="400">\n    <h2>กิจกรรมเด่น</h2>\n    <ul>\n      <li>กีฬาสี</li>\n      <li>ค่ายวิทยาศาสตร์</li>\n      <li>ชมรมคอมพิวเตอร์</li>\n    </ul>\n    <h2>ตารางเปิดเรียน</h2>\n    <table>\n      <tr><th>ภาคเรียน</th><th>ช่วงเวลา</th></tr>\n      <tr><td>เทอม 1</td><td>พ.ค. - ก.ย.</td></tr>\n      <tr><td>เทอม 2</td><td>พ.ย. - มี.ค.</td></tr>\n    </table>\n    <h2>ติดต่อเรา</h2>\n    <form>\n      <input type="text" placeholder="ชื่อของคุณ">\n      <textarea rows="3" placeholder="ข้อความ"></textarea>\n      <button type="button">ส่ง</button>\n    </form>\n  </main>\n  <footer>จัดทำโดย นักเรียนชั้น ม.2 | โรงเรียนของฉัน</footer>\n</body>\n</html>',
+ checks:[
+  ['โครง header + nav + main + footer ครบ',d=>['header','nav','main','footer'].every(t=>d.querySelector(t))],
+  ['header มี gradient',(d,s)=>/header\s*{[^}]*linear-gradient/is.test(s)],
+  ['nav มี 4 ลิงก์ + hover',(d,s)=>d.querySelectorAll('nav a').length>=4&&/:\s*hover/i.test(s)],
+  ['มี h2 อย่างน้อย 2 หัวข้อ',d=>d.querySelectorAll('main h2').length>=2],
+  ['มีรูป 2 รูป ทุกรูปมี alt',d=>{const im=d.querySelectorAll('main img');return im.length>=2&&[...im].every(i=>(i.getAttribute('alt')||'').trim().length>0)}],
+  ['มีตาราง + ลิสต์',d=>!!d.querySelector('main table')&&!!d.querySelector('main ul, main ol')],
+  ['มีฟอร์ม (input + button)',d=>!!d.querySelector('form input')&&!!d.querySelector('form button')]
+ ]}
 ];
 
-let mi = 0;
+// ---------- syntax highlighter ----------
+const escHl = t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function hlTag(t){
+  const m = t.match(/^(<\/?)([\w-]*)([\s\S]*)$/);
+  if(!m) return escHl(t);
+  let rest = escHl(m[3]);
+  rest = rest.replace(/("[^"]*"?|'[^']*'?)|([\w-]+)(?==)|(\/?&gt;)/g, (mm,str,attr,end)=>{
+    if(str) return '<span class="tk-str">'+str+'</span>';
+    if(attr) return '<span class="tk-attr">'+attr+'</span>';
+    if(end) return '<span class="tk-pn">'+end+'</span>';
+    return mm;
+  });
+  return '<span class="tk-pn">'+escHl(m[1])+'</span><span class="tk-tag">'+m[2]+'</span>'+rest;
+}
+const HL_RULES = [
+  [/^<!--[\s\S]*?(-->|$)/, 'cmt'],
+  [/^\/\*[\s\S]*?(\*\/|$)/, 'cmt'],
+  [/^<!DOCTYPE[^>]*>/i, 'doct'],
+  [/^<\/?[a-zA-Z][^>]*(>|$)/, 'TAG'],
+  [/^"[^"\n]*("|$)/, 'str'],
+  [/^'[^'\n]*('|$)/, 'str'],
+  [/^[a-zA-Z-]+(?=\s*:(?!\/\/))/, 'prop'],
+  [/^#[0-9a-fA-F]{3,8}\b/, 'num'],
+  [/^\d+(\.\d+)?(px|%|rem|em|vh|vw|deg|s|fr)?/, 'num']
+];
+function hl(src){
+  let out='', rest=src, guard=0;
+  while(rest && guard++ < 200000){
+    let hit=false;
+    for(const [re,cls] of HL_RULES){
+      const m = rest.match(re);
+      if(m && m[0].length){
+        out += cls==='TAG' ? hlTag(m[0]) : '<span class="tk-'+cls+'">'+escHl(m[0])+'</span>';
+        rest = rest.slice(m[0].length); hit=true; break;
+      }
+    }
+    if(!hit){ out += escHl(rest[0]); rest = rest.slice(1); }
+  }
+  return out;
+}
+
+// ---------- engine state ----------
+let mi = 0, curCh = 0;
 const mEd = document.getElementById('mEd');
+const mHl = document.getElementById('mHl');
+const mHlc = document.getElementById('mHlc');
+const totalXP = ()=>M.reduce((a,m,i)=>a+(store.getItem('mdone_'+i)==='1'?m.xp:0),0);
+const doneCount = ()=>M.filter((m,i)=>store.getItem('mdone_'+i)==='1').length;
+const chDone = c=>M.filter((m,i)=>m.ch===c&&store.getItem('mdone_'+i)==='1').length;
+const chTotal = c=>M.filter(m=>m.ch===c).length;
+
+function syncHl(){
+  mHlc.innerHTML = hl(mEd.value) + '\n';
+  mHl.scrollTop = mEd.scrollTop; mHl.scrollLeft = mEd.scrollLeft;
+}
+function renderHero(){
+  const xp = totalXP(), lvl = Math.floor(xp/100)+1, into = xp%100;
+  document.getElementById('lvlNum').textContent = lvl;
+  document.getElementById('xpText').textContent = xp+' XP — อีก '+(100-into)+' XP ถึง Level '+(lvl+1);
+  document.getElementById('xpFill').style.width = into+'%';
+  document.getElementById('lvlArc').style.strokeDashoffset = 238.76*(1-into/100);
+  document.getElementById('doneText').textContent = 'ผ่านแล้ว '+doneCount()+' / '+M.length+' ด่าน';
+  const br = document.getElementById('badgeRow');
+  br.innerHTML='';
+  CH.forEach((c,i)=>{
+    const b=document.createElement('div');
+    b.className='bdg'+(chDone(i)===chTotal(i)?' got':'');
+    b.textContent=c.ic; b.title=c.n+' '+chDone(i)+'/'+chTotal(i);
+    br.appendChild(b);
+  });
+}
+function renderChapters(){
+  const g = document.getElementById('chgrid');
+  g.innerHTML='';
+  CH.forEach((c,i)=>{
+    const done=chDone(i), tot=chTotal(i);
+    const el=document.createElement('div');
+    el.className='chcard'+(i===curCh?' cur':'');
+    el.innerHTML='<div class="ic">'+c.ic+'</div><h4>บท '+(i+1)+': '+c.n+'</h4>'
+      +'<div class="sub">'+tot+' ด่าน'+(done===tot?' — จบบท! 🏅':'')+'</div>'
+      +'<div class="pct">'+done+'/'+tot+'</div>'
+      +'<div class="cbar"><div style="width:'+(done/tot*100)+'%;background:'+c.c+'"></div></div>';
+    el.onclick=()=>{curCh=i; const first=M.findIndex(m=>m.ch===i); loadMission(first);};
+    g.appendChild(el);
+  });
+}
+function renderPills(){
+  const el = document.getElementById('mpills');
+  el.innerHTML = '';
+  M.forEach((m,i)=>{
+    if(m.ch!==curCh) return;
+    const b = document.createElement('button');
+    b.textContent = (i+1)+(m.ty==='boss'?' 👑':m.ty==='fix'?' 🔧':'');
+    if (i===mi) b.classList.add('cur');
+    if (store.getItem('mdone_'+i)==='1') b.classList.add('done');
+    b.onclick = ()=>loadMission(i);
+    el.appendChild(b);
+  });
+}
 function loadMission(i){
-  mi = i;
+  mi = i; curCh = M[i].ch;
   const m = M[i];
-  document.getElementById('mTitle').textContent = m.t;
+  const badge = '<span class="mtype '+m.ty+'">'+(m.ty==='boss'?'ด่านบอส':m.ty==='fix'?'ซ่อมบั๊ก':'สร้างเอง')+'</span><span class="mxp">+'+m.xp+' XP</span>';
+  document.getElementById('mTitle').innerHTML = m.t + badge;
   document.getElementById('mGoal').textContent = '🎯 ' + m.goal;
   document.getElementById('mHow').innerHTML = m.how;
   document.getElementById('mTarget').srcdoc = m.sol;
@@ -869,19 +1259,7 @@ function loadMission(i){
   document.getElementById('mFrame').srcdoc = mEd.value;
   document.getElementById('mWin').style.display = 'none';
   renderChecks(m.checks.map(()=>null));
-  renderPills();
-}
-function renderPills(){
-  const el = document.getElementById('mpills');
-  el.innerHTML = '';
-  M.forEach((m,i)=>{
-    const b = document.createElement('button');
-    b.textContent = i+1;
-    if (i===mi) b.classList.add('cur');
-    if (store.getItem('mdone_'+i)==='1') b.classList.add('done');
-    b.onclick = ()=>loadMission(i);
-    el.appendChild(b);
-  });
+  renderPills(); renderChapters(); syncHl();
 }
 function renderChecks(results){
   const m = M[mi];
@@ -895,6 +1273,19 @@ function renderChecks(results){
     el.appendChild(d);
   });
 }
+function confettiBoom(){
+  const colors=['#fbbf24','#f472b6','#8b5cf6','#34d399','#60a5fa'];
+  for(let i=0;i<50;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=Math.random()*100+'vw';
+    c.style.background=colors[i%colors.length];
+    c.style.animationDuration=(1.6+Math.random()*1.6)+'s';
+    c.style.transform='rotate('+Math.random()*360+'deg)';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3400);
+  }
+}
 function checkMission(){
   const src = mEd.value;
   const doc = new DOMParser().parseFromString(src, 'text/html');
@@ -903,15 +1294,19 @@ function checkMission(){
   renderChecks(results);
   document.getElementById('mFrame').srcdoc = src;
   if (results.every(r=>r)){
+    const first = store.getItem('mdone_'+mi)!=='1';
     store.setItem('mdone_'+mi, '1');
+    document.getElementById('winXp').textContent = first ? 'ได้ +'+m.xp+' XP' : '(เคยผ่านแล้ว)';
     document.getElementById('mWin').style.display = 'block';
-    renderPills();
+    if(first) confettiBoom();
+    renderPills(); renderChapters(); renderHero();
   }
 }
 function showHint(){
   if (confirm('ดูเฉลยจริงหรอ? ลองอีกสักรอบก่อนไหม 😏')) {
     mEd.value = M[mi].sol;
     document.getElementById('mFrame').srcdoc = mEd.value;
+    syncHl();
   }
 }
 function resetMission(){
@@ -922,12 +1317,15 @@ function nextMission(){ if (mi < M.length-1) loadMission(mi+1); }
 mEd.addEventListener('input', ()=>{
   document.getElementById('mFrame').srcdoc = mEd.value;
   store.setItem('mcode_'+mi, mEd.value);
+  syncHl();
 });
+mEd.addEventListener('scroll', ()=>{ mHl.scrollTop=mEd.scrollTop; mHl.scrollLeft=mEd.scrollLeft; });
 mEd.addEventListener('keydown', e=>{
   if (e.key==='Tab'){ e.preventDefault();
-    const s=mEd.selectionStart; mEd.setRangeText('  ',s,mEd.selectionEnd,'end'); }
+    const s=mEd.selectionStart; mEd.setRangeText('  ',s,mEd.selectionEnd,'end');
+    mEd.dispatchEvent(new Event('input')); }
 });
-loadMission(0);
+loadMission(0); renderHero();
 
 // ---------- day 3: topics + timer ----------
 const topics = [
