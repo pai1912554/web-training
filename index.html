@@ -157,6 +157,15 @@
   .ac-item .h{color:#8a8db8;font-size:.75rem;font-family:'Segoe UI',Tahoma,sans-serif}
   .ac-item.sel{background:#312e81}
   .ac-foot{padding:4px 10px;border-top:1px solid var(--line);color:#6b6e9e;font-size:.7rem;font-family:'Segoe UI',Tahoma,sans-serif}
+  /* ---- vs code editor chrome ---- */
+  .gutter{position:absolute;left:0;top:0;bottom:0;width:44px;background:#0d0d1f;border-right:1px solid #23244a;overflow:hidden;z-index:3;user-select:none;pointer-events:none}
+  .gutter .gin{color:#4b4e78;font:.85rem/1.5 Consolas,monospace;text-align:right;padding:12px 8px 12px 0}
+  .edwrap pre{padding-left:56px}
+  #mEd{padding-left:56px}
+  .statusbar{display:flex;gap:18px;background:#101024;border:1px solid var(--acc);border-top:0;border-radius:0 0 10px 10px;padding:4px 14px;font-size:.75rem;color:var(--dim);font-family:Consolas,monospace;margin-top:-6px;position:relative;z-index:1}
+  .statusbar b{color:#93c5fd;font-weight:normal}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:#065f46;color:#d1fae5;padding:10px 22px;border-radius:22px;z-index:300;box-shadow:0 8px 20px rgba(0,0,0,.5);opacity:0;transition:.3s;pointer-events:none;font-size:.9rem}
+  .toast.on{opacity:1}
 </style>
 </head>
 <body>
@@ -498,9 +507,11 @@ nav a:hover { color: #fbbf24; }</code></pre>
 
     <div class="lbl">⌨️ เขียนโค้ดตรงนี้ — มีตัวช่วยแบบ VS Code: พิมพ์ <code>&lt;</code> เด้ง tag ให้เลือก · <code>!</code>+Tab = โครงพร้อมตัวแปรสี · ชื่อ tag+Tab = tag เปิด-ปิด · <code>.ชื่อ</code>+Tab = กล่อง class · พิมพ์ <code>&gt;</code> ปิด tag ให้เอง</div>
     <div class="edwrap">
+      <div class="gutter"><div class="gin" id="mGut">1</div></div>
       <pre id="mHl" aria-hidden="true"><code id="mHlc"></code></pre>
       <textarea id="mEd" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
     </div>
+    <div class="statusbar"><span id="stLn">บรรทัด 1, คอลัมน์ 1</span><span>โหมด: <b id="stMode">HTML</b></span><span id="stMsg" style="margin-left:auto"></span></div>
 
     <div class="btnrow" style="justify-content:flex-start;margin-top:10px">
       <button class="btn2 go" onclick="checkMission()">✔ ตรวจคำตอบ</button>
@@ -696,15 +707,19 @@ nav a:hover { color: #fbbf24; }</code></pre>
   <h2>📄 สูตรต้องจำก่อนเข้าสนาม</h2>
 
   <div class="card">
-    <h3>คีย์ลัด VS Code</h3>
-    <ul>
-      <li><code>!</code> + <kbd>Tab</kbd> — โครง HTML ทั้งหมด</li>
-      <li>พิมพ์ชื่อ tag เช่น <code>table</code> + <kbd>Tab</kbd> — tag ขึ้นเอง (Emmet)</li>
-      <li><code>ul&gt;li*5</code> + <kbd>Tab</kbd> — ลิสต์ 5 ข้อทันที</li>
-      <li><kbd>Ctrl</kbd>+<kbd>S</kbd> — เซฟ (เซฟบ่อย ๆ ทุก 2 นาที!)</li>
-      <li><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> — จัด indent ให้อัตโนมัติ</li>
-      <li><kbd>Ctrl</kbd>+<kbd>/</kbd> — ใส่ comment</li>
-    </ul>
+    <h3>🧰 เครื่องมือ VS Code + หลักการ (ซ้อมได้ในเว็บนี้เลย ทุกตัว)</h3>
+    <table>
+      <tr><th>เครื่องมือ</th><th>หลักการ</th><th>ใช้ยังไง</th></tr>
+      <tr><td>IntelliSense</td><td>editor เดาจากบริบท: อยู่ใน tag เสนอ tag, ใน style เสนอ CSS</td><td>พิมพ์ไปเลย รายการเด้งเอง · <kbd>Tab</kbd>/<kbd>Enter</kbd> เลือก</td></tr>
+      <tr><td>Emmet</td><td>เขียนย่อ → ขยายเป็นโค้ดเต็ม</td><td><code>!</code>+<kbd>Tab</kbd> โครงเว็บ · <code>ul&gt;li*5</code>+<kbd>Tab</kbd> · <code>div.row&gt;div.card*3</code>+<kbd>Tab</kbd></td></tr>
+      <tr><td>Auto Close</td><td>เปิด tag แล้ว editor ปิดให้ กันลืมปิด</td><td>พิมพ์ <code>&gt;</code> แล้ว <code>&lt;/tag&gt;</code> โผล่เอง · พิมพ์ <code>{</code> ได้ <code>{}</code></td></tr>
+      <tr><td>Format Document</td><td>จัดย่อหน้าทั้งไฟล์ตามความลึกของกล่อง</td><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> — โค้ดเละแค่ไหนก็กลับมาสวย</td></tr>
+      <tr><td>Toggle Comment</td><td>ปิดโค้ดชั่วคราวไว้ debug โดยไม่ลบ</td><td><kbd>Ctrl</kbd>+<kbd>/</kbd> — รู้ context เอง (HTML/CSS คนละแบบ)</td></tr>
+      <tr><td>Move / Copy Line</td><td>ย้ายโค้ดไม่ต้อง copy-paste</td><td><kbd>Alt</kbd>+<kbd>↑↓</kbd> ย้ายบรรทัด · <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd> ก๊อปบรรทัด</td></tr>
+      <tr><td>Save</td><td>เซฟบ่อย = งานไม่หาย</td><td><kbd>Ctrl</kbd>+<kbd>S</kbd> ทุก 2 นาที ให้เป็นนิสัยอัตโนมัติ</td></tr>
+      <tr><td>Status Bar</td><td>บอกว่าเคอร์เซอร์อยู่ไหน โหมดอะไร</td><td>แถบล่าง editor: บรรทัด/คอลัมน์/HTML หรือ CSS</td></tr>
+    </table>
+    <p class="dim">ของจริงใน VS Code มีเพิ่ม: <kbd>Ctrl</kbd>+<kbd>D</kbd> เลือกคำซ้ำ (multi-cursor), <kbd>Ctrl</kbd>+<kbd>P</kbd> ค้นไฟล์, extension Live Server (คลิกขวา → Open with Live Server = เซฟปุ๊บหน้า refresh เอง) — ซ้อมที่บ้านลองให้ครบ</p>
   </div>
 
   <div class="card">
@@ -2014,18 +2029,54 @@ function acAccept(i){
   acTa.dispatchEvent(new Event('input'));
   acTa.focus();
 }
+// Emmet ย่อส่วน: tag.class#id*N, ซ้อนลูกด้วย > เช่น ul>li*3, div.row>div.card*3
+function emmetExpand(expr, baseInd){
+  if(!/^[a-zA-Z.#][\w.#>*-]*$/.test(expr)) return null;
+  const parts = expr.split('>');
+  const voids = ['br','hr','img','input','meta','link'];
+  function build(idx, ind){
+    if(idx >= parts.length) return null;
+    const m = parts[idx].match(/^([a-zA-Z][\w-]*)?((?:[.#][\w-]+)*)(?:\*(\d+))?$/);
+    if(!m || (!m[1] && !m[2])) return 'ERR';
+    const tag = m[1]||'div', n = Math.min(parseInt(m[3]||'1'), 20);
+    const classes = (m[2].match(/\.[\w-]+/g)||[]).map(c=>c.slice(1));
+    const id = (m[2].match(/#[\w-]+/g)||[])[0];
+    const attrs = (id ? ' id="'+id.slice(1)+'"' : '') + (classes.length ? ' class="'+classes.join(' ')+'"' : '');
+    const child = build(idx+1, ind+'  ');
+    if(child==='ERR') return 'ERR';
+    const out=[];
+    for(let k=0;k<n;k++){
+      if(voids.includes(tag)) out.push(ind+'<'+tag+attrs+'>');
+      else if(child) out.push(ind+'<'+tag+attrs+'>\n'+child+'\n'+ind+'</'+tag+'>');
+      else out.push(ind+'<'+tag+attrs+'></'+tag+'>');
+    }
+    return out.join('\n');
+  }
+  const r = build(0,'');
+  if(r==='ERR' || r===null) return null;
+  return r.split('\n').map((l,i)=>i===0?l:baseInd+l).join('\n');
+}
 function acSnippet(ta){
   const S = ta.value.slice(0, ta.selectionStart);
-  const w = (S.match(/[\w!.-]+$/)||[''])[0];
+  const w = (S.match(/[\w!.#>*-]+$/)||[''])[0];
   if(!w) return false;
   const start = ta.selectionStart - w.length;
   if(w==='!'){ ta.setRangeText(AC_SNIP_BOILER, start, ta.selectionStart, 'end');
     const p = start + AC_SNIP_BOILER.indexOf('<title>')+7;
     ta.selectionStart=ta.selectionEnd=p; ta.dispatchEvent(new Event('input')); return true; }
-  if(w.startsWith('.') && w.length>1){
-    const cls=w.slice(1), tpl='<div class="'+cls+'"></div>';
-    ta.setRangeText(tpl, start, ta.selectionStart, 'end');
-    ta.selectionStart=ta.selectionEnd=start+tpl.length-6; ta.dispatchEvent(new Event('input')); return true; }
+  // Emmet เมื่อมี . # > * ในนิพจน์
+  if(/[.#>*]/.test(w)){
+    const lineStart = S.lastIndexOf('\n')+1;
+    const before = S.slice(lineStart, start);
+    const baseInd = /^\s*$/.test(before) ? before : '';
+    const exp = emmetExpand(w, baseInd);
+    if(exp){
+      ta.setRangeText(exp, start, ta.selectionStart, 'end');
+      const gap = exp.indexOf('></');
+      ta.selectionStart = ta.selectionEnd = start + (gap>=0 ? gap+1 : exp.length);
+      ta.dispatchEvent(new Event('input')); return true;
+    }
+  }
   const tag = AC_TAGS.find(t=>t[0]===w.toLowerCase());
   if(tag){ const a=acTagApply(tag); const tpl='<'+a.tpl;
     ta.setRangeText(tpl, start, ta.selectionStart, 'end');
@@ -2076,6 +2127,152 @@ function attachAssist(ta){
 }
 attachAssist(mEd);
 attachAssist(ed);
+
+// ---------- VS Code editor toolkit ----------
+const toast = document.createElement('div');
+toast.className='toast'; document.body.appendChild(toast);
+let toastT=null;
+function showToast(msg){
+  toast.textContent=msg; toast.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>toast.classList.remove('on'), 1800);
+}
+function edInStyle(ta, pos){
+  const S=ta.value.slice(0,pos);
+  return (S.match(/<style[^>]*>/gi)||[]).length > (S.match(/<\/style>/gi)||[]).length;
+}
+function edLineRange(ta){
+  const v=ta.value;
+  const ls=v.lastIndexOf('\n', ta.selectionStart-1)+1;
+  let le=v.indexOf('\n', ta.selectionEnd); if(le<0) le=v.length;
+  return [ls, le];
+}
+function formatDoc(src){
+  const voids=['br','hr','img','input','meta','link'];
+  let depth=0;
+  return src.split('\n').map(raw=>{
+    const l=raw.trim();
+    if(l===''){ return ''; }
+    let ind=depth;
+    if(/^(<\/|})/.test(l)) ind=Math.max(0,depth-1);
+    const opens=(l.match(/<(?!\/|!)([a-zA-Z][\w-]*)/g)||[]).map(s=>s.replace('<','').toLowerCase()).filter(t=>!voids.includes(t)).length;
+    const closes=(l.match(/<\/[a-zA-Z]/g)||[]).length;
+    const delta=opens-closes+((l.match(/{/g)||[]).length-(l.match(/}/g)||[]).length);
+    depth=Math.max(0, depth+delta);
+    return '  '.repeat(ind)+l;
+  }).join('\n');
+}
+function enhanceEditor(ta, opts){
+  const upd = ()=>{
+    if(opts.gutter){
+      const n = ta.value.split('\n').length;
+      const g = document.getElementById(opts.gutter);
+      g.innerHTML = Array.from({length:n},(_,i)=>i+1).join('<br>');
+      g.style.transform='translateY('+(-ta.scrollTop)+'px)';
+    }
+    if(opts.status){
+      const S=ta.value.slice(0,ta.selectionStart);
+      const ln=S.split('\n').length, col=ta.selectionStart-S.lastIndexOf('\n');
+      document.getElementById('stLn').textContent='บรรทัด '+ln+', คอลัมน์ '+col;
+      document.getElementById('stMode').textContent = edInStyle(ta,ta.selectionStart)?'CSS':'HTML';
+    }
+  };
+  ta.addEventListener('input', upd);
+  ta.addEventListener('click', upd);
+  ta.addEventListener('keyup', upd);
+  ta.addEventListener('scroll', ()=>{ if(opts.gutter){ document.getElementById(opts.gutter).style.transform='translateY('+(-ta.scrollTop)+'px)'; } });
+  ta.addEventListener('keydown', e=>{
+    if(e.defaultPrevented) return;
+    const v=ta.value, s=ta.selectionStart;
+    // จับคู่วงเล็บ/เครื่องหมายคำพูด
+    const pairs={'{':'}','(':')','"':'"',"'":"'"};
+    if(pairs[e.key] !== undefined && ta.selectionStart===ta.selectionEnd){
+      const next=v[s]||'';
+      if((e.key==='"'||e.key==="'") && next===e.key){
+        e.preventDefault(); ta.selectionStart=ta.selectionEnd=s+1; return;
+      }
+      e.preventDefault();
+      ta.setRangeText(e.key+pairs[e.key], s, s, 'end');
+      ta.selectionStart=ta.selectionEnd=s+1;
+      ta.dispatchEvent(new Event('input')); return;
+    }
+    if((e.key==='}'||e.key===')') && v[s]===e.key){
+      e.preventDefault(); ta.selectionStart=ta.selectionEnd=s+1; return;
+    }
+    // Enter = ย่อหน้าอัตโนมัติ
+    if(e.key==='Enter'){
+      e.preventDefault();
+      const ls=v.lastIndexOf('\n',s-1)+1;
+      const ind=(v.slice(ls,s).match(/^\s*/)||[''])[0];
+      const before=v.slice(0,s).trimEnd();
+      const openBrace=before.endsWith('{');
+      const mo=before.match(/<([a-zA-Z][\w-]*)[^<>]*>$/);
+      const openTag=mo && !['br','hr','img','input','meta','link'].includes(mo[1].toLowerCase()) && !before.endsWith('/>');
+      const closingNext = (openBrace && v[s]==='}') || (openTag && v.slice(s).startsWith('</'));
+      let insert='\n'+ind;
+      if(openBrace||openTag) insert+='  ';
+      if(closingNext){
+        ta.setRangeText(insert+'\n'+ind, s, ta.selectionEnd, 'end');
+        ta.selectionStart=ta.selectionEnd=s+insert.length;
+      } else {
+        ta.setRangeText(insert, s, ta.selectionEnd, 'end');
+      }
+      ta.dispatchEvent(new Event('input')); return;
+    }
+    // Ctrl+S
+    if(e.ctrlKey && !e.shiftKey && e.key.toLowerCase()==='s'){
+      e.preventDefault();
+      if(opts.onSave) opts.onSave();
+      return;
+    }
+    // Ctrl+/ = comment
+    if(e.ctrlKey && e.key==='/'){
+      e.preventDefault();
+      const [ls,le]=edLineRange(ta);
+      const seg=v.slice(ls,le), ind=(seg.match(/^\s*/)||[''])[0], body=seg.trim();
+      const css=edInStyle(ta,ls);
+      let ns;
+      if(css){
+        ns = body.startsWith('/*') ? ind+body.replace(/^\/\*\s?/,'').replace(/\s?\*\/$/,'') : ind+'/* '+body+' */';
+      } else {
+        ns = body.startsWith('<!--') ? ind+body.replace(/^<!--\s?/,'').replace(/\s?-->$/,'') : ind+'<!-- '+body+' -->';
+      }
+      ta.setRangeText(ns, ls, le, 'select');
+      ta.dispatchEvent(new Event('input')); return;
+    }
+    // Alt+Shift+F = จัดโค้ด
+    if(e.altKey && e.shiftKey && e.key.toLowerCase()==='f'){
+      e.preventDefault();
+      ta.value=formatDoc(ta.value);
+      ta.dispatchEvent(new Event('input'));
+      showToast('จัดโค้ดเรียบร้อย ✨ (Alt+Shift+F)'); return;
+    }
+    // Alt+Shift+ArrowDown = ก๊อปบรรทัด
+    if(e.altKey && e.shiftKey && e.key==='ArrowDown'){
+      e.preventDefault();
+      const [ls,le]=edLineRange(ta);
+      const seg=v.slice(ls,le);
+      ta.setRangeText(seg+'\n'+seg, ls, le, 'end');
+      ta.dispatchEvent(new Event('input')); return;
+    }
+    // Alt+Arrow = ย้ายบรรทัด
+    if(e.altKey && !e.shiftKey && (e.key==='ArrowUp'||e.key==='ArrowDown')){
+      e.preventDefault();
+      const lines=v.split('\n');
+      const ln=v.slice(0,s).split('\n').length-1;
+      const to=e.key==='ArrowUp'?ln-1:ln+1;
+      if(to<0||to>=lines.length) return;
+      [lines[ln],lines[to]]=[lines[to],lines[ln]];
+      const col=s-(v.lastIndexOf('\n',s-1)+1);
+      ta.value=lines.join('\n');
+      const pos=lines.slice(0,to).join('\n').length+(to>0?1:0)+Math.min(col,lines[to].length);
+      ta.selectionStart=ta.selectionEnd=pos;
+      ta.dispatchEvent(new Event('input')); return;
+    }
+  });
+  upd();
+}
+enhanceEditor(mEd, {gutter:'mGut', status:true, onSave:()=>{ checkMission(); showToast('เซฟให้อัตโนมัติอยู่แล้ว ✓ ตรวจคำตอบให้เลย'); }});
+enhanceEditor(ed, {onSave:()=>{ run(); showToast('รันโค้ดแล้ว ▶ (Ctrl+S)'); }});
 
 // ---------- day 3: topics + timer ----------
 const topics = [
