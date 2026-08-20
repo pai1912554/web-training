@@ -134,6 +134,7 @@
   <button onclick="go('d2',this)">วัน 2: CSS</button>
   <button onclick="go('d3',this)">วัน 3: จำลองแข่ง</button>
   <button onclick="go('train',this)">💪 ภารกิจฝึก</button>
+  <button onclick="go('real',this)">🏁 คู่มือแข่งจริง</button>
   <button onclick="go('play',this)">🧪 สนามลอง</button>
   <button onclick="go('cheat',this)">📄 สูตรต้องจำ</button>
 </nav>
@@ -390,15 +391,15 @@ nav a:hover { color: #fbbf24; }</code></pre>
   </div>
 
   <div class="card">
-    <h3>📋 เกณฑ์ที่กรรมการมักดู (เช็คก่อนหมดเวลา)</h3>
-    <div class="chk" onclick="tick(this,'j1')"><input type="checkbox" id="j1"><span>โครงสร้างถูก: DOCTYPE, head, body, charset UTF-8</span></div>
-    <div class="chk" onclick="tick(this,'j2')"><input type="checkbox" id="j2"><span>เนื้อหาตรงหัวข้อ + สะกดถูก</span></div>
-    <div class="chk" onclick="tick(this,'j3')"><input type="checkbox" id="j3"><span>มี header + เมนู + footer (ชื่อผู้จัดทำ)</span></div>
-    <div class="chk" onclick="tick(this,'j4')"><input type="checkbox" id="j4"><span>มีรูปพร้อม alt อย่างน้อย 2 รูป</span></div>
-    <div class="chk" onclick="tick(this,'j5')"><input type="checkbox" id="j5"><span>มีตาราง หรือ ลิสต์ อย่างน้อย 1 อัน</span></div>
-    <div class="chk" onclick="tick(this,'j6')"><input type="checkbox" id="j6"><span>สีเข้ากัน อ่านง่าย ไม่ลายตา (ใช้ 2-3 สีพอ)</span></div>
-    <div class="chk" onclick="tick(this,'j7')"><input type="checkbox" id="j7"><span>มี hover อย่างน้อย 1 จุด</span></div>
-    <div class="chk" onclick="tick(this,'j8')"><input type="checkbox" id="j8"><span>เปิดใน browser แล้วไม่มีอะไรพัง ลิงก์กดได้จริง</span></div>
+    <h3>📋 เช็คลิสต์ตามเกณฑ์คะแนนจริง 100 (เช็คก่อนหมดเวลา)</h3>
+    <div class="chk" onclick="tick(this,'j1')"><input type="checkbox" id="j1"><span>[25] Code ถูกต้อง: DOCTYPE, charset UTF-8, tag ปิดครบ + เนื้อหาตรงหัวข้อ สะกดถูก</span></div>
+    <div class="chk" onclick="tick(this,'j2')"><input type="checkbox" id="j2"><span>[15] สร้างสรรค์: มีของโชว์อย่างน้อย 1 (ปุ่ม JS / อนิเมชัน / โหมดกลางคืน)</span></div>
+    <div class="chk" onclick="tick(this,'j3')"><input type="checkbox" id="j3"><span>[15] สวยงาม: ชุดสีไม่เกิน 3 สี + gradient/เงา + ฟอนต์อ่านง่าย</span></div>
+    <div class="chk" onclick="tick(this,'j4')"><input type="checkbox" id="j4"><span>[15] Layout: header/nav/main/footer + จัดกลาง + รูปไม่ล้น</span></div>
+    <div class="chk" onclick="tick(this,'j5')"><input type="checkbox" id="j5"><span>[10] ครบ 3 หน้า + FTP ขึ้น server สำเร็จ (ถ้าสนามใช้)</span></div>
+    <div class="chk" onclick="tick(this,'j6')"><input type="checkbox" id="j6"><span>[10] ลิงก์: เมนูครบทุกหน้า กดไป-กลับได้หมด ไม่มีลิงก์ตาย</span></div>
+    <div class="chk" onclick="tick(this,'j7')"><input type="checkbox" id="j7"><span>[5] ฟอร์ม: form + input + textarea + button ครบ</span></div>
+    <div class="chk" onclick="tick(this,'j8')"><input type="checkbox" id="j8"><span>รูปทุกรูปมี alt + เปิดใน browser รอบสุดท้ายแล้วไม่มีอะไรพัง</span></div>
   </div>
 
   <div class="card">
@@ -485,6 +486,109 @@ nav a:hover { color: #fbbf24; }</code></pre>
       <figure><img src="https://picsum.photos/id/1060/220/148" alt="กาแฟ"><figcaption>กาแฟ</figcaption><code>https://picsum.photos/id/1060/300/200</code></figure>
       <figure><img src="https://picsum.photos/id/1040/220/148" alt="ปราสาท"><figcaption>ปราสาท</figcaption><code>https://picsum.photos/id/1040/300/200</code></figure>
     </div>
+  </div>
+</section>
+
+<!-- ================= REAL COMP GUIDE ================= -->
+<section id="real" class="page">
+  <h2>🏁 คู่มือแข่งจริง — เกณฑ์กลางศิลปหัตถกรรม ปีงบ 2568</h2>
+
+  <div class="card" style="border-color:#ef4444">
+    <h3 style="color:#f87171">⚠️ กติกาจริงที่ต้องรู้ (ต่างจากที่หลายคนคิด!)</h3>
+    <ul>
+      <li>ใช้ <b>Notepad เท่านั้น</b> — ไม่ใช่ VS Code! ไม่มีตัวเติมโค้ด ไม่มีสี ไม่มี Emmet ต้องจำ syntax เอง 100%</li>
+      <li><b>ทีมละ 2 คน</b> (ระดับ ม.1-3)</li>
+      <li><b>ไม่มีอินเทอร์เน็ต</b> — มีแค่ intranet + FTP server ภายในห้องแข่ง เปิด Google ไม่ได้!</li>
+      <li>รูป/เสียง/วิดีโอ ใช้ได้เฉพาะ<b>ไฟล์ที่กรรมการแจก</b>เท่านั้น</li>
+      <li>ต้องทำ<b>ไม่น้อยกว่า 3 หน้า</b> (3 เพจ เชื่อมลิงก์กัน)</li>
+      <li>ต้อง <b>FTP ผลงานขึ้น Server</b> — กรรมการตรวจจาก server เท่านั้น (FTP ไม่ได้ = โดนตัดคะแนน)</li>
+      <li>เวลา 3 ชั่วโมง | ห้ามนำเอกสาร/แฟลชไดรฟ์/มือถือเข้าห้อง — เจอ = ปรับออก</li>
+    </ul>
+    <p class="dim">⚡ แต่ละเขตอาจปรับกติกาต่างกัน (บางเขตให้เดี่ยว/ให้ใช้เน็ต) — <b>ถามครูผู้ฝึกสอนยืนยันก่อนซ้อม</b></p>
+  </div>
+
+  <div class="card">
+    <h3>💯 เกณฑ์คะแนนจริง 100 คะแนน</h3>
+    <table>
+      <tr><th>หัวข้อ</th><th>คะแนน</th><th>วิธีเก็บให้ครบ</th></tr>
+      <tr><td>ความถูกต้องสมบูรณ์ของ Code และเนื้อหา</td><td>25</td><td>โครงครบ DOCTYPE/charset, tag ปิดครบ, เนื้อหาตรงหัวข้อ สะกดถูก</td></tr>
+      <tr><td>ความคิดสร้างสรรค์</td><td>15</td><td>โหมดกลางคืน, อนิเมชัน, ปุ่ม JS — ของจากบท ⚡ และ 🎬</td></tr>
+      <tr><td>ความสวยงาม</td><td>15</td><td>ชุดสี 3 สี, ฟอนต์อ่านง่าย, gradient, เงา</td></tr>
+      <tr><td>จัดวาง Layout เหมาะสม</td><td>15</td><td>header/nav/main/footer, จัดกลาง max-width, flexbox</td></tr>
+      <tr><td>FTP ขึ้น Server ได้</td><td>10</td><td>ซ้อม FileZilla ตามหัวข้อข้างล่าง — 10 คะแนนฟรีถ้าซ้อมมา</td></tr>
+      <tr><td>เชื่อมโยง Link ถูกต้อง</td><td>10</td><td>เมนูครบทุกหน้า ลิงก์ไม่ตาย ชื่อไฟล์ตรง</td></tr>
+      <tr><td>สร้างฟอร์มถูกต้อง</td><td>5</td><td>form + input + textarea + button (ด่าน 29)</td></tr>
+    </table>
+    <p class="dim">เหรียญทอง 80+, เงิน 70-79, ทองแดง 60-69</p>
+  </div>
+
+  <div class="card">
+    <h3>📝 ซ้อม Notepad ให้ชิน (สำคัญสุด!)</h3>
+    <ol>
+      <li>เปิด Notepad: กด <kbd>Win</kbd> พิมพ์ notepad กด Enter</li>
+      <li>พิมพ์โครงเว็บ<b>จากความจำ</b> — ไม่มีตัวช่วยเลย นี่แหละของจริง</li>
+      <li>เซฟ: File → Save As → ตั้งชื่อ <code>index.html</code> → ช่อง Encoding เลือก <b>UTF-8</b> (ลืม = ภาษาไทยเพี้ยน!) → ช่อง Save as type เลือก All Files</li>
+      <li>เปิดไฟล์ด้วย Chrome ดูผล → แก้ใน Notepad → กด <kbd>Ctrl</kbd>+<kbd>S</kbd> → กลับไป Chrome กด <kbd>F5</kbd></li>
+    </ol>
+    <p><b>ตารางซ้อม:</b> ทำภารกิจในเว็บนี้ให้เข้าใจก่อน แล้ว "ทำซ้ำด่านเดิมใน Notepad" — เว็บนี้ = ห้องเรียน, Notepad = สนามจริง</p>
+    <p class="dim">ข้อดีที่ซ่อนอยู่: ซ้อม Notepad จนคล่อง วันแข่งจะเร็วกว่าคู่แข่งที่ซ้อมแต่ VS Code แล้วไปงงหน้างาน</p>
+  </div>
+
+  <div class="card">
+    <h3>🗂 สูตรเว็บ 3 หน้า (บังคับตามเกณฑ์!)</h3>
+    <p>โครงโฟลเดอร์ที่ควรใช้:</p>
+<pre><code>งานแข่ง/
+  index.html      <span class="cmt">(หน้าแรก)</span>
+  page2.html      <span class="cmt">(เนื้อหาหลัก)</span>
+  page3.html      <span class="cmt">(ผู้จัดทำ/ติดต่อ + ฟอร์ม)</span>
+  images/         <span class="cmt">(รูปที่กรรมการแจก copy มาไว้นี่)</span></code></pre>
+    <p>เมนูเดียวกัน วางทุกหน้า — ลิงก์ใช้ชื่อไฟล์ตรง ๆ:</p>
+<pre><code><span class="tag">&lt;nav&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"index.html"</span><span class="tag">&gt;</span>หน้าแรก<span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"page2.html"</span><span class="tag">&gt;</span>เนื้อหา<span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"page3.html"</span><span class="tag">&gt;</span>ผู้จัดทำ<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/nav&gt;</span>
+
+<span class="cmt">&lt;!-- รูปจากไฟล์ในเครื่อง (ไม่ใช่ลิงก์เน็ต!) --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src=</span><span class="val">"images/pic1.jpg"</span> <span class="attr">alt=</span><span class="val">"คำอธิบายรูป"</span><span class="tag">&gt;</span></code></pre>
+    <ul>
+      <li>ชื่อไฟล์: อังกฤษล้วน ตัวเล็ก ไม่มีช่องว่าง — <code>page2.html</code> ไม่ใช่ <code>หน้า 2.HTML</code></li>
+      <li>เคล็ดลับเร็ว: ทำ index.html เสร็จ 1 หน้า (โครง+เมนู+footer) → copy ไฟล์เป็น page2, page3 → แก้แค่เนื้อหากลาง</li>
+      <li>CSS ก็ copy ทั้งก้อน &lt;style&gt; ไปทุกหน้า = ธีมเดียวกันอัตโนมัติ</li>
+      <li>เช็คก่อนส่ง: กดเมนูครบทุกลิงก์ ทุกหน้า ไป-กลับได้หมด (10 คะแนนตรงนี้)</li>
+    </ul>
+    <p class="dim">💪 ซ้อมเลย: ทำโปรเจกต์ 3 หน้าหัวข้อ "โรงเรียนของฉัน" ใน Notepad แล้วส่งรูป/โค้ดมาให้ผมตรวจในแชท</p>
+  </div>
+
+  <div class="card">
+    <h3>📤 FTP คืออะไร + ซ้อมยังไง (10 คะแนนฟรี)</h3>
+    <p>FTP = ส่งไฟล์จากเครื่องเราขึ้น server. วันแข่งกรรมการแจก Host/IP, Username, Password, Port</p>
+    <ol>
+      <li>โปรแกรมยอดฮิต: <b>FileZilla</b> (ฟรี) — โหลดมาซ้อมที่บ้านได้</li>
+      <li>กรอก 4 ช่องบน: Host, Username, Password, Port → กด Quickconnect</li>
+      <li>ฝั่งซ้าย = เครื่องเรา, ฝั่งขวา = server → ลากไฟล์ทั้งหมด (ทุก .html + โฟลเดอร์ images) จากซ้ายไปขวา</li>
+      <li>เช็คว่าไฟล์ขึ้นครบ แล้วเปิดเว็บผ่าน browser ตาม URL ที่กรรมการให้ ดูว่ารูปไม่แตก ลิงก์ไม่ตาย</li>
+    </ol>
+    <p class="dim">กับดักคลาสสิก: อัปแต่ .html ลืมโฟลเดอร์ images → รูปแตกหมด. ลากขึ้นทั้งยวง!</p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 ได้โจทย์แล้วทำอะไรก่อน (15 นาทีแรกชี้ชะตา)</h3>
+    <ol>
+      <li><b>อ่านโจทย์ 2 รอบ</b> — วงคำสำคัญ: หัวข้ออะไร บังคับมีอะไรบ้าง</li>
+      <li><b>เปิดดูไฟล์ที่กรรมการแจกทันที</b> — มีรูปอะไร กี่รูป มีข้อความ/วิดีโอไหม → ของพวกนี้คือ "วัตถุดิบ" วางแผนจากของที่มี</li>
+      <li><b>ร่างบนกระดาษ</b> (กรรมการแจกดินสอ+กระดาษ): 3 หน้า หน้าไหนใส่อะไร ใช้รูปไหน</li>
+      <li>แบ่งงานในทีม: คนหนึ่งลุยโครง+เนื้อหา อีกคนคิดเนื้อหา/เขียนข้อความบนกระดาษรอ</li>
+      <li>เขียนเนื้อหาจาก<b>ความรู้ตัวเอง</b> — หัวข้อแข่งมักเป็นเรื่องใกล้ตัว (จังหวัด ประเพณี สิ่งแวดล้อม เศรษฐกิจพอเพียง) อ่านรอบตัวไว้เยอะ ๆ</li>
+    </ol>
+    <h3 style="margin-top:16px">🔎 ถ้าเขตของคุณให้ใช้เน็ต — สูตรค้นให้ไว</h3>
+    <ul>
+      <li>ค้นเนื้อหา: <code>หัวข้อ + ประวัติ</code>, <code>หัวข้อ + ความสำคัญ</code>, <code>หัวข้อ + 5 ข้อ</code> (ได้ลิสต์สำเร็จ)</li>
+      <li><b>ห้าม copy ทั้งดุ้น</b> — อ่านแล้วสรุปเป็นภาษาตัวเอง 2-3 ประโยคต่อหัวข้อ (กรรมการจับ copy ได้ = คะแนนเนื้อหาหาย)</li>
+      <li>หารูป: Google Images → Tools → ขนาดใหญ่ | หรือ pexels.com / unsplash.com (รูปฟรีไม่ติดลิขสิทธิ์)</li>
+      <li>ลืม tag: <code>w3schools + ชื่อ tag</code> — เปิดดู 10 วิ ปิด อย่าไถยาว</li>
+      <li>กติกาเวลา: ค้นข้อมูลรวมไม่ควรเกิน 20 นาทีทั้งการแข่ง — เวลาที่เหลือคือเขียนโค้ด</li>
+    </ul>
   </div>
 </section>
 
@@ -770,7 +874,9 @@ const CH = [
   {n:'กล่องและระยะ', ic:'📦', c:'#f59e0b'},
   {n:'จัดหน้า Flexbox', ic:'🧲', c:'#10b981'},
   {n:'ตกแต่งขั้นโปร', ic:'✨', c:'#a855f7'},
-  {n:'โปรเจกต์จริง', ic:'🏆', c:'#ef4444'}
+  {n:'โปรเจกต์จริง', ic:'🏆', c:'#ef4444'},
+  {n:'JavaScript โชว์กรรมการ', ic:'⚡', c:'#eab308'},
+  {n:'อนิเมชันและสี', ic:'🎬', c:'#06b6d4'}
 ];
 const M = [
 // ============ บท 1: พื้นฐาน HTML ============
@@ -1144,6 +1250,122 @@ const M = [
   ['มีรูป 2 รูป ทุกรูปมี alt',d=>{const im=d.querySelectorAll('main img');return im.length>=2&&[...im].every(i=>(i.getAttribute('alt')||'').trim().length>0)}],
   ['มีตาราง + ลิสต์',d=>!!d.querySelector('main table')&&!!d.querySelector('main ul, main ol')],
   ['มีฟอร์ม (input + button)',d=>!!d.querySelector('form input')&&!!d.querySelector('form button')]
+ ]}
+,
+// ============ บท 8: JavaScript โชว์กรรมการ ============
+{ch:7,ty:'build',xp:15,
+ t:'ด่าน 33: ปุ่มแรกที่กดได้จริง',
+ goal:'ทำปุ่มที่กดแล้วเด้งข้อความทักทาย (onclick + alert)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> HTML/CSS แค่ "แสดง" แต่ JavaScript คือ "สมอง" ที่ตอบสนอง. onclick บอก browser ว่า "ถ้าปุ่มนี้ถูกคลิก ให้รันคำสั่งนี้" — alert() คือคำสั่งเด้งกล่องข้อความ. แค่บรรทัดเดียว เว็บนิ่ง ๆ ก็มีชีวิต กรรมการเห็นปุ๊บรู้เลยว่าทีมนี้เกินหลักสูตร',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ปุ่มกดได้</title>\n</head>\n<body>\n  <h1>เว็บของฉัน</h1>\n  <!-- ปุ่ม onclick alert -->\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ปุ่มกดได้</title>\n</head>\n<body>\n  <h1>เว็บของฉัน</h1>\n  <button onclick="alert(\'สวัสดี! ยินดีต้อนรับ\')">กดฉันสิ</button>\n</body>\n</html>',
+ checks:[
+  ['มีปุ่ม <button>',d=>!!d.querySelector('button')],
+  ['ปุ่มมี onclick',d=>{const b=d.querySelector('button');return b&&!!b.getAttribute('onclick')}],
+  ['onclick เรียก alert(...)',(d,s)=>/onclick\s*=\s*["'][^"']*alert\s*\(/i.test(s)]
+ ]},
+{ch:7,ty:'build',xp:15,
+ t:'ด่าน 34: เปลี่ยนข้อความด้วยปุ่ม',
+ goal:'กดปุ่มแล้วข้อความใน <p id="msg"> เปลี่ยน (getElementById + textContent)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ทุก tag ในหน้าถูก browser เก็บเป็น "วัตถุ" ที่ JS จับต้องได้. getElementById คือการชี้ตัว "เอาตัวที่ id นี้มา" แล้ว .textContent = แก้ข้อความข้างในสด ๆ โดยไม่โหลดหน้าใหม่. เว็บทันสมัยทุกเว็บ (เฟซ ยูทูบ) ใช้หลักการนี้',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เปลี่ยนข้อความ</title>\n</head>\n<body>\n  <h1>ดวงประจำวัน</h1>\n  <p id="msg">กดปุ่มเพื่อดูดวง</p>\n  <button onclick="ดูดวง()">เปิดดวง</button>\n  <script>\n    function ดูดวง() {\n      // เปลี่ยนข้อความใน msg\n    }\n  <\/script>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เปลี่ยนข้อความ</title>\n</head>\n<body>\n  <h1>ดวงประจำวัน</h1>\n  <p id="msg">กดปุ่มเพื่อดูดวง</p>\n  <button onclick="ดูดวง()">เปิดดวง</button>\n  <script>\n    function ดูดวง() {\n      document.getElementById("msg").textContent = "วันนี้ดวงดีมาก จะเขียนโค้ดผ่านทุกด่าน!";\n    }\n  <\/script>\n</body>\n</html>',
+ checks:[
+  ['มี <p id="msg">',d=>!!d.querySelector('p#msg')],
+  ['มี <script> กับ function',(d,s)=>/<script>[\s\S]*function[\s\S]*<\/script>/i.test(s)],
+  ['ใช้ getElementById',(d,s)=>/getElementById\s*\(\s*["\']msg["\']\s*\)/.test(s)],
+  ['เปลี่ยน textContent หรือ innerHTML',(d,s)=>/\.(textContent|innerHTML)\s*=/.test(s)]
+ ]},
+{ch:7,ty:'build',xp:15,
+ t:'ด่าน 35: ปุ่มเปลี่ยนสีพื้นหลัง',
+ goal:'ปุ่ม 3 ปุ่ม: ม่วง ชมพู ขาว — กดแล้วพื้นหลัง body เปลี่ยนสีนั้น (style.background)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> JS แก้ CSS สด ๆ ได้ผ่าน .style — document.body.style.background = "..." คือสั่งเปลี่ยนสไตล์ตัว body ทันทีที่กด. นี่คือหลักการเดียวกับปุ่ม dark mode ทุกเว็บ. ส่งค่าเข้า function ผ่านวงเล็บ = ปุ่มเดียวใช้ซ้ำได้ทุกสี',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เปลี่ยนสี</title>\n</head>\n<body>\n  <h1>เลือกสีพื้นหลัง</h1>\n  <!-- ปุ่ม 3 ปุ่ม เรียก เปลี่ยนสี(\'#สี\') -->\n  <script>\n    function เปลี่ยนสี(สี) {\n      // เปลี่ยนพื้นหลัง body\n    }\n  <\/script>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>เปลี่ยนสี</title>\n</head>\n<body>\n  <h1>เลือกสีพื้นหลัง</h1>\n  <button onclick="เปลี่ยนสี(\'#ddd6fe\')">ม่วง</button>\n  <button onclick="เปลี่ยนสี(\'#fbcfe8\')">ชมพู</button>\n  <button onclick="เปลี่ยนสี(\'white\')">ขาว</button>\n  <script>\n    function เปลี่ยนสี(สี) {\n      document.body.style.background = สี;\n    }\n  <\/script>\n</body>\n</html>',
+ checks:[
+  ['มีปุ่ม 3 ปุ่ม',d=>d.querySelectorAll('button').length>=3],
+  ['ทุกปุ่มมี onclick',d=>[...d.querySelectorAll('button')].every(b=>b.getAttribute('onclick'))],
+  ['ใช้ style.background ใน script',(d,s)=>/\.style\.background(Color)?\s*=/.test(s)]
+ ]},
+{ch:7,ty:'build',xp:20,
+ t:'ด่าน 36: เกมนับคะแนน',
+ goal:'ปุ่ม "+1 คะแนน" กดแล้วตัวเลขใน <span id="score"> เพิ่มทีละ 1 (ตัวแปร + ++)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> ตัวแปร (let) คือ "กล่องจำค่า" ของโปรแกรม — กดปุ่มปุ๊บ function บวกค่าในกล่องแล้วเอาไปแปะจอใหม่. ค่าอยู่ในหน่วยความจำตราบใดที่ยังไม่ refresh. เกม, ตะกร้าสินค้า, ยอดไลก์ — ทั้งหมดคือตัวแปร+อัปเดตจอแบบนี้เป๊ะ',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>นับคะแนน</title>\n</head>\n<body>\n  <h1>คะแนน: <span id="score">0</span></h1>\n  <button onclick="เพิ่ม()">+1 คะแนน</button>\n  <script>\n    let คะแนน = 0;\n    function เพิ่ม() {\n      // บวกคะแนน แล้วอัปเดต span\n    }\n  <\/script>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>นับคะแนน</title>\n</head>\n<body>\n  <h1>คะแนน: <span id="score">0</span></h1>\n  <button onclick="เพิ่ม()">+1 คะแนน</button>\n  <script>\n    let คะแนน = 0;\n    function เพิ่ม() {\n      คะแนน = คะแนน + 1;\n      document.getElementById("score").textContent = คะแนน;\n    }\n  <\/script>\n</body>\n</html>',
+ checks:[
+  ['มี <span id="score">',d=>!!d.querySelector('#score')],
+  ['มีตัวแปรเก็บคะแนน (let)',(d,s)=>/let\s+\S+\s*=\s*0/.test(s)],
+  ['มีการบวกค่า (+1 หรือ ++)',(d,s)=>/(\+\s*1|\+\+|\+=\s*1)/.test(s)],
+  ['อัปเดตตัวเลขขึ้นจอ',(d,s)=>/getElementById\s*\(\s*["\']score["\']\s*\)[\s\S]*\.(textContent|innerHTML)\s*=/.test(s)]
+ ]},
+{ch:7,ty:'build',xp:20,
+ t:'ด่าน 37: ปุ่มโหมดกลางคืน',
+ goal:'ปุ่มเดียวสลับสว่าง/มืดไปมา — CSS มี class .dark + JS ใช้ classList.toggle',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> เตรียมชุดสีมืดไว้ใน class .dark แล้ว toggle = "ถ้ายังไม่มี class นี้ให้ใส่ ถ้ามีแล้วให้ถอด". กดครั้งแรกมืด กดอีกครั้งสว่าง — สลับเองไม่ต้องเขียน if. เว็บโหมดกลางคืนของจริงใช้เทคนิคนี้ตรง ๆ เลย. โชว์อันนี้วันแข่ง = คะแนนสร้างสรรค์เต็ม ๆ',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>โหมดกลางคืน</title>\n  <style>\n    body { background: white; color: #222; transition: 0.4s; font-family: Tahoma; }\n    /* เพิ่ม body.dark สีพื้นเข้ม ตัวหนังสือสว่าง */\n  </style>\n</head>\n<body>\n  <h1>เว็บสลับโหมดได้</h1>\n  <button onclick="สลับโหมด()">🌙 สลับโหมด</button>\n  <script>\n    function สลับโหมด() {\n      // toggle class dark ที่ body\n    }\n  <\/script>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>โหมดกลางคืน</title>\n  <style>\n    body { background: white; color: #222; transition: 0.4s; font-family: Tahoma; }\n    body.dark { background: #111827; color: #f9fafb; }\n  </style>\n</head>\n<body>\n  <h1>เว็บสลับโหมดได้</h1>\n  <button onclick="สลับโหมด()">🌙 สลับโหมด</button>\n  <script>\n    function สลับโหมด() {\n      document.body.classList.toggle("dark");\n    }\n  <\/script>\n</body>\n</html>',
+ checks:[
+  ['CSS มีกฎ body.dark',(d,s)=>/body\.dark\s*{[^}]*background/is.test(s)],
+  ['ใช้ classList.toggle',(d,s)=>/classList\.toggle\s*\(\s*["\']dark["\']\s*\)/.test(s)],
+  ['body มี transition (สลับนุ่ม ๆ)',(d,s)=>/body\s*{[^}]*transition/is.test(s)]
+ ]},
+// ============ บท 9: อนิเมชันและสี ============
+{ch:8,ty:'build',xp:15,
+ t:'ด่าน 38: ชุดสีมือโปรด้วย CSS Variables',
+ goal:'ประกาศสี 3 ตัวใน :root (--main, --accent, --bg) แล้วเรียกใช้ด้วย var() อย่างน้อย 3 ที่',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> :root คือ "คลังกลาง" ของทั้งหน้า — ประกาศสีครั้งเดียว เรียกใช้ด้วย var(--ชื่อ) ได้ทุกที่. อยากเปลี่ยนธีมทั้งเว็บ? แก้ 3 บรรทัดบนสุดจบ ไม่ต้องไล่แก้ทีละจุด. สูตรเลือกสี: สีหลัก 1 + สีเน้น 1 + พื้นอ่อน 1 — ห้ามเกิน 3 เว็บจะไม่ลายตา',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ชุดสี</title>\n  <style>\n    :root {\n      /* --main: ..; --accent: ..; --bg: ..; */\n    }\n    body { font-family: Tahoma; }\n    /* ใช้ var(--..) กับ body, h1, .card */\n    .card { padding: 16px; border-radius: 10px; max-width: 300px; }\n  </style>\n</head>\n<body>\n  <h1>เว็บธีมเดียวกันทั้งหน้า</h1>\n  <div class="card">เปลี่ยนสีที่ :root ที่เดียว ทั้งเว็บเปลี่ยนตาม</div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ชุดสี</title>\n  <style>\n    :root {\n      --main: #7c3aed;\n      --accent: #ec4899;\n      --bg: #faf5ff;\n    }\n    body { font-family: Tahoma; background: var(--bg); }\n    h1 { color: var(--main); }\n    .card { padding: 16px; border-radius: 10px; max-width: 300px;\n            background: white; border: 2px solid var(--accent); }\n  </style>\n</head>\n<body>\n  <h1>เว็บธีมเดียวกันทั้งหน้า</h1>\n  <div class="card">เปลี่ยนสีที่ :root ที่เดียว ทั้งเว็บเปลี่ยนตาม</div>\n</body>\n</html>',
+ checks:[
+  ['มี :root ประกาศตัวแปรสี 3 ตัว',(d,s)=>{const m=s.match(/:root\s*{([^}]*)}/is);return m&&(m[1].match(/--[\w-]+\s*:/g)||[]).length>=3}],
+  ['เรียกใช้ var() อย่างน้อย 3 ที่',(d,s)=>(s.match(/var\(\s*--/g)||[]).length>=3]
+ ]},
+{ch:8,ty:'build',xp:15,
+ t:'ด่าน 39: กล่องลอยขึ้นลง (@keyframes)',
+ goal:'ทำกล่องลอยขึ้นลงเรื่อย ๆ: ประกาศ @keyframes ลอย + ใส่ animation ให้ .box วนไม่รู้จบ (infinite)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> @keyframes คือ "สตอรีบอร์ด" — บอกว่า 0% อยู่ตรงไหน 50% ตรงไหน 100% ตรงไหน แล้ว browser วาดเฟรมระหว่างนั้นให้ 60 เฟรม/วิ เนียนกริบ. animation: ชื่อ เวลา ease-in-out infinite = เล่นวนตลอด. ต่างจาก transition ตรงไม่ต้องรอ hover — เคลื่อนเองเลย',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลอยได้</title>\n  <style>\n    body { display: flex; justify-content: center; padding-top: 60px; background: #ecfeff; }\n    .box { width: 120px; height: 120px; border-radius: 20px; background: #06b6d4;\n           display: flex; align-items: center; justify-content: center; font-size: 3rem; }\n    /* ประกาศ @keyframes ลอย (0% กับ 50% translateY) แล้วใส่ animation ให้ .box */\n  </style>\n</head>\n<body>\n  <div class="box">🎈</div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ลอยได้</title>\n  <style>\n    body { display: flex; justify-content: center; padding-top: 60px; background: #ecfeff; }\n    .box { width: 120px; height: 120px; border-radius: 20px; background: #06b6d4;\n           display: flex; align-items: center; justify-content: center; font-size: 3rem;\n           animation: ลอย 2s ease-in-out infinite; }\n    @keyframes ลอย {\n      0%, 100% { transform: translateY(0); }\n      50% { transform: translateY(-24px); }\n    }\n  </style>\n</head>\n<body>\n  <div class="box">🎈</div>\n</body>\n</html>',
+ checks:[
+  ['มี @keyframes',(d,s)=>/@keyframes\s+\S+\s*{/i.test(s)],
+  ['keyframes ใช้ transform: translateY',(d,s)=>/@keyframes[\s\S]*translateY/i.test(s)],
+  ['.box มี animation แบบ infinite',(d,s)=>/\.box\s*{[^}]*animation\s*:[^}]*infinite/is.test(s)]
+ ]},
+{ch:8,ty:'build',xp:15,
+ t:'ด่าน 40: เว็บค่อย ๆ โผล่ (fade-in)',
+ goal:'ตอนเปิดหน้า ให้ h1 กับ .card ค่อย ๆ จางเข้า+เลื่อนขึ้น (keyframes opacity 0 เป็น 1) — .card ช้ากว่าด้วย animation-delay',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> animation เริ่มเล่นทันทีที่ element โผล่ในหน้า — ตั้ง 0% เป็น "ล่องหน+อยู่ต่ำ" (opacity 0, translateY) แล้วจบที่ตัวจริง = เอฟเฟกต์ค่อย ๆ โผล่. animation-delay ให้แต่ละตัวโผล่ไล่กันทีละจังหวะ เหมือนเว็บบริษัทแพง ๆ. กรรมการเปิดหน้าแรกแล้วของค่อย ๆ ไหลเข้า = ว้าวทันที',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Fade in</title>\n  <style>\n    body { font-family: Tahoma; background: #faf5ff; text-align: center; padding-top: 40px; }\n    .card { background: white; max-width: 300px; margin: 16px auto; padding: 20px;\n            border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,.12); }\n    /* @keyframes โผล่ + ใส่ให้ h1 และ .card (.card หน่วงเวลา) */\n  </style>\n</head>\n<body>\n  <h1>ยินดีต้อนรับ</h1>\n  <div class="card">ฉันโผล่ทีหลัง</div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Fade in</title>\n  <style>\n    body { font-family: Tahoma; background: #faf5ff; text-align: center; padding-top: 40px; }\n    .card { background: white; max-width: 300px; margin: 16px auto; padding: 20px;\n            border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,.12); }\n    @keyframes โผล่ {\n      from { opacity: 0; transform: translateY(20px); }\n      to { opacity: 1; transform: translateY(0); }\n    }\n    h1 { animation: โผล่ 0.8s ease both; }\n    .card { animation: โผล่ 0.8s ease both; animation-delay: 0.4s; }\n  </style>\n</head>\n<body>\n  <h1>ยินดีต้อนรับ</h1>\n  <div class="card">ฉันโผล่ทีหลัง</div>\n</body>\n</html>',
+ checks:[
+  ['keyframes จาก opacity 0 ไป 1',(d,s)=>/@keyframes[\s\S]*opacity\s*:\s*0[\s\S]*opacity\s*:\s*1/i.test(s)],
+  ['h1 มี animation',(d,s)=>/h1\s*{[^}]*animation/is.test(s)],
+  ['.card มี animation-delay',(d,s)=>/\.card\s*{[^}]*animation-delay/is.test(s)||/animation\s*:[^;}]*\d+(\.\d+)?s[^;}]*\d+(\.\d+)?s/is.test(s)]
+ ]},
+{ch:8,ty:'build',xp:15,
+ t:'ด่าน 41: รูปซูมตอนชี้',
+ goal:'รูปในการ์ด: เมาส์ชี้แล้วรูปค่อย ๆ ซูม (transform: scale) แต่ไม่ล้นกรอบ (overflow: hidden ที่กรอบ)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> scale(1.1) ขยายรูป 110% — แต่รูปจะล้นกรอบ! เคล็ดลับ: ให้ "กรอบ" (.frame) เป็นคนตัด ด้วย overflow: hidden — อะไรล้นออกนอกกรอบถูกตัดทิ้ง. รูปเลยซูมอยู่ในกรอบสวย ๆ. เว็บข่าว เว็บหนัง ใช้เอฟเฟกต์นี้กับรูปทุกใบ',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ซูมรูป</title>\n  <style>\n    body { display: flex; justify-content: center; padding-top: 40px; background: #f3e8ff; }\n    .frame { width: 300px; border-radius: 12px;\n             /* ตัดส่วนล้น */ }\n    .frame img { width: 100%; display: block;\n                 /* transition + hover scale */ }\n  </style>\n</head>\n<body>\n  <div class="frame">\n    <img src="https://picsum.photos/id/1015/300/200" alt="แม่น้ำ">\n  </div>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>ซูมรูป</title>\n  <style>\n    body { display: flex; justify-content: center; padding-top: 40px; background: #f3e8ff; }\n    .frame { width: 300px; border-radius: 12px;\n             overflow: hidden; }\n    .frame img { width: 100%; display: block;\n                 transition: 0.5s; }\n    .frame img:hover { transform: scale(1.15); }\n  </style>\n</head>\n<body>\n  <div class="frame">\n    <img src="https://picsum.photos/id/1015/300/200" alt="แม่น้ำ">\n  </div>\n</body>\n</html>',
+ checks:[
+  ['.frame มี overflow: hidden',(d,s)=>/\.frame\s*{[^}]*overflow\s*:\s*hidden/is.test(s)],
+  ['img มี transition',(d,s)=>/img\s*{[^}]*transition/is.test(s)],
+  ['hover แล้ว scale',(d,s)=>/:hover\s*{[^}]*scale\s*\(/is.test(s)]
+ ]},
+{ch:8,ty:'boss',xp:25,
+ t:'ด่าน 42: 👑 Gradient ไหลได้ (รวมทุกท่า)',
+ goal:'header พื้น gradient 3 สีที่ "ไหล" ตลอดเวลา: background-size: 200% + @keyframes เลื่อน background-position + ตัวหนังสือ fade-in',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> เคล็ดลับคือทำ gradient ใหญ่กว่าจอ 2 เท่า (background-size: 200%) แล้วใช้ keyframes เลื่อน background-position ไปมา — สีเลยดูไหลเรื่อย ๆ ไม่มีสะดุด. เว็บ startup ดัง ๆ ใช้ท่านี้ทำ hero. ผสม fade-in ของด่าน 40 = หน้าแรกระดับมือโปรของจริง',
+ start:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Gradient ไหล</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    header {\n      color: white; text-align: center; padding: 70px 20px;\n      background: linear-gradient(270deg, #7c3aed, #ec4899, #06b6d4);\n      /* background-size 200% + animation เลื่อน position */\n    }\n    /* @keyframes ไหล + @keyframes โผล่ (ให้ h1) */\n  </style>\n</head>\n<body>\n  <header>\n    <h1>เว็บสุดเท่ของฉัน</h1>\n    <p>สีไหลได้ ไม่ต้องใช้โปรแกรมอะไรเลย</p>\n  </header>\n</body>\n</html>',
+ sol:'<!DOCTYPE html>\n<html lang="th">\n<head>\n  <meta charset="UTF-8">\n  <title>Gradient ไหล</title>\n  <style>\n    body { margin: 0; font-family: Tahoma; }\n    header {\n      color: white; text-align: center; padding: 70px 20px;\n      background: linear-gradient(270deg, #7c3aed, #ec4899, #06b6d4);\n      background-size: 200% 200%;\n      animation: ไหล 6s ease infinite;\n    }\n    @keyframes ไหล {\n      0%, 100% { background-position: 0% 50%; }\n      50% { background-position: 100% 50%; }\n    }\n    @keyframes โผล่ {\n      from { opacity: 0; transform: translateY(20px); }\n      to { opacity: 1; transform: translateY(0); }\n    }\n    header h1 { animation: โผล่ 1s ease both; }\n    header p { animation: โผล่ 1s ease both 0.5s; }\n  </style>\n</head>\n<body>\n  <header>\n    <h1>เว็บสุดเท่ของฉัน</h1>\n    <p>สีไหลได้ ไม่ต้องใช้โปรแกรมอะไรเลย</p>\n  </header>\n</body>\n</html>',
+ checks:[
+  ['gradient 3 สี',(d,s)=>{const m=s.match(/linear-gradient\(([^)]*)\)/i);return m&&(m[1].match(/#[0-9a-f]{3,8}|rgb/gi)||[]).length>=3}],
+  ['background-size ขยาย (200%)',(d,s)=>/background-size\s*:\s*200%/i.test(s)],
+  ['keyframes เลื่อน background-position',(d,s)=>/@keyframes[\s\S]*background-position/i.test(s)],
+  ['header มี animation infinite',(d,s)=>/header\s*{[^}]*animation\s*:[^}]*infinite/is.test(s)],
+  ['h1 มี fade-in (opacity keyframes)',(d,s)=>/@keyframes[\s\S]*opacity\s*:\s*0/i.test(s)&&/h1\s*{[^}]*animation/is.test(s)]
  ]}
 ];
 
