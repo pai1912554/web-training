@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ค่ายซ้อมเว็บ 3 วัน — ศิลปหัตถกรรม ม.ต้น</title>
+<style>
+  :root{
+    --bg:#0f1020; --card:#1a1b33; --card2:#232450; --line:#34366b;
+    --txt:#eef0ff; --dim:#a8abd8; --acc:#8b5cf6; --acc2:#ec4899; --ok:#34d399; --warn:#fbbf24;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--txt);line-height:1.7}
+  header{background:linear-gradient(135deg,#4c1d95,#7c3aed 50%,#db2777);padding:34px 20px;text-align:center}
+  header h1{font-size:1.7rem}
+  header p{color:#e9d5ff;margin-top:6px;font-size:.95rem}
+  nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;background:var(--card);padding:10px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)}
+  nav button{background:transparent;border:1px solid var(--line);color:var(--dim);padding:8px 14px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.9rem}
+  nav button.active{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:bold}
+  main{max-width:900px;margin:0 auto;padding:20px 14px 80px}
+  .page{display:none}
+  .page.show{display:block}
+  h2{margin:22px 0 10px;font-size:1.3rem;color:#c4b5fd}
+  h3{margin:18px 0 8px;font-size:1.05rem;color:var(--acc2)}
+  p{margin:8px 0;color:var(--txt)}
+  .dim{color:var(--dim);font-size:.92rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}
+  summary{padding:14px 16px;cursor:pointer;font-weight:bold;list-style:none;display:flex;align-items:center;gap:10px}
+  summary::before{content:"▸";color:var(--acc);transition:.2s}
+  details[open] summary::before{transform:rotate(90deg)}
+  details .inner{padding:0 16px 16px}
+  pre{background:#0a0a18;border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto;font-size:.85rem;margin:8px 0;position:relative}
+  code{font-family:Consolas,monospace;color:#93c5fd}
+  pre code{color:#e0e7ff;white-space:pre}
+  .tag{color:#f472b6}.attr{color:#fbbf24}.val{color:#86efac}.cmt{color:#6b7280}
+  .try{background:var(--acc);color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.85rem;margin-top:6px}
+  .try:hover{background:#7c3aed}
+  ul,ol{margin:8px 0 8px 24px}
+  li{margin:4px 0}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.9rem}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+  th{background:var(--card2);color:#c4b5fd}
+  .chk{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--card2);border-radius:8px;margin:6px 0;cursor:pointer}
+  .chk input{width:18px;height:18px;accent-color:var(--ok)}
+  .chk.done{opacity:.55;text-decoration:line-through}
+  .bar{height:10px;background:var(--card2);border-radius:5px;overflow:hidden;margin:10px 0}
+  .bar>div{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));width:0%;transition:.4s}
+  .playwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+  @media(max-width:700px){.playwrap{grid-template-columns:1fr}}
+  #editor{width:100%;height:340px;background:#0a0a18;color:#e0e7ff;border:1px solid var(--line);border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:.85rem;resize:vertical;tab-size:2}
+  #frame{width:100%;height:340px;background:#fff;border:1px solid var(--line);border-radius:8px}
+  .big{font-size:2.6rem;font-weight:bold;text-align:center;font-variant-numeric:tabular-nums}
+  .timerbox{text-align:center;padding:20px}
+  .btnrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .btn2{background:var(--card2);border:1px solid var(--line);color:var(--txt);padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .btn2.go{background:var(--ok);color:#052e22;border:none;font-weight:bold}
+  .btn2.stop{background:#ef4444;color:#fff;border:none}
+  .topic{background:linear-gradient(135deg,var(--card2),#3b1d5e);border:1px solid var(--acc);border-radius:12px;padding:18px;text-align:center;font-size:1.15rem;font-weight:bold;margin:12px 0}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);padding:2px 10px;border-radius:12px;font-size:.8rem;color:var(--dim);margin:2px}
+  footer{text-align:center;padding:20px;color:var(--dim);font-size:.85rem;border-top:1px solid var(--line)}
+  kbd{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.85em}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏆 ค่ายซ้อมเว็บ 3 วัน</h1>
+  <p>เตรียมแข่งสร้าง Webpage ประเภท Text Editor — ศิลปหัตถกรรม ม.ต้น</p>
+</header>
+
+<nav>
+  <button class="active" onclick="go('d1',this)">วัน 1: HTML</button>
+  <button onclick="go('d2',this)">วัน 2: CSS</button>
+  <button onclick="go('d3',this)">วัน 3: จำลองแข่ง</button>
+  <button onclick="go('play',this)">🧪 สนามลอง</button>
+  <button onclick="go('cheat',this)">📄 สูตรต้องจำ</button>
+</nav>
+
+<main>
+
+<!-- ================= DAY 1 ================= -->
+<section id="d1" class="page show">
+  <h2>วัน 1 — HTML: โครงกระดูกของเว็บ</h2>
+  <p class="dim">เป้าหมายวันนี้: พิมพ์โครงเว็บได้จากความจำ + ใช้ tag หลักครบทุกตัว</p>
+  <div class="bar"><div id="bar-d1"></div></div>
+
+  <details open>
+    <summary>1.1 โครงหลักที่ต้องจำขึ้นใจ</summary>
+    <div class="inner">
+      <p>ทุกเว็บเริ่มแบบนี้เสมอ — วันแข่งพิมพ์ <code>!</code> แล้วกด <kbd>Tab</kbd> ใน VS Code โครงขึ้นเองทันที</p>
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang=</span><span class="val">"th"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset=</span><span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>ชื่อบนแท็บ<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="cmt">&lt;!-- ทุกอย่างที่คนเห็น อยู่ตรงนี้ --&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+      <ul>
+        <li><code>&lt;head&gt;</code> = หลังบ้าน (ชื่อแท็บ, ตั้งค่า) — คนไม่เห็น</li>
+        <li><code>&lt;body&gt;</code> = หน้าบ้าน — ทุกอย่างที่โชว์</li>
+        <li><code>charset="UTF-8"</code> = ทำให้ภาษาไทยไม่เพี้ยน <b>ห้ามลืม</b></li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>1.2 ข้อความ: หัวข้อ + ย่อหน้า</summary>
+    <div class="inner">
+<pre><code><span class="tag">&lt;h1&gt;</span>หัวข้อใหญ่สุด (มีอันเดียวต่อหน้า)<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span>หัวข้อรอง<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;h3&gt;</span>หัวข้อย่อย<span class="tag">&lt;/h3&gt;</span>
+<span class="tag">&lt;p&gt;</span>ย่อหน้าปกติ มี <span class="tag">&lt;b&gt;</span>ตัวหนา<span class="tag">&lt;/b&gt;</span> และ <span class="tag">&lt;i&gt;</span>ตัวเอียง<span class="tag">&lt;/i&gt;</span> ได้<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;hr&gt;</span> <span class="cmt">&lt;!-- เส้นคั่น --&gt;</span>
+<span class="tag">&lt;br&gt;</span> <span class="cmt">&lt;!-- ขึ้นบรรทัดใหม่ --&gt;</span></code></pre>
+      <button class="try" onclick="tryCode('text')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>1.3 รูปภาพ + ลิงก์</summary>
+    <div class="inner">
+<pre><code><span class="cmt">&lt;!-- รูป: src = ที่อยู่รูป, alt = คำอธิบาย (กรรมการดู!) --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src=</span><span class="val">"cat.jpg"</span> <span class="attr">alt=</span><span class="val">"แมวส้ม"</span> <span class="attr">width=</span><span class="val">"300"</span><span class="tag">&gt;</span>
+
+<span class="cmt">&lt;!-- ลิงก์ไปเว็บอื่น --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"https://www.google.com"</span><span class="tag">&gt;</span>ไปกูเกิล<span class="tag">&lt;/a&gt;</span>
+
+<span class="cmt">&lt;!-- ลิงก์ไปหน้าอื่นของเราเอง --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"page2.html"</span><span class="tag">&gt;</span>หน้าถัดไป<span class="tag">&lt;/a&gt;</span></code></pre>
+      <p class="dim">⚠️ <code>&lt;img&gt;</code> ไม่มี tag ปิด. วันแข่งเซฟรูปไว้โฟลเดอร์เดียวกับ index.html แล้วใช้ชื่อไฟล์ตรง ๆ</p>
+      <button class="try" onclick="tryCode('img')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>1.4 ลิสต์ (รายการ)</summary>
+    <div class="inner">
+<pre><code><span class="cmt">&lt;!-- จุดนำหน้า --&gt;</span>
+<span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span>ข้อแรก<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>ข้อสอง<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+
+<span class="cmt">&lt;!-- ตัวเลขนำหน้า --&gt;</span>
+<span class="tag">&lt;ol&gt;</span>
+  <span class="tag">&lt;li&gt;</span>อันดับหนึ่ง<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>อันดับสอง<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span></code></pre>
+      <button class="try" onclick="tryCode('list')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>1.5 ตาราง (กรรมการชอบมาก)</summary>
+    <div class="inner">
+<pre><code><span class="tag">&lt;table</span> <span class="attr">border=</span><span class="val">"1"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;tr&gt;</span>
+    <span class="tag">&lt;th&gt;</span>ชื่อ<span class="tag">&lt;/th&gt;</span><span class="tag">&lt;th&gt;</span>ราคา<span class="tag">&lt;/th&gt;</span>
+  <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;tr&gt;</span>
+    <span class="tag">&lt;td&gt;</span>ข้าวผัด<span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span>50<span class="tag">&lt;/td&gt;</span>
+  <span class="tag">&lt;/tr&gt;</span>
+<span class="tag">&lt;/table&gt;</span></code></pre>
+      <ul>
+        <li><code>tr</code> = แถว, <code>th</code> = หัวตาราง, <code>td</code> = ช่องข้อมูล</li>
+        <li>จำ: <b>ตาราง→แถว→ช่อง</b> เรียงจากนอกเข้าใน</li>
+      </ul>
+      <button class="try" onclick="tryCode('table')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>1.6 กล่องแบ่งโซน (สำคัญสุดสำหรับจัดหน้า)</summary>
+    <div class="inner">
+<pre><code><span class="tag">&lt;header&gt;</span>ส่วนหัวเว็บ (โลโก้ ชื่อเว็บ)<span class="tag">&lt;/header&gt;</span>
+<span class="tag">&lt;nav&gt;</span>เมนู<span class="tag">&lt;/nav&gt;</span>
+<span class="tag">&lt;main&gt;</span>เนื้อหาหลัก<span class="tag">&lt;/main&gt;</span>
+<span class="tag">&lt;footer&gt;</span>ท้ายเว็บ (ชื่อผู้จัดทำ)<span class="tag">&lt;/footer&gt;</span>
+
+<span class="cmt">&lt;!-- กล่องเปล่าเอนกประสงค์ --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class=</span><span class="val">"box"</span><span class="tag">&gt;</span>อะไรก็ได้<span class="tag">&lt;/div&gt;</span></code></pre>
+      <p class="dim">ใช้ header/nav/main/footer = ดูโปร กรรมการให้คะแนนโครงสร้าง</p>
+    </div>
+  </details>
+
+  <div class="card">
+    <h3>✅ การบ้านวัน 1</h3>
+    <div class="chk" onclick="tick(this,'d1a')"><input type="checkbox" id="d1a"><span>พิมพ์โครงเว็บจากความจำ ไม่ดูโพย 3 รอบ</span></div>
+    <div class="chk" onclick="tick(this,'d1b')"><span style="display:none"></span><input type="checkbox" id="d1b"><span>ทำหน้า "แนะนำตัวเอง" มี h1, p, รูป 1 รูป, ลิสต์งานอดิเรก</span></div>
+    <div class="chk" onclick="tick(this,'d1c')"><input type="checkbox" id="d1c"><span>เพิ่มตารางตารางเรียน 5 วัน</span></div>
+    <div class="chk" onclick="tick(this,'d1d')"><input type="checkbox" id="d1d"><span>แบ่งหน้าเป็น header / main / footer</span></div>
+  </div>
+</section>
+
+<!-- ================= DAY 2 ================= -->
+<section id="d2" class="page">
+  <h2>วัน 2 — CSS: แต่งให้สวย</h2>
+  <p class="dim">เป้าหมายวันนี้: เว็บขาว ๆ กลายเป็นเว็บมีสี มีเมนู มีการ์ด เหมือนเว็บจริง</p>
+  <div class="bar"><div id="bar-d2"></div></div>
+
+  <details open>
+    <summary>2.1 CSS เขียนตรงไหน</summary>
+    <div class="inner">
+      <p>วางใน <code>&lt;head&gt;</code> แบบนี้ (วิธีเดียวพอสำหรับแข่ง):</p>
+<pre><code><span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;style&gt;</span>
+    body { background-color: lightyellow; }
+    h1   { color: purple; }
+  <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span></code></pre>
+      <p>สูตร: <code>ตัวไหน { แต่งอะไร: ยังไง; }</code></p>
+      <button class="try" onclick="tryCode('css1')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>2.2 เลือกเป้าหมาย: tag / class / id</summary>
+    <div class="inner">
+<pre><code>p        { color: gray; }   <span class="cmt">/* p ทุกตัว */</span>
+.card    { padding: 16px; } <span class="cmt">/* ตัวที่มี class="card" */</span>
+#logo    { width: 80px; }   <span class="cmt">/* ตัวที่มี id="logo" (ใช้ครั้งเดียว) */</span></code></pre>
+      <p class="dim">จำ: จุด = class, ชาร์ป = id. งานแข่งใช้ class เป็นหลักพอ</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>2.3 คำสั่งแต่งที่ใช้บ่อยสุด 12 ตัว</summary>
+    <div class="inner">
+      <table>
+        <tr><th>คำสั่ง</th><th>ทำอะไร</th><th>ตัวอย่าง</th></tr>
+        <tr><td><code>color</code></td><td>สีตัวอักษร</td><td><code>color: #7c3aed;</code></td></tr>
+        <tr><td><code>background-color</code></td><td>สีพื้นหลัง</td><td><code>background-color: #f3e8ff;</code></td></tr>
+        <tr><td><code>font-size</code></td><td>ขนาดตัวอักษร</td><td><code>font-size: 20px;</code></td></tr>
+        <tr><td><code>font-family</code></td><td>แบบตัวอักษร</td><td><code>font-family: Tahoma;</code></td></tr>
+        <tr><td><code>text-align</code></td><td>จัดข้อความ</td><td><code>text-align: center;</code></td></tr>
+        <tr><td><code>padding</code></td><td>ระยะห่างในกล่อง</td><td><code>padding: 16px;</code></td></tr>
+        <tr><td><code>margin</code></td><td>ระยะห่างนอกกล่อง</td><td><code>margin: 10px;</code></td></tr>
+        <tr><td><code>border</code></td><td>เส้นขอบ</td><td><code>border: 2px solid purple;</code></td></tr>
+        <tr><td><code>border-radius</code></td><td>มุมโค้ง</td><td><code>border-radius: 10px;</code></td></tr>
+        <tr><td><code>width</code></td><td>ความกว้าง</td><td><code>width: 300px;</code></td></tr>
+        <tr><td><code>box-shadow</code></td><td>เงา (ดูโปรทันที)</td><td><code>box-shadow: 0 4px 10px #0003;</code></td></tr>
+        <tr><td><code>background: linear-gradient(...)</code></td><td>สีไล่เฉด</td><td><code>linear-gradient(135deg,#7c3aed,#ec4899)</code></td></tr>
+      </table>
+      <p class="dim">จำภาพ: <b>margin = ถอยห่างเพื่อนบ้าน, padding = เบาะในกล่อง, border = กำแพง</b></p>
+      <button class="try" onclick="tryCode('css2')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>2.4 Flexbox: เรียงของในแถวเดียว</summary>
+    <div class="inner">
+      <p>อยากให้ของเรียงแนวนอน (เมนู, การ์ด 3 ใบ) — ใส่ที่<b>ตัวแม่</b>:</p>
+<pre><code>.row {
+  display: flex;
+  gap: 16px;              <span class="cmt">/* ช่องว่างระหว่างลูก */</span>
+  justify-content: center; <span class="cmt">/* จัดกลางแนวนอน */</span>
+  align-items: center;     <span class="cmt">/* จัดกลางแนวตั้ง */</span>
+}</code></pre>
+      <p class="dim">รู้แค่ 4 บรรทัดนี้ ทำเมนู + การ์ดได้หมด</p>
+      <button class="try" onclick="tryCode('flex')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>2.5 เมนูบาร์สำเร็จรูป (จำไปใช้วันแข่งเลย)</summary>
+    <div class="inner">
+<pre><code><span class="cmt">&lt;!-- HTML --&gt;</span>
+<span class="tag">&lt;nav&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"#home"</span><span class="tag">&gt;</span>หน้าแรก<span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"#about"</span><span class="tag">&gt;</span>เกี่ยวกับ<span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"#contact"</span><span class="tag">&gt;</span>ติดต่อ<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/nav&gt;</span>
+
+<span class="cmt">/* CSS */</span>
+nav { display: flex; gap: 20px; justify-content: center;
+      background: #4c1d95; padding: 14px; }
+nav a { color: white; text-decoration: none; font-weight: bold; }
+nav a:hover { color: #fbbf24; }</code></pre>
+      <p class="dim"><code>:hover</code> = ตอนเมาส์ชี้ — ใส่แล้วเว็บดูมีชีวิต กรรมการชอบ</p>
+      <button class="try" onclick="tryCode('nav')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <details>
+    <summary>2.6 การ์ดสวย ๆ สำเร็จรูป</summary>
+    <div class="inner">
+<pre><code>.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  padding: 20px;
+  width: 250px;
+}
+.card img { width: 100%; border-radius: 8px; }</code></pre>
+      <p>เอา 3 ใบใส่ใน <code>&lt;div class="row"&gt;</code> (flex) = หน้าเว็บโปรทันที</p>
+      <button class="try" onclick="tryCode('card')">▶ ลองในสนามลอง</button>
+    </div>
+  </details>
+
+  <div class="card">
+    <h3>✅ การบ้านวัน 2</h3>
+    <div class="chk" onclick="tick(this,'d2a')"><input type="checkbox" id="d2a"><span>เอาเว็บแนะนำตัวเมื่อวาน มาใส่สี + font + จัดกลาง</span></div>
+    <div class="chk" onclick="tick(this,'d2b')"><input type="checkbox" id="d2b"><span>ทำเมนูบาร์ 3 ลิงก์ มี hover</span></div>
+    <div class="chk" onclick="tick(this,'d2c')"><input type="checkbox" id="d2c"><span>ทำการ์ด 3 ใบเรียงแถวด้วย flexbox</span></div>
+    <div class="chk" onclick="tick(this,'d2d')"><input type="checkbox" id="d2d"><span>ใส่ gradient ที่ header</span></div>
+  </div>
+</section>
+
+<!-- ================= DAY 3 ================= -->
+<section id="d3" class="page">
+  <h2>วัน 3 — จำลองสนามจริง</h2>
+  <p class="dim">กด "สุ่มหัวข้อ" → กด "เริ่มจับเวลา" → ทำเว็บใน VS Code ให้เสร็จใน 3 ชม. เหมือนวันแข่ง</p>
+
+  <div class="card timerbox">
+    <div class="topic" id="topicBox">กดปุ่มสุ่มหัวข้อ 👇</div>
+    <div class="btnrow">
+      <button class="btn2" onclick="randTopic()">🎲 สุ่มหัวข้อ</button>
+    </div>
+    <div class="big" id="clock">3:00:00</div>
+    <div class="btnrow">
+      <button class="btn2 go" onclick="startT()">▶ เริ่มจับเวลา</button>
+      <button class="btn2" onclick="pauseT()">⏸ พัก</button>
+      <button class="btn2 stop" onclick="resetT()">↺ รีเซ็ต</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📋 เกณฑ์ที่กรรมการมักดู (เช็คก่อนหมดเวลา)</h3>
+    <div class="chk" onclick="tick(this,'j1')"><input type="checkbox" id="j1"><span>โครงสร้างถูก: DOCTYPE, head, body, charset UTF-8</span></div>
+    <div class="chk" onclick="tick(this,'j2')"><input type="checkbox" id="j2"><span>เนื้อหาตรงหัวข้อ + สะกดถูก</span></div>
+    <div class="chk" onclick="tick(this,'j3')"><input type="checkbox" id="j3"><span>มี header + เมนู + footer (ชื่อผู้จัดทำ)</span></div>
+    <div class="chk" onclick="tick(this,'j4')"><input type="checkbox" id="j4"><span>มีรูปพร้อม alt อย่างน้อย 2 รูป</span></div>
+    <div class="chk" onclick="tick(this,'j5')"><input type="checkbox" id="j5"><span>มีตาราง หรือ ลิสต์ อย่างน้อย 1 อัน</span></div>
+    <div class="chk" onclick="tick(this,'j6')"><input type="checkbox" id="j6"><span>สีเข้ากัน อ่านง่าย ไม่ลายตา (ใช้ 2-3 สีพอ)</span></div>
+    <div class="chk" onclick="tick(this,'j7')"><input type="checkbox" id="j7"><span>มี hover อย่างน้อย 1 จุด</span></div>
+    <div class="chk" onclick="tick(this,'j8')"><input type="checkbox" id="j8"><span>เปิดใน browser แล้วไม่มีอะไรพัง ลิงก์กดได้จริง</span></div>
+  </div>
+
+  <div class="card">
+    <h3>⏱ แผนแบ่งเวลา 3 ชม. วันแข่ง</h3>
+    <table>
+      <tr><th>เวลา</th><th>ทำอะไร</th></tr>
+      <tr><td>0:00–0:15</td><td>อ่านโจทย์ 2 รอบ ร่างโครงบนกระดาษ: มีกี่ส่วน อะไรบ้าง</td></tr>
+      <tr><td>0:15–1:00</td><td>HTML ล้วน — เนื้อหาครบทุกส่วนก่อน ยังไม่แต่ง</td></tr>
+      <tr><td>1:00–2:15</td><td>CSS — สี เมนู การ์ด จัดหน้า</td></tr>
+      <tr><td>2:15–2:45</td><td>รูป + รายละเอียด + hover + เก็บตก</td></tr>
+      <tr><td>2:45–3:00</td><td><b>ตรวจ!</b> ไล่เช็คลิสต์ข้างบน ห้ามเพิ่มของใหม่ช่วงนี้</td></tr>
+    </table>
+    <p class="dim">กฎเหล็ก: <b>เนื้อหาครบก่อนสวย</b> — เว็บเรียบแต่ครบ ชนะเว็บสวยแต่ทำไม่เสร็จ</p>
+  </div>
+</section>
+
+<!-- ================= PLAYGROUND ================= -->
+<section id="play" class="page">
+  <h2>🧪 สนามลอง — พิมพ์ซ้าย เห็นผลขวา</h2>
+  <p class="dim">แก้โค้ดแล้วกด "รันโค้ด" หรือ <kbd>Ctrl</kbd>+<kbd>Enter</kbd></p>
+  <div class="btnrow" style="justify-content:flex-start">
+    <button class="btn2 go" onclick="run()">▶ รันโค้ด</button>
+    <button class="btn2" onclick="resetPlay()">↺ ล้าง</button>
+  </div>
+  <div class="playwrap">
+    <textarea id="editor" spellcheck="false"></textarea>
+    <iframe id="frame" title="ผลลัพธ์"></iframe>
+  </div>
+</section>
+
+<!-- ================= CHEATSHEET ================= -->
+<section id="cheat" class="page">
+  <h2>📄 สูตรต้องจำก่อนเข้าสนาม</h2>
+
+  <div class="card">
+    <h3>คีย์ลัด VS Code</h3>
+    <ul>
+      <li><code>!</code> + <kbd>Tab</kbd> — โครง HTML ทั้งหมด</li>
+      <li>พิมพ์ชื่อ tag เช่น <code>table</code> + <kbd>Tab</kbd> — tag ขึ้นเอง (Emmet)</li>
+      <li><code>ul&gt;li*5</code> + <kbd>Tab</kbd> — ลิสต์ 5 ข้อทันที</li>
+      <li><kbd>Ctrl</kbd>+<kbd>S</kbd> — เซฟ (เซฟบ่อย ๆ ทุก 2 นาที!)</li>
+      <li><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> — จัด indent ให้อัตโนมัติ</li>
+      <li><kbd>Ctrl</kbd>+<kbd>/</kbd> — ใส่ comment</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>เว็บเปิดได้วันแข่ง (ถ้าให้ใช้เน็ต)</h3>
+    <ul>
+      <li><b>fonts.google.com</b> — font ไทยสวย ๆ (Kanit, Prompt, Sarabun)</li>
+      <li><b>coolors.co</b> — สุ่มชุดสีเข้ากัน</li>
+      <li><b>unsplash.com / pexels.com</b> — รูปฟรี</li>
+      <li><b>w3schools.com</b> — ลืม tag ไหนเปิดดู</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>ใส่ font ไทย Google Fonts (จำ 2 บรรทัด)</h3>
+<pre><code><span class="cmt">&lt;!-- ใน head --&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">href=</span><span class="val">"https://fonts.googleapis.com/css2?family=Kanit&display=swap"</span> <span class="attr">rel=</span><span class="val">"stylesheet"</span><span class="tag">&gt;</span>
+
+<span class="cmt">/* ใน style */</span>
+body { font-family: 'Kanit', sans-serif; }</code></pre>
+  </div>
+
+  <div class="card">
+    <h3>ชุดสีปลอดภัย เลือกชุดเดียวใช้ทั้งเว็บ</h3>
+    <p>
+      <span class="pill">ม่วง #7c3aed + ชมพู #ec4899 + พื้น #faf5ff</span>
+      <span class="pill">ฟ้า #2563eb + เขียวมิ้นท์ #34d399 + พื้น #eff6ff</span>
+      <span class="pill">ส้ม #ea580c + เหลือง #fbbf24 + พื้น #fffbeb</span>
+    </p>
+    <p class="dim">สูตร: สีหลัก 1 + สีรอง 1 + พื้นอ่อน 1. ห้ามเกิน 3</p>
+  </div>
+
+  <div class="card">
+    <h3>ท่องก่อนนอน</h3>
+    <ol>
+      <li>เนื้อหาครบก่อนสวย</li>
+      <li>เซฟทุก 2 นาที เปิด browser เช็คทุก 10 นาที</li>
+      <li>ลืม tag = เปิด w3schools ไม่ต้องนั่งนึก</li>
+      <li>15 นาทีสุดท้าย ตรวจอย่างเดียว ห้ามเพิ่มของใหม่</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>ค่ายซ้อมเว็บ 3 วัน — สู้ ๆ วันแข่ง! 💪</footer>
+
+<script>
+// ---------- nav ----------
+function go(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ---------- checklist + progress (localStorage) ----------
+function tick(row, id){
+  const cb = document.getElementById(id);
+  if (event.target !== cb) cb.checked = !cb.checked;
+  row.classList.toggle('done', cb.checked);
+  localStorage.setItem('chk_'+id, cb.checked ? '1' : '0');
+  updateBars();
+}
+function updateBars(){
+  [['d1',['d1a','d1b','d1c','d1d']],['d2',['d2a','d2b','d2c','d2d']]].forEach(([day,ids])=>{
+    const done = ids.filter(i=>localStorage.getItem('chk_'+i)==='1').length;
+    const bar = document.getElementById('bar-'+day);
+    if (bar) bar.style.width = (done/ids.length*100)+'%';
+  });
+}
+document.querySelectorAll('.chk input').forEach(cb=>{
+  if (localStorage.getItem('chk_'+cb.id)==='1'){
+    cb.checked = true;
+    cb.closest('.chk').classList.add('done');
+  }
+});
+updateBars();
+
+// ---------- playground ----------
+const samples = {
+text:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>ลองข้อความ</title></head>
+<body>
+  <h1>หัวข้อใหญ่</h1>
+  <h2>หัวข้อรอง</h2>
+  <p>ย่อหน้าธรรมดา มี <b>ตัวหนา</b> และ <i>ตัวเอียง</i></p>
+  <hr>
+  <p>ลองแก้ข้อความดูสิ</p>
+</body>
+</html>`,
+img:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>รูปกับลิงก์</title></head>
+<body>
+  <h1>รูปและลิงก์</h1>
+  <img src="https://placehold.co/300x180/7c3aed/white?text=รูปตัวอย่าง" alt="รูปตัวอย่าง">
+  <p><a href="https://www.google.com">คลิกไปกูเกิล</a></p>
+</body>
+</html>`,
+list:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>ลิสต์</title></head>
+<body>
+  <h2>ของโปรด</h2>
+  <ul><li>เกม</li><li>ฟุตบอล</li><li>เขียนเว็บ</li></ul>
+  <h2>ขั้นตอนทำมาม่า</h2>
+  <ol><li>ต้มน้ำ</li><li>ใส่เส้น</li><li>ใส่เครื่องปรุง</li></ol>
+</body>
+</html>`,
+table:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>ตาราง</title>
+<style>
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #333; padding: 8px 14px; }
+  th { background: #ede9fe; }
+</style>
+</head>
+<body>
+  <h2>เมนูร้านป้า</h2>
+  <table>
+    <tr><th>เมนู</th><th>ราคา</th></tr>
+    <tr><td>ข้าวผัด</td><td>50</td></tr>
+    <tr><td>กะเพราไก่</td><td>55</td></tr>
+  </table>
+</body>
+</html>`,
+css1:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>CSS แรก</title>
+<style>
+  body { background-color: #faf5ff; font-family: Tahoma; }
+  h1   { color: #7c3aed; text-align: center; }
+  p    { color: #444; }
+</style>
+</head>
+<body>
+  <h1>เว็บมีสีแล้ว!</h1>
+  <p>ลองเปลี่ยนสีใน style ดู</p>
+</body>
+</html>`,
+css2:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>กล่อง</title>
+<style>
+  .box {
+    background: white;
+    border: 2px solid #7c3aed;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+  }
+  body { background: #f3e8ff; font-family: Tahoma; }
+</style>
+</head>
+<body>
+  <div class="box"><h3>กล่องที่ 1</h3><p>ลองแก้ padding / margin / border ดู</p></div>
+</body>
+</html>`,
+flex:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>Flexbox</title>
+<style>
+  .row { display: flex; gap: 16px; justify-content: center; }
+  .item { background: #7c3aed; color: white; padding: 30px; border-radius: 10px; }
+  body { font-family: Tahoma; }
+</style>
+</head>
+<body>
+  <h2 style="text-align:center">สามกล่องเรียงแถว</h2>
+  <div class="row">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+</body>
+</html>`,
+nav:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>เมนู</title>
+<style>
+  body { margin: 0; font-family: Tahoma; }
+  nav { display: flex; gap: 20px; justify-content: center;
+        background: #4c1d95; padding: 14px; }
+  nav a { color: white; text-decoration: none; font-weight: bold; }
+  nav a:hover { color: #fbbf24; }
+</style>
+</head>
+<body>
+  <nav>
+    <a href="#">หน้าแรก</a>
+    <a href="#">เกี่ยวกับ</a>
+    <a href="#">ติดต่อ</a>
+  </nav>
+  <p style="text-align:center">เอาเมาส์ชี้เมนูดู</p>
+</body>
+</html>`,
+card:`<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><title>การ์ด</title>
+<style>
+  body { background: #f3e8ff; font-family: Tahoma; }
+  .row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .card { background: white; border-radius: 12px; padding: 20px;
+          width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+  .card img { width: 100%; border-radius: 8px; }
+  .card h3 { color: #7c3aed; }
+</style>
+</head>
+<body>
+  <h2 style="text-align:center">สินค้าแนะนำ</h2>
+  <div class="row">
+    <div class="card"><img src="https://placehold.co/200x120/7c3aed/white?text=A" alt="สินค้า A"><h3>สินค้า A</h3><p>ราคา 100 บาท</p></div>
+    <div class="card"><img src="https://placehold.co/200x120/ec4899/white?text=B" alt="สินค้า B"><h3>สินค้า B</h3><p>ราคา 150 บาท</p></div>
+    <div class="card"><img src="https://placehold.co/200x120/34d399/white?text=C" alt="สินค้า C"><h3>สินค้า C</h3><p>ราคา 200 บาท</p></div>
+  </div>
+</body>
+</html>`
+};
+const defaultCode = samples.text;
+const ed = document.getElementById('editor');
+function run(){ document.getElementById('frame').srcdoc = ed.value; }
+function resetPlay(){ ed.value = defaultCode; run(); }
+function tryCode(key){
+  ed.value = samples[key];
+  go('play', document.querySelectorAll('nav button')[3]);
+  run();
+}
+ed.value = defaultCode;
+ed.addEventListener('keydown', e=>{
+  if (e.ctrlKey && e.key==='Enter') run();
+  if (e.key==='Tab'){ e.preventDefault();
+    const s=ed.selectionStart; ed.setRangeText('  ',s,ed.selectionEnd,'end'); }
+});
+run();
+
+// ---------- day 3: topics + timer ----------
+const topics = [
+  'แหล่งท่องเที่ยวในจังหวัดของเรา',
+  'อาหารไทย 4 ภาค',
+  'การอนุรักษ์สิ่งแวดล้อมในโรงเรียน',
+  'ประเพณีลอยกระทง',
+  'กีฬาที่ฉันชื่นชอบ',
+  'สมุนไพรไทยใกล้ตัว',
+  'การประหยัดพลังงาน',
+  'อาชีพในฝันของฉัน',
+  'ผลไม้ไทยตามฤดูกาล',
+  'เศรษฐกิจพอเพียง',
+  'ภัยจากโลกออนไลน์และการป้องกัน',
+  'สัตว์ป่าสงวนของไทย'
+];
+function randTopic(){
+  const t = topics[Math.floor(Math.random()*topics.length)];
+  document.getElementById('topicBox').textContent = '📌 หัวข้อ: ' + t;
+}
+let remain = 3*60*60, timer = null;
+function draw(){
+  const h = Math.floor(remain/3600), m = Math.floor(remain%3600/60), s = remain%60;
+  const el = document.getElementById('clock');
+  el.textContent = h + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  el.style.color = remain <= 15*60 ? '#ef4444' : '';
+}
+function startT(){
+  if (timer) return;
+  timer = setInterval(()=>{
+    if (remain > 0){ remain--; draw(); }
+    else { clearInterval(timer); timer=null; alert('หมดเวลา! วางมือ ✋'); }
+  },1000);
+}
+function pauseT(){ clearInterval(timer); timer=null; }
+function resetT(){ pauseT(); remain = 3*60*60; draw(); }
+draw();
+</script>
+</body>
+</html>
