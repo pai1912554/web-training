@@ -226,6 +226,34 @@
   .rec p{font-size:.78rem;color:var(--dim);margin:0 0 8px}
   .rec button{width:100%;background:var(--card2);border:1px solid var(--line);color:#c4b5fd;padding:6px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.8rem}
   .rec button:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
+  /* ---- new drill modes ---- */
+  .subtabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+  .subtabs button{background:var(--card2);border:1px solid var(--line);color:var(--dim);padding:9px 16px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:.88rem}
+  .subtabs button.on{background:linear-gradient(135deg,#f43f5e,#ec4899);color:#fff;border-color:#f43f5e;box-shadow:0 0 14px #f43f5e55}
+  .sub{display:none}.sub.show{display:block}
+  .fcard{background:linear-gradient(160deg,#1e1b4b,#312e81);border:1px solid #4c1d95;border-radius:16px;padding:26px 20px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px}
+  .fcard .qq{font-size:1.12rem;color:#fff;line-height:1.6}
+  .fcard .aa{font-family:Consolas,monospace;color:#86efac;background:#0a0a18;border-radius:10px;padding:12px 16px;white-space:pre;overflow-x:auto;max-width:100%;text-align:left}
+  .fcard .cat{font-size:.72rem;color:#a5b4fc;background:#0006;padding:2px 12px;border-radius:10px}
+  .boxrow{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+  .boxpill{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 11px;font-size:.75rem;color:var(--dim);font-family:Consolas,monospace}
+  .boxpill b{color:#fbbf24}
+  .predopts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+  @media(max-width:720px){.predopts{grid-template-columns:1fr}}
+  .popt{border:2px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;background:#fff;transition:.2s;position:relative}
+  .popt:hover{border-color:var(--acc);transform:translateY(-3px)}
+  .popt.right{border-color:var(--ok);box-shadow:0 0 16px #34d39955}
+  .popt.wrong{border-color:#ef4444;opacity:.6}
+  .popt iframe{width:100%;height:150px;border:0;display:block;pointer-events:none}
+  .popt .tagno{position:absolute;top:6px;left:6px;background:#000a;color:#fff;border-radius:6px;padding:1px 8px;font-size:.75rem;font-family:Consolas,monospace}
+  .rcbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:8px 0;font-family:Consolas,monospace;font-size:.85rem;color:var(--dim)}
+  .rcbar b{color:#fbbf24}
+  .difline{font-family:Consolas,monospace;font-size:.8rem;padding:3px 10px;border-radius:6px;white-space:pre-wrap;word-break:break-all;margin:2px 0}
+  .difok{background:#0b3b2a;color:#6ee7b7}
+  .difbad{background:#3f1220;color:#fda4af}
+  .difbad i{color:#fca5a5;font-style:normal;opacity:.75}
+  .drillTa{width:100%;height:180px;background:#0a0a18;color:#e0e7ff;border:1px solid var(--line);border-radius:10px;padding:12px;font:.85rem/1.5 Consolas,monospace;resize:vertical;tab-size:2}
+  .bigtimer{font:bold 2.2rem Consolas,monospace;color:#fbbf24;text-align:center;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -240,6 +268,7 @@
   <button onclick="go('d2',this)">วัน 2: CSS</button>
   <button onclick="go('d3',this)">วัน 3: จำลองแข่ง</button>
   <button onclick="go('train',this)">💪 ภารกิจฝึก</button>
+  <button onclick="go('drill',this)">🎯 โหมดฝึกใหม่</button>
   <button onclick="go('layout',this)">🏛 ห้องแล็บ Layout</button>
   <button onclick="go('blocks',this)">🧩 บล็อกโค้ด</button>
   <button onclick="go('real',this)">🏁 คู่มือแข่งจริง</button>
@@ -597,6 +626,94 @@ nav a:hover { color: #fbbf24; }</code></pre>
       <figure><img src="https://picsum.photos/id/1060/220/148" alt="กาแฟ"><figcaption>กาแฟ</figcaption><code>https://picsum.photos/id/1060/300/200</code></figure>
       <figure><img src="https://picsum.photos/id/1040/220/148" alt="ปราสาท"><figcaption>ปราสาท</figcaption><code>https://picsum.photos/id/1040/300/200</code></figure>
     </div>
+  </div>
+</section>
+
+<!-- ================= NEW DRILL MODES ================= -->
+<section id="drill" class="page">
+  <h2>🎯 โหมดฝึกใหม่ — วิธีที่งานวิจัยบอกว่าได้ผลจริง</h2>
+  <div class="how">งานวิจัยรวม 242 การศึกษา สรุปว่า 2 วิธีที่ได้ผลสูงสุดคือ <b>Practice Testing</b> (ทดสอบตัวเองแทนการอ่านซ้ำ) และ <b>Distributed Practice</b> (ซ้อมกระจายวัน ไม่ใช่อัดรวดเดียว) — 4 โหมดข้างล่างสร้างตามหลักนี้ทั้งหมด บวก <b>Interleaving</b> (สลับหัวข้อมั่ว ๆ) ที่ช่วยให้จำได้ยาว</div>
+
+  <div class="subtabs">
+    <button class="on" onclick="subGo('sSrs',this)">🃏 บัตรคำความจำ</button>
+    <button onclick="subGo('sPred',this)">🔮 ทายผลลัพธ์</button>
+    <button onclick="subGo('sRec',this)">🧠 ปิดตาพิมพ์</button>
+    <button onclick="subGo('sSpd',this)">⚡ ดริลล์จับเวลา</button>
+  </div>
+
+  <!-- flashcards -->
+  <div class="sub show" id="sSrs">
+    <div class="card">
+      <h3>🃏 บัตรคำความจำ (ระบบกล่อง Leitner)</h3>
+      <p class="dim">อ่านคำถาม → <b>นึกคำตอบในหัวก่อน</b> (สำคัญที่สุด อย่าเพิ่งเปิด) → กดเฉลย → บอกตามจริงว่าจำได้ไหม. ใบที่จำไม่ได้จะกลับมาถี่ ๆ ใบที่จำได้จะทิ้งช่วงนานขึ้น 1→2→4→7 วัน</p>
+      <div class="boxrow" id="srsBoxes"></div>
+      <div class="fcard" id="srsCard"></div>
+      <div class="btnrow" id="srsBtns"></div>
+      <p class="dim" style="text-align:center" id="srsMsg"></p>
+    </div>
+  </div>
+
+  <!-- predict -->
+  <div class="sub" id="sPred">
+    <div class="card">
+      <h3>🔮 ทายผลลัพธ์ — อ่านโค้ดแล้วเดาหน้าเว็บ</h3>
+      <p class="dim">โค้ดนี้จะออกมาหน้าตาแบบไหน? เลือก 1 ใน 3. โหมดนี้บังคับให้สมองจำลองการทำงานของ browser — ทักษะเดียวกับที่ใช้ตอนเขียน Notepad แล้วยังไม่ได้กด F5</p>
+      <div class="rcbar"><span>ข้อ <b id="pdNo">1</b>/<b id="pdTot">8</b></span><span>ถูก <b id="pdScore">0</b></span></div>
+      <div class="labcode" id="pdCode"></div>
+      <div class="predopts" id="pdOpts"></div>
+      <div class="how" id="pdWhy" style="display:none"></div>
+      <div class="btnrow" style="justify-content:flex-start">
+        <button class="btn2 go" onclick="pdNext()">ข้อถัดไป ▶</button>
+        <button class="btn2" onclick="pdStart()">↺ เริ่มใหม่</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- blind recall -->
+  <div class="sub" id="sRec">
+    <div class="card">
+      <h3>🧠 ปิดตาพิมพ์ — ตรงกับสนามจริงที่สุด</h3>
+      <p class="dim">ดูโค้ด → โค้ดหายไป → พิมพ์จากความจำ → ระบบเทียบให้ทีละบรรทัด. <b>ไม่มีตัวช่วยพิมพ์ในโหมดนี้โดยตั้งใจ</b> เพราะวันแข่งใช้ Notepad เปล่า ๆ</p>
+      <div class="ctrl"><span class="lbl2">เลือกชุด</span><span id="rcPick"></span></div>
+      <div class="rcbar"><span>เวลาดู <b id="rcSec">—</b></span><span>สถิติดีสุด <b id="rcBest">—</b></span></div>
+      <div class="labcode" id="rcShow">กดปุ่มข้างล่างเพื่อเริ่ม</div>
+      <div class="btnrow" style="justify-content:flex-start">
+        <button class="btn2 go" id="rcBtn" onclick="rcStart()">👀 เปิดดู 30 วินาที</button>
+        <button class="btn2" onclick="rcCheck()">✔ ตรวจความจำ</button>
+      </div>
+      <textarea class="drillTa" id="rcTa" spellcheck="false" placeholder="พิมพ์จากความจำตรงนี้..."></textarea>
+      <div id="rcDiff"></div>
+    </div>
+  </div>
+
+  <!-- speed drill -->
+  <div class="sub" id="sSpd">
+    <div class="card">
+      <h3>⚡ ดริลล์จับเวลา — สุ่มโจทย์สลับหัวข้อ (Interleaving)</h3>
+      <p class="dim">โจทย์สั้น ๆ สุ่มมาทีละข้อ จับเวลาตั้งแต่เริ่มพิมพ์. เป้าคือทำให้เร็วขึ้นเรื่อย ๆ จนอัตโนมัติ — วันแข่ง 3 ชม. ความเร็วคือแต้มต่อ</p>
+      <div class="bigtimer" id="spTime">0.0 วิ</div>
+      <div class="topic" id="spTask">กด "สุ่มโจทย์" เพื่อเริ่ม</div>
+      <div class="rcbar"><span>สถิติดีสุดข้อนี้: <b id="spBest">—</b></span><span>ผ่านแล้ววันนี้: <b id="spDone">0</b> ข้อ</span></div>
+      <textarea class="drillTa" id="spTa" spellcheck="false" placeholder="พิมพ์คำตอบตรงนี้ (พิมพ์เฉพาะส่วนที่โจทย์ขอ ไม่ต้องเขียนทั้งหน้า)"></textarea>
+      <div class="btnrow" style="justify-content:flex-start">
+        <button class="btn2 go" onclick="spCheck()">✔ ส่งคำตอบ</button>
+        <button class="btn2" onclick="spNew()">🎲 สุ่มโจทย์ใหม่</button>
+      </div>
+      <div class="checks" id="spResult"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📅 ตารางซ้อมแบบกระจายวัน (Distributed Practice)</h3>
+    <p>อย่าอัดรวดเดียว — สมองจำได้ดีกว่าเมื่อทิ้งช่วง. 3 วันที่เหลือควรเป็นแบบนี้:</p>
+    <table>
+      <tr><th>ช่วง</th><th>ทำอะไร (30-45 นาที/ช่วง แล้วพัก)</th></tr>
+      <tr><td>เช้า</td><td>🃏 บัตรคำที่ถึงกำหนด + 💪 ภารกิจฝึกบทใหม่</td></tr>
+      <tr><td>บ่าย</td><td>🏛 ห้องแล็บ Layout + 🔮 ทายผลลัพธ์ 8 ข้อ</td></tr>
+      <tr><td>เย็น</td><td>⚡ ดริลล์จับเวลา 10 ข้อ + 🧠 ปิดตาพิมพ์ 1 ชุด</td></tr>
+      <tr><td>ก่อนนอน</td><td>🃏 บัตรคำรอบสอง (ทบทวนก่อนนอน = สมองเก็บตอนหลับ)</td></tr>
+    </table>
+    <p class="dim">กฎเหล็ก: ทุกครั้งที่ "จำไม่ได้" คือข่าวดี — นั่นคือจุดที่ต้องซ้อม อย่าข้ามมันไปทำข้อที่ทำได้อยู่แล้ว</p>
   </div>
 </section>
 
@@ -2577,6 +2694,311 @@ function enhanceEditor(ta, opts){
 }
 enhanceEditor(mEd, {gutter:'mGut', status:true, onSave:()=>{ checkMission(); showToast('เซฟให้อัตโนมัติอยู่แล้ว ✓ ตรวจคำตอบให้เลย'); }});
 enhanceEditor(ed, {onSave:()=>{ run(); showToast('รันโค้ดแล้ว ▶ (Ctrl+S)'); }});
+
+// ---------- new drill modes ----------
+function subGo(id, btn){
+  document.querySelectorAll('#drill .sub').forEach(s=>s.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  document.querySelectorAll('.subtabs button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+// --- 1 flashcards (Leitner) ---
+const FC=[
+['โครงสร้าง','พิมพ์อะไรใน VS Code เพื่อได้โครง HTML ทั้งหน้า?','! แล้วกด Tab'],
+['โครงสร้าง','บรรทัดไหนกันภาษาไทยเพี้ยน?','<meta charset="UTF-8">'],
+['โครงสร้าง','เชื่อมไฟล์ CSS ภายนอกยังไง?','<link rel="stylesheet" href="style.css">'],
+['โครงสร้าง','tag ไหนไม่ต้องมีตัวปิด?','<br> <hr> <img> <input> <meta> <link>'],
+['โครงสร้าง','4 กล่องหลักที่ทำให้ layout ได้คะแนน?','<header> <nav> <main> <footer>'],
+['รูป/ลิงก์','ใส่รูปพร้อมคำอธิบายยังไง?','<img src="images/pic.jpg" alt="คำอธิบาย">'],
+['รูป/ลิงก์','ลิงก์ไปหน้าอื่นในเว็บเรา?','<a href="page2.html">ข้อความ</a>'],
+['ตาราง','ตาราง 3 ชั้นเรียงยังไง?','<table> → <tr> แถว → <th> หัว / <td> ช่อง'],
+['CSS','สั่งให้ลูกเรียงแนวนอน?','display: flex;'],
+['CSS','จัดลูกกลางตามแนวแถว?','justify-content: center;'],
+['CSS','จัดลูกกลางแนวขวางแถว?','align-items: center;'],
+['CSS','จัดกลางทั้งแนวตั้งแนวนอนใน flex?','display: flex;\njustify-content: center;\nalign-items: center;'],
+['CSS','ให้กล่องอยู่กลางจอโดยไม่ใช้ flex?','max-width: 1120px;\nmargin: 0 auto;'],
+['CSS','ให้ flex ตัดขึ้นบรรทัดใหม่เมื่อที่ไม่พอ?','flex-wrap: wrap;'],
+['CSS','เรียงลูก flex แนวตั้ง?','flex-direction: column;'],
+['CSS','ช่องว่างระหว่างลูก flex/grid?','gap: 16px;'],
+['CSS','เอาขีดเส้นใต้ลิงก์ออก?','text-decoration: none;'],
+['CSS','เอาจุดหน้าลิสต์ออก?','list-style: none;'],
+['CSS','ทำรูปเป็นวงกลม?','border-radius: 50%;'],
+['CSS','กันกล่องบวมเวลาใส่ padding?','box-sizing: border-box;'],
+['CSS','reset ที่ต้องมีทุกโปรเจกต์?','* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}'],
+['CSS','เงานุ่ม ๆ ดูแพง?','box-shadow: 0 8px 24px rgba(0,0,0,.12);'],
+['CSS','สีไล่เฉด 2 สี?','background: linear-gradient(135deg, #7c3aed, #ec4899);'],
+['CSS','ทำให้เปลี่ยนค่านุ่ม ๆ ไม่กระตุก?','transition: 0.3s;'],
+['CSS','เมาส์ชี้แล้วลอยขึ้น?','.card:hover {\n    transform: translateY(-6px);\n}'],
+['CSS','ประกาศตัวแปรสี แล้วเรียกใช้?','ประกาศ: :root { --main: #7c3aed; }\nเรียก: color: var(--main);'],
+['CSS','grid การ์ดยืดเองไม่ต้องเขียน media query?','grid-template-columns:\n    repeat(auto-fit, minmax(220px, 1fr));'],
+['CSS','เขียน media query จอเล็กยังไง?','@media (max-width: 700px) {\n    .cards { grid-template-columns: 1fr; }\n}'],
+['CSS','แถบเมนูติดหนึบตอนเลื่อน?','position: sticky;\ntop: 0;'],
+['CSS','margin กับ padding ต่างกันยังไง?','padding = เบาะข้างในกล่อง (พื้นหลังยืดตาม)\nmargin = ถอยห่างเพื่อนบ้าน (พื้นหลังไม่ยืด)'],
+['JS','ปุ่มกดแล้วเด้งข้อความ?','<button onclick="alert(\'สวัสดี\')">กด</button>'],
+['JS','เปลี่ยนข้อความในกล่อง id="msg"?','document.getElementById("msg").textContent = "ใหม่";'],
+['JS','สลับโหมดกลางคืน?','document.body.classList.toggle("dark");'],
+['กติกา','แข่งใช้โปรแกรมอะไร / กี่ชั่วโมง?','Notepad เท่านั้น · 3 ชั่วโมง · ทีม 2 คน'],
+['กติกา','ต้องทำกี่หน้า และต้องทำอะไรตอนจบ?','ไม่น้อยกว่า 3 หน้า + FTP ขึ้น server'],
+['กติกา','คะแนนก้อนใหญ่สุดคืออะไร?','ความถูกต้องของ Code และเนื้อหา 25 คะแนน'],
+['กติกา','15 นาทีสุดท้ายต้องทำอะไร?','ตรวจอย่างเดียว — ห้ามเพิ่มของใหม่']
+];
+const FC_IV=[0,1,2,4,7];
+function fcState(i){
+  try{ const s=JSON.parse(store.getItem('fc_'+i)); if(s&&s.box) return s; }catch(e){}
+  return {box:1, due:0};
+}
+function fcDue(){
+  const now=Date.now();
+  return FC.map((c,i)=>i).filter(i=>fcState(i).due<=now);
+}
+let fcCur=-1, fcFlip=false;
+function srsDraw(){
+  const counts=[0,0,0,0,0];
+  FC.forEach((c,i)=>counts[fcState(i).box-1]++);
+  document.getElementById('srsBoxes').innerHTML =
+    counts.map((n,i)=>'<span class="boxpill">กล่อง '+(i+1)+' <b>'+n+'</b></span>').join('')+
+    '<span class="boxpill" style="border-color:#f43f5e">ถึงกำหนดวันนี้ <b>'+fcDue().length+'</b></span>';
+  const card=document.getElementById('srsCard'), btns=document.getElementById('srsBtns');
+  const due=fcDue();
+  if(!due.length){
+    card.innerHTML='<div class="qq">🎉 ทบทวนครบทุกใบแล้ว!</div><div class="dim">กลับมาพรุ่งนี้ ใบที่ถึงกำหนดจะโผล่เอง — นี่คือหัวใจของ Distributed Practice</div>';
+    btns.innerHTML='<button class="btn2" onclick="fcResetAll()">↺ ล้างความคืบหน้า เริ่มใหม่</button>';
+    document.getElementById('srsMsg').textContent='';
+    return;
+  }
+  if(fcCur<0 || due.indexOf(fcCur)<0){ fcCur=due[Math.floor(Math.random()*due.length)]; fcFlip=false; }
+  const c=FC[fcCur];
+  card.innerHTML='<span class="cat">'+c[0]+' · กล่อง '+fcState(fcCur).box+'</span><div class="qq">'+c[1]+'</div>'+
+    (fcFlip?'<div class="aa">'+c[2].replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</div>':'<div class="dim">…นึกคำตอบในหัวก่อน แล้วค่อยกดเฉลย</div>');
+  btns.innerHTML = fcFlip
+    ? '<button class="btn2 go" onclick="fcRate(true)">✓ จำได้</button><button class="btn2 stop" onclick="fcRate(false)">✗ ยังไม่ได้</button>'
+    : '<button class="btn2" onclick="fcFlipCard()">🔎 เฉลย</button>';
+  document.getElementById('srsMsg').textContent='เหลือรอบนี้ '+due.length+' ใบ';
+}
+function fcFlipCard(){ fcFlip=true; srsDraw(); }
+function fcRate(ok){
+  const s=fcState(fcCur);
+  const box = ok ? Math.min(5, s.box+1) : 1;
+  store.setItem('fc_'+fcCur, JSON.stringify({box, due: Date.now() + FC_IV[box-1]*86400000}));
+  if(ok && box===5) showToast('ใบนี้ขึ้นกล่อง 5 แล้ว — เจอกันอีกที 7 วัน 🎉');
+  fcCur=-1; fcFlip=false; srsDraw();
+}
+function fcResetAll(){ if(confirm('ล้างความคืบหน้าบัตรคำทั้งหมด?')){ FC.forEach((c,i)=>store.removeItem('fc_'+i)); fcCur=-1; srsDraw(); } }
+srsDraw();
+// --- 2 predict the output ---
+function pdDoc(css, body){
+  return '<!DOCTYPE html>\n<html><head><meta charset="UTF-8"><style>\nbody { margin:0; font-family: Tahoma; font-size: 13px; }\n.bx { background:#7c3aed; color:#fff; padding:10px 14px; border-radius:6px; }\n'+css+'\n<\/style></head><body>\n'+body+'\n</body></html>';
+}
+const PD=[
+{q:'.row { display: flex; justify-content: space-between; }',
+ body:'<div class="row"><div class="bx">1</div><div class="bx">2</div><div class="bx">3</div></div>',
+ css:'.row { display:flex; justify-content:space-between; }',
+ alt:['.row { display:flex; justify-content:center; gap:8px; }','.row { display:flex; flex-direction:column; gap:6px; }'],
+ why:'space-between = ตัวแรกชิดซ้ายสุด ตัวสุดท้ายชิดขวาสุด ที่ว่างแบ่งอยู่ตรงกลาง'},
+{q:'.box { width: 200px; margin: 0 auto; }',
+ body:'<div class="bx box">กล่องนี้อยู่ไหน?</div>',
+ css:'.box { width:200px; margin: 0 auto; }',
+ alt:['.box { width:200px; text-align:center; }','.box { width:200px; margin-left:0; }'],
+ why:'margin: 0 auto แบ่งที่ว่างซ้าย-ขวาเท่ากัน กล่องเลยอยู่กลาง (ต้องมี width ด้วย). text-align:center จัดแค่ "ข้อความข้างใน" ไม่ได้ขยับกล่อง'},
+{q:'span { display: inline; width: 200px; height: 80px; }',
+ body:'<span class="bx">ฉันตั้ง width 200 height 80</span>',
+ css:'span { display:inline; width:200px; height:80px; }',
+ alt:['span { display:block; width:200px; height:80px; }','span { display:inline-block; width:200px; height:80px; }'],
+ why:'inline ไม่รับ width/height — กล่องจะพอดีข้อความเท่านั้น ต้องเปลี่ยนเป็น inline-block หรือ block ถึงจะกำหนดขนาดได้'},
+{q:'.card { width: 200px; padding: 20px; box-sizing: border-box; }\n(เทียบกับกรอบประ 200px)',
+ body:'<div style="width:200px;border:2px dashed #f43f5e;padding:2px">กรอบ 200px</div><div class="bx card">กล่องฉัน</div>',
+ css:'.card { width:200px; padding:20px; box-sizing:border-box; }',
+ alt:['.card { width:200px; padding:20px; box-sizing:content-box; }','.card { width:100%; padding:20px; }'],
+ why:'border-box นับ padding รวมอยู่ใน 200px แล้ว กล่องจึงกว้าง 200px เท่ากรอบพอดี ไม่บวมออกไป 240px'},
+{q:'.parent { position: relative; }\n.child { position: absolute; top: 10px; right: 10px; }',
+ body:'<div class="parent" style="height:110px;background:#ede9fe;position:relative"><div class="bx child" style="position:absolute;top:10px;right:10px">ฉัน</div></div>',
+ css:'.parent { position:relative; height:110px; background:#ede9fe; }',
+ alt:['.parent { height:110px; background:#ede9fe; }\n.child { position:static; }','.parent { height:110px; background:#ede9fe; display:flex; justify-content:center; }'],
+ why:'absolute เกาะกล่องแม่ที่เป็น relative แล้วลอยไปมุมขวาบนตามค่า top/right — หลุดออกจากการไหลปกติ'},
+{q:'.grid { display: grid; grid-template-columns: 2fr 1fr; }',
+ body:'<div class="grid"><div class="bx">2fr</div><div class="bx" style="background:#0891b2">1fr</div></div>',
+ css:'.grid { display:grid; grid-template-columns: 2fr 1fr; gap:8px; }',
+ alt:['.grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; }','.grid { display:flex; flex-direction:column; gap:8px; }'],
+ why:'fr = แบ่งส่วนที่ว่าง 2fr กว้างเป็น 2 เท่าของ 1fr เสมอไม่ว่าจอกว้างแค่ไหน'},
+{q:'.frame { overflow: hidden; border-radius: 20px; }\n.frame img { width: 100%; }',
+ body:'<div class="frame"><img src="https://picsum.photos/id/1015/300/120" alt="รูป"></div>',
+ css:'.frame { overflow:hidden; border-radius:20px; width:220px; }\n.frame img { width:100%; display:block; }',
+ alt:['.frame { border-radius:20px; width:220px; }\n.frame img { width:100%; display:block; }','.frame { width:220px; }\n.frame img { width:60%; display:block; }'],
+ why:'มุมโค้งของกล่องแม่จะตัดรูปได้ก็ต่อเมื่อมี overflow: hidden ไม่งั้นรูปจะทับมุมออกมาเป็นเหลี่ยมเหมือนเดิม'},
+{q:'.menu li { list-style: none; }\n.menu { display: flex; gap: 20px; }',
+ body:'<ul class="menu"><li>Home</li><li>About</li><li>Contact</li></ul>',
+ css:'.menu { display:flex; gap:20px; padding:0; }\n.menu li { list-style:none; }',
+ alt:['.menu { padding-left:20px; }\n.menu li { list-style:disc; }','.menu { display:flex; flex-direction:column; gap:6px; padding:0; }\n.menu li { list-style:none; }'],
+ why:'list-style: none ลบจุดหน้าข้อ + display:flex ทำให้เมนูเรียงแนวนอน = สูตร navbar มาตรฐาน'}
+];
+let pdI=0, pdScore=0, pdOrder=[], pdLocked=false;
+function pdRender(){
+  const it=PD[pdI];
+  document.getElementById('pdNo').textContent=pdI+1;
+  document.getElementById('pdTot').textContent=PD.length;
+  document.getElementById('pdScore').textContent=pdScore;
+  document.getElementById('pdCode').innerHTML=hl(it.q);
+  document.getElementById('pdWhy').style.display='none';
+  const docs=[it.css, it.alt[0], it.alt[1]].map(c=>pdDoc(c, it.body));
+  pdOrder=[0,1,2].sort(()=>Math.random()-.5);
+  pdLocked=false;
+  const host=document.getElementById('pdOpts'); host.innerHTML='';
+  pdOrder.forEach((src,pos)=>{
+    const d=document.createElement('div');
+    d.className='popt';
+    d.innerHTML='<span class="tagno">'+(pos+1)+'</span><iframe></iframe>';
+    d.querySelector('iframe').srcdoc=docs[src];
+    d.onclick=()=>pdPick(pos, src===0);
+    host.appendChild(d);
+  });
+}
+function pdPick(pos, correct){
+  if(pdLocked) return; pdLocked=true;
+  const cards=[...document.querySelectorAll('#pdOpts .popt')];
+  cards.forEach((c,i)=>c.classList.add(pdOrder[i]===0?'right':'wrong'));
+  if(correct){ pdScore++; showToast('ถูกต้อง! 🎯'); }
+  else showToast('ยังไม่ใช่ — ดูกรอบเขียวคืออันที่ถูก');
+  document.getElementById('pdScore').textContent=pdScore;
+  const w=document.getElementById('pdWhy');
+  w.innerHTML='<b>ทำไม:</b> '+PD[pdI].why;
+  w.style.display='block';
+}
+function pdNext(){ pdI=(pdI+1)%PD.length; if(pdI===0) showToast('ครบรอบแล้ว เริ่มรอบใหม่'); pdRender(); }
+function pdStart(){ pdI=0; pdScore=0; pdRender(); }
+pdStart();
+// --- 3 blind recall ---
+const RC=[
+{n:'โครงเว็บ', sec:25, code:'<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <link rel="stylesheet" href="style.css">\n</head>\n<body>\n\n</body>\n</html>'},
+{n:'reset + container', sec:25, code:'* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.container {\n    width: 100%;\n    max-width: 1120px;\n    margin: 0 auto;\n}'},
+{n:'navbar HTML', sec:35, code:'<nav>\n    <div class="container">\n        <div class="nav-con">\n            <div class="logo">\n                <a href="#">Bloom</a>\n            </div>\n            <ul class="menu">\n                <li><a href="#">Home</a></li>\n                <li><a href="#">About</a></li>\n            </ul>\n        </div>\n    </div>\n</nav>'},
+{n:'navbar CSS', sec:30, code:'nav {\n    padding: 1rem;\n    background-color: #333;\n}\n\n.nav-con {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.menu li {\n    margin: 0 1rem;\n    list-style: none;\n}'},
+{n:'การ์ด + hover', sec:30, code:'.card {\n    background: #fff;\n    border-radius: 12px;\n    padding: 20px;\n    box-shadow: 0 8px 24px rgba(0,0,0,.12);\n    transition: 0.3s;\n}\n\n.card:hover {\n    transform: translateY(-6px);\n}'},
+{n:'media query', sec:20, code:'@media (max-width: 700px) {\n    .cards {\n        grid-template-columns: 1fr;\n    }\n}'}
+];
+let rcI=0, rcT=null, rcLeft=0;
+function rcDraw(){
+  btnRow(document.getElementById('rcPick'), RC.map((r,i)=>[i, r.n]), rcI, v=>{ rcI=v; rcStop(); rcDraw(); });
+  document.getElementById('rcSec').textContent=RC[rcI].sec+' วิ';
+  const b=store.getItem('rcbest_'+rcI);
+  document.getElementById('rcBest').textContent = b ? b+'%' : '—';
+}
+function rcStop(){
+  clearInterval(rcT); rcT=null;
+  document.getElementById('rcShow').textContent='โค้ดถูกซ่อนแล้ว — พิมพ์จากความจำข้างล่าง';
+  document.getElementById('rcBtn').textContent='👀 เปิดดูอีกรอบ';
+}
+function rcStart(){
+  clearInterval(rcT);
+  rcLeft=RC[rcI].sec;
+  document.getElementById('rcDiff').innerHTML='';
+  const show=document.getElementById('rcShow'), btn=document.getElementById('rcBtn');
+  const paint=()=>{ show.innerHTML=hl(RC[rcI].code); btn.textContent='⏳ เหลือ '+rcLeft+' วิ'; };
+  paint();
+  rcT=setInterval(()=>{
+    rcLeft--;
+    if(rcLeft<=0){ rcStop(); document.getElementById('rcTa').focus(); }
+    else paint();
+  },1000);
+}
+function rcNorm(s){ return s.split('\n').map(l=>l.trim().replace(/\s+/g,' ')).filter(l=>l!==''); }
+function rcCheck(){
+  const want=rcNorm(RC[rcI].code), got=rcNorm(document.getElementById('rcTa').value);
+  const host=document.getElementById('rcDiff'); host.innerHTML='';
+  let ok=0;
+  want.forEach((line,i)=>{
+    const mine=got[i]||'';
+    const same=mine===line;
+    if(same) ok++;
+    const d=document.createElement('div');
+    d.className='difline '+(same?'difok':'difbad');
+    d.innerHTML = same
+      ? '✔ '+line.replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      : '✘ ควรเป็น: '+line.replace(/&/g,'&amp;').replace(/</g,'&lt;')+(mine?'<br><i>   คุณพิมพ์: '+mine.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</i>':'<br><i>   (ไม่ได้พิมพ์บรรทัดนี้)</i>');
+    host.appendChild(d);
+  });
+  const pct=Math.round(ok/want.length*100);
+  const best=+(store.getItem('rcbest_'+rcI)||0);
+  if(pct>best) store.setItem('rcbest_'+rcI, pct);
+  const sum=document.createElement('div');
+  sum.className='win'; sum.style.display='block';
+  sum.innerHTML='ความแม่นยำ '+pct+'% ('+ok+'/'+want.length+' บรรทัด)'+(pct===100?' — เพอร์เฟกต์! 🎉':pct>=80?' — เกือบแล้ว ดูบรรทัดแดงแล้วลองใหม่':' — ยังไม่พอ ดูอีกรอบแล้วพิมพ์ใหม่');
+  host.insertBefore(sum, host.firstChild);
+  rcDraw();
+}
+rcDraw();
+// --- 4 speed drill (interleaved) ---
+const SP=[
+{t:'เขียน h1 ข้อความ "ยินดีต้อนรับ" ให้เป็นสีม่วงและจัดกลาง (ใช้ style ในบรรทัดหรือ CSS ก็ได้)',
+ c:[['มี <h1> พร้อมข้อความ',(d,s)=>{const h=d.querySelector('h1');return h&&h.textContent.trim().length>0}],
+    ['กำหนดสี',(d,s)=>/color\s*:/i.test(s)],['จัดกลาง',(d,s)=>/text-align\s*:\s*center/i.test(s)]]},
+{t:'เขียนลิสต์ ul ที่มี li 3 ข้อ',
+ c:[['มี <ul>',d=>!!d.querySelector('ul')],['มี li 3 ข้อ',d=>d.querySelectorAll('ul li').length>=3]]},
+{t:'เขียนตาราง 2 คอลัมน์ มีหัวตาราง (th) และแถวข้อมูล (td) 1 แถว',
+ c:[['มี <table>',d=>!!d.querySelector('table')],['มี th 2 ช่อง',d=>d.querySelectorAll('th').length>=2],['มี td 2 ช่อง',d=>d.querySelectorAll('td').length>=2]]},
+{t:'เขียนลิงก์ไป https://www.google.com ข้อความว่า "ค้นหา"',
+ c:[['มี <a href>',d=>!!d.querySelector('a[href]')],['ชี้ไป google.com',d=>/google\.com/.test((d.querySelector('a')||{}).href||'')],['ข้อความว่า ค้นหา',d=>((d.querySelector('a')||{}).textContent||'').indexOf('ค้นหา')>=0]]},
+{t:'เขียนรูปจาก images/cat.jpg พร้อม alt และกว้าง 300',
+ c:[['มี <img src>',(d,s)=>/<img[^>]*src\s*=/i.test(s)],['src เป็น images/cat.jpg',(d,s)=>/src\s*=\s*["']images\/cat\.jpg["']/i.test(s)],['มี alt',(d,s)=>/alt\s*=\s*["'][^"']+["']/i.test(s)],['กว้าง 300',(d,s)=>/width\s*[:=]\s*["']?300/i.test(s)]]},
+{t:'เขียน CSS ให้ .row เรียงลูกแนวนอน จัดกลาง และห่างกัน 16px',
+ c:[['display: flex',(d,s)=>/display\s*:\s*flex/i.test(s)],['justify-content: center',(d,s)=>/justify-content\s*:\s*center/i.test(s)],['gap: 16px',(d,s)=>/gap\s*:\s*16px/i.test(s)]]},
+{t:'เขียน CSS reset (* ลบ margin/padding + box-sizing)',
+ c:[['เลือก * ทั้งหมด',(d,s)=>/\*\s*{/.test(s)],['margin: 0',(d,s)=>/margin\s*:\s*0/i.test(s)],['padding: 0',(d,s)=>/padding\s*:\s*0/i.test(s)],['box-sizing: border-box',(d,s)=>/box-sizing\s*:\s*border-box/i.test(s)]]},
+{t:'เขียน CSS ให้ .container กว้างสุด 1120px และอยู่กลางจอ',
+ c:[['max-width: 1120px',(d,s)=>/max-width\s*:\s*1120px/i.test(s)],['margin: 0 auto',(d,s)=>/margin\s*:\s*0\s+auto/i.test(s)]]},
+{t:'เขียน <link> เชื่อมไฟล์ style.css',
+ c:[['มี <link>',(d,s)=>/<link/i.test(s)],['rel="stylesheet"',(d,s)=>/rel\s*=\s*["']stylesheet["']/i.test(s)],['href="style.css"',(d,s)=>/href\s*=\s*["']style\.css["']/i.test(s)]]},
+{t:'เขียน media query จอแคบกว่า 700px ให้ .cards เหลือ 1 คอลัมน์',
+ c:[['@media (max-width: 700px)',(d,s)=>/@media[^{]*max-width\s*:\s*700px/i.test(s)],['.cards เปลี่ยนเป็น 1fr',(d,s)=>/grid-template-columns\s*:\s*1fr/i.test(s)]]},
+{t:'เขียนปุ่มที่กดแล้วเด้งข้อความว่า "สวัสดี"',
+ c:[['มี <button>',d=>!!d.querySelector('button')],['มี onclick',(d,s)=>/onclick\s*=/i.test(s)],['เรียก alert',(d,s)=>/alert\s*\(/i.test(s)]]},
+{t:'เขียน CSS ให้ .card มีมุมโค้ง 12px และเงานุ่ม',
+ c:[['border-radius: 12px',(d,s)=>/border-radius\s*:\s*12px/i.test(s)],['มี box-shadow',(d,s)=>/box-shadow\s*:/i.test(s)]]}
+];
+let spI=-1, spT=null, spStart0=0, spRunning=false;
+function spFmt(ms){ return (ms/1000).toFixed(1)+' วิ'; }
+function spNew(){
+  spI=Math.floor(Math.random()*SP.length);
+  document.getElementById('spTask').textContent='📌 '+SP[spI].t;
+  document.getElementById('spTa').value='';
+  document.getElementById('spResult').innerHTML='';
+  const b=store.getItem('spbest_'+spI);
+  document.getElementById('spBest').textContent = b ? spFmt(+b) : '—';
+  clearInterval(spT); spRunning=false;
+  document.getElementById('spTime').textContent='0.0 วิ';
+  document.getElementById('spTa').focus();
+}
+document.getElementById('spTa').addEventListener('input',()=>{
+  if(spI<0 || spRunning) return;
+  spRunning=true; spStart0=Date.now();
+  spT=setInterval(()=>{ document.getElementById('spTime').textContent=spFmt(Date.now()-spStart0); },100);
+});
+function spCheck(){
+  if(spI<0){ showToast('กด "สุ่มโจทย์ใหม่" ก่อน'); return; }
+  const raw=document.getElementById('spTa').value;
+  const doc=new DOMParser().parseFromString('<!DOCTYPE html><html><head><style>'+raw+'<\/style></head><body>'+raw+'</body></html>','text/html');
+  const res=SP[spI].c.map(c=>{ try{ return !!c[1](doc, raw); }catch(e){ return false; } });
+  const host=document.getElementById('spResult'); host.innerHTML='';
+  SP[spI].c.forEach((c,i)=>{
+    const d=document.createElement('div');
+    d.className=res[i]?'cpass':'cfail';
+    d.textContent=(res[i]?'✔ ':'✘ ')+c[0];
+    host.appendChild(d);
+  });
+  if(res.every(x=>x)){
+    clearInterval(spT); spRunning=false;
+    const took=Date.now()-spStart0;
+    const best=+(store.getItem('spbest_'+spI)||0);
+    if(!best || took<best){ store.setItem('spbest_'+spI, took); showToast('สถิติใหม่! '+spFmt(took)+' 🏆'); }
+    else showToast('ผ่าน! '+spFmt(took));
+    document.getElementById('spBest').textContent=spFmt(+(store.getItem('spbest_'+spI)));
+    const n=+(store.getItem('spdone')||0)+1; store.setItem('spdone', n);
+    document.getElementById('spDone').textContent=n;
+    const w=document.createElement('div'); w.className='win'; w.style.display='block';
+    w.innerHTML='✅ ผ่านใน '+spFmt(took)+' — <button class="btn2 go" onclick="spNew()">สุ่มข้อถัดไป ▶</button>';
+    host.insertBefore(w, host.firstChild);
+  }
+}
+document.getElementById('spDone').textContent=+(store.getItem('spdone')||0);
 
 // ---------- layout lab ----------
 function labJump(id){ document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}); }
