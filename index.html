@@ -174,6 +174,58 @@
   .ftabs .dot{width:8px;height:8px;border-radius:50%;background:#e34c26}
   .ftabs .dot.css{background:#2965f1}
   .edwrap{border-radius:0 10px 10px 10px}
+  /* ---- layout lab ---- */
+  .stepnav{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+  .stepnav button{background:var(--card2);border:1px solid var(--line);color:var(--dim);padding:6px 13px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.82rem}
+  .stepnav button:hover{border-color:#22d3ee;color:#fff}
+  .lab{background:linear-gradient(160deg,var(--card),#171738);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+  .lab h3{margin:0 0 6px;color:#67e8f9;font-size:1.1rem}
+  .lab .why{background:#0d2438;border-left:3px solid #22d3ee;border-radius:0 8px 8px 0;padding:9px 12px;font-size:.9rem;margin:8px 0;color:#cffafe}
+  .ctrl{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:9px 0}
+  .ctrl .lbl2{font-size:.78rem;color:#8b8fc7;min-width:132px;font-family:Consolas,monospace}
+  .ctrl button{background:var(--card2);border:1px solid var(--line);color:var(--dim);padding:5px 11px;border-radius:8px;cursor:pointer;font-family:Consolas,monospace;font-size:.77rem;transition:.15s}
+  .ctrl button:hover{color:#fff;border-color:var(--acc)}
+  .ctrl button.on{background:var(--acc);color:#fff;border-color:var(--acc);box-shadow:0 0 10px #8b5cf666}
+  .ctrl input[type=range]{accent-color:#22d3ee;width:128px}
+  .ctrl .val{font-family:Consolas,monospace;font-size:.78rem;color:#fbbf24;min-width:52px}
+  .stage{background:repeating-linear-gradient(45deg,#0b0b1c,#0b0b1c 10px,#0d0d21 10px,#0d0d21 20px);border:1px solid var(--line);border-radius:12px;padding:14px;min-height:140px;overflow:hidden}
+  .bx{background:linear-gradient(160deg,#7c3aed,#a855f7);color:#fff;border-radius:8px;padding:16px 20px;font:bold .85rem Consolas,monospace;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+  .bx.alt{background:linear-gradient(160deg,#0891b2,#22d3ee);color:#04222a}
+  .bx.alt2{background:linear-gradient(160deg,#db2777,#f472b6)}
+  .labcode{background:#08081a;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:.79rem/1.55 Consolas,monospace;white-space:pre;overflow-x:auto;margin-top:10px}
+  /* box model viz */
+  .bmv{text-align:center;font-family:Consolas,monospace;font-size:.72rem}
+  .bm-m{background:#78350f60;border:1px dashed #f59e0b;display:inline-block;color:#fbbf24;padding:0}
+  .bm-b{background:#7c3aed;color:#fff}
+  .bm-p{background:#065f4660;border:1px dashed #34d399;color:#6ee7b7}
+  .bm-c{background:#1e3a8a;color:#bfdbfe;padding:14px 10px;font-size:.8rem}
+  .bmtag{font-size:.65rem;opacity:.9;display:block;padding:2px}
+  .totalw{color:#fbbf24;font-family:Consolas,monospace;font-size:.82rem;margin-top:8px}
+  /* position lab */
+  .poswrap{position:relative;height:180px;background:#0b0b1c;border:1px dashed #34366b;border-radius:10px;overflow:auto;padding:10px}
+  .posfill{height:300px;background:repeating-linear-gradient(180deg,#12122a,#12122a 24px,#0f0f24 24px,#0f0f24 48px);border-radius:8px;padding:8px;color:#4b4e78;font-size:.75rem;font-family:Consolas,monospace}
+  #posBox{width:130px;height:52px;z-index:2}
+  /* responsive lab */
+  .viewport{margin:0 auto;border:3px solid #34366b;border-radius:12px;background:#0b0b1c;padding:10px;transition:.25s;overflow:hidden}
+  .vpbar{text-align:center;font-family:Consolas,monospace;font-size:.78rem;color:#22d3ee;margin-bottom:6px}
+  /* polish lab */
+  .polrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.polrow{grid-template-columns:1fr}}
+  .pcard{background:#fff;color:#1f2937;padding:18px;font-family:Tahoma}
+  .pcard h4{margin:8px 0 4px;font-size:1rem}
+  .pcard p{color:#6b7280;font-size:.85rem;margin:0}
+  .pcard .thumb{height:74px;background:linear-gradient(135deg,#7c3aed,#ec4899)}
+  .pcaption{text-align:center;font-size:.78rem;color:var(--dim);margin-top:6px}
+  /* recipes */
+  .recgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .rec{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+  .rec:hover{border-color:#22d3ee;transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.45)}
+  .rec iframe{width:100%;height:130px;border:0;background:#fff;display:block;pointer-events:none}
+  .rec .rbody{padding:10px 12px}
+  .rec h4{margin:0 0 3px;font-size:.92rem;color:#fff}
+  .rec p{font-size:.78rem;color:var(--dim);margin:0 0 8px}
+  .rec button{width:100%;background:var(--card2);border:1px solid var(--line);color:#c4b5fd;padding:6px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.8rem}
+  .rec button:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
 </style>
 </head>
 <body>
@@ -188,6 +240,7 @@
   <button onclick="go('d2',this)">วัน 2: CSS</button>
   <button onclick="go('d3',this)">วัน 3: จำลองแข่ง</button>
   <button onclick="go('train',this)">💪 ภารกิจฝึก</button>
+  <button onclick="go('layout',this)">🏛 ห้องแล็บ Layout</button>
   <button onclick="go('blocks',this)">🧩 บล็อกโค้ด</button>
   <button onclick="go('real',this)">🏁 คู่มือแข่งจริง</button>
   <button onclick="go('play',this)">🧪 สนามลอง</button>
@@ -547,6 +600,115 @@ nav a:hover { color: #fbbf24; }</code></pre>
   </div>
 </section>
 
+<!-- ================= LAYOUT LAB ================= -->
+<section id="layout" class="page">
+  <h2>🏛 ห้องแล็บ Layout — กดแล้วกล่องขยับจริง</h2>
+  <p class="dim">ทุกแล็บ: กดปุ่ม → กล่องบนเวทีขยับทันที → โค้ดข้างล่างเปลี่ยนตาม. อ่านโค้ดที่มันสร้าง แล้วจำไปเขียนเอง</p>
+
+  <div class="stepnav">
+    <button onclick="labJump('lab1')">1 · ทุกอย่างคือกล่อง</button>
+    <button onclick="labJump('lab2')">2 · block / inline</button>
+    <button onclick="labJump('lab3')">3 · Flexbox</button>
+    <button onclick="labJump('lab4')">4 · Grid</button>
+    <button onclick="labJump('lab5')">5 · Position</button>
+    <button onclick="labJump('lab6')">6 · Responsive</button>
+    <button onclick="labJump('lab7')">7 · ตบแต่งเทพ</button>
+    <button onclick="labJump('lab8')">8 · สูตรสำเร็จ</button>
+  </div>
+
+  <!-- 1 box model -->
+  <div class="lab" id="lab1">
+    <h3>1 · ทุกอย่างคือกล่อง (Box Model)</h3>
+    <div class="why"><b>หลักการ:</b> ทุก tag คือกล่อง 4 ชั้นจากในออกนอก — <b>เนื้อหา → padding (เบาะใน) → border (กำแพง) → margin (ถอยห่างเพื่อนบ้าน)</b>. เข้าใจอันนี้อันเดียว แก้ปัญหา "ทำไมมันชิดกันจัง / ทำไมล้น" ได้ 80%</div>
+    <div class="ctrl"><span class="lbl2">padding</span><input type="range" id="bmP" min="0" max="40" value="16"><span class="val" id="bmPv">16px</span></div>
+    <div class="ctrl"><span class="lbl2">border</span><input type="range" id="bmB" min="0" max="20" value="6"><span class="val" id="bmBv">6px</span></div>
+    <div class="ctrl"><span class="lbl2">margin</span><input type="range" id="bmM" min="0" max="40" value="18"><span class="val" id="bmMv">18px</span></div>
+    <div class="ctrl"><span class="lbl2">box-sizing</span><span id="bmSz"></span></div>
+    <div class="stage" style="text-align:center"><div class="bmv" id="bmStage"></div><div class="totalw" id="bmTotal"></div></div>
+    <div class="labcode" id="bmCode"></div>
+  </div>
+
+  <!-- 2 display -->
+  <div class="lab" id="lab2">
+    <h3>2 · block / inline / inline-block</h3>
+    <div class="why"><b>หลักการ:</b> <b>block</b> (div, p, h1) จองเต็มความกว้าง = ขึ้นบรรทัดใหม่เสมอ · <b>inline</b> (a, span, b) แทรกในบรรทัด กำหนดความกว้าง/สูงไม่ได้ · <b>inline-block</b> = อยู่ในบรรทัดเดียวกันได้ แต่กำหนดขนาดได้ (ลูกครึ่ง). ปุ่มเมนูส่วนใหญ่ใช้ inline-block</div>
+    <div class="ctrl"><span class="lbl2">display ของ .item</span><span id="dpBtns"></span></div>
+    <div class="stage" id="dpStage"></div>
+    <div class="labcode" id="dpCode"></div>
+  </div>
+
+  <!-- 3 flex -->
+  <div class="lab" id="lab3">
+    <h3>3 · Flexbox — จัดของในแถวเดียว (ใช้บ่อยสุด 90%)</h3>
+    <div class="why"><b>หลักการ:</b> คำสั่งใส่ที่ <b>ตัวแม่</b> แล้วลูกทุกตัวเข้าแถวตาม · <b>justify-content</b> = จัดตามแนวที่ของเรียง (row = แนวนอน) · <b>align-items</b> = จัดแนวขวาง. จำสั้น ๆ: <i>justify ตามแถว, align ขวางแถว</i></div>
+    <div id="fxCtrl"></div>
+    <div class="stage" id="fxStage"></div>
+    <div class="labcode" id="fxCode"></div>
+  </div>
+
+  <!-- 4 grid -->
+  <div class="lab" id="lab4">
+    <h3>4 · Grid — ตารางจริงจัง (แกลเลอรี/การ์ดเยอะ ๆ)</h3>
+    <div class="why"><b>หลักการ:</b> Flex คิดเป็น "แถวเดียว", Grid คิดเป็น "ตารางแถว×คอลัมน์". <b>1fr</b> = แบ่งที่ว่างเท่า ๆ กัน · <b>repeat(auto-fit, minmax(180px,1fr))</b> = เวทมนตร์: การ์ดยืดเองและตัดบรรทัดเองตามจอ ไม่ต้องเขียน media query เลย</div>
+    <div id="gdCtrl"></div>
+    <div class="stage" id="gdStage"></div>
+    <div class="labcode" id="gdCode"></div>
+  </div>
+
+  <!-- 5 position -->
+  <div class="lab" id="lab5">
+    <h3>5 · Position — วางของทับ ลอย ติดหนึบ</h3>
+    <div class="why"><b>หลักการ:</b> <b>static</b> ปกติ · <b>relative</b> ขยับจากที่เดิม (ที่เดิมยังจองไว้) · <b>absolute</b> ลอยเทียบกล่องแม่ที่เป็น relative (หลุดจากแถว) · <b>fixed</b> ติดจอไม่ไปไหนแม้เลื่อน · <b>sticky</b> ปกติจนกว่าจะเลื่อนถึงขอบแล้วหนึบ (แถบเมนูบนสุดใช้อันนี้) — <i>ลองเลื่อนในกรอบดู</i></div>
+    <div class="ctrl"><span class="lbl2">position</span><span id="psBtns"></span></div>
+    <div class="ctrl"><span class="lbl2">top</span><input type="range" id="psT" min="0" max="80" value="10"><span class="val" id="psTv">10px</span>
+      <span class="lbl2" style="min-width:40px">left</span><input type="range" id="psL" min="0" max="200" value="20"><span class="val" id="psLv">20px</span></div>
+    <div class="poswrap" id="psWrap"><div class="posfill">เลื่อนในกรอบนี้เพื่อดูความต่างของ fixed / sticky<br><br>บรรทัด...<br>บรรทัด...<br>บรรทัด...<br>บรรทัด...<br>บรรทัด...<br>บรรทัด...</div>
+      <div class="bx alt2" id="posBox">ฉันเอง</div></div>
+    <div class="labcode" id="psCode"></div>
+  </div>
+
+  <!-- 6 responsive -->
+  <div class="lab" id="lab6">
+    <h3>6 · Responsive — จอเล็กจอใหญ่ก็สวย</h3>
+    <div class="why"><b>หลักการ:</b> <b>media query</b> = "ถ้าจอแคบกว่านี้ ให้ใช้กฎชุดนี้แทน". ลากแถบเลื่อนย่อจอดู — พอต่ำกว่า 700px การ์ดจะเปลี่ยนจาก 3 คอลัมน์เหลือ 1 อัตโนมัติ. ห้ามลืม <code>&lt;meta name="viewport"&gt;</code> ไม่งั้นมือถือไม่ทำงาน</div>
+    <div class="ctrl"><span class="lbl2">ความกว้างจอจำลอง</span><input type="range" id="rsW" min="320" max="1000" value="900"><span class="val" id="rsWv">900px</span></div>
+    <div class="vpbar" id="rsBar"></div>
+    <div class="viewport" id="rsVp"></div>
+    <div class="labcode" id="rsCode"></div>
+  </div>
+
+  <!-- 7 polish -->
+  <div class="lab" id="lab7">
+    <h3>7 · ตบแต่งเทพ — จากเว็บเด็กทำ เป็นเว็บดูแพง</h3>
+    <div class="why"><b>หลักการ:</b> ความ "ดูแพง" ไม่ใช่สีเยอะ แต่คือ <b>ระยะห่างเป็นระบบ + เงานุ่ม + มุมโค้งพอดี + สีคุมโทน + ขยับนุ่ม</b>. เปิดทีละสวิตช์แล้วเทียบซ้าย-ขวา จะเห็นว่าแต่ละอย่างเพิ่มความ "แพง" ยังไง</div>
+    <div id="plCtrl"></div>
+    <div class="polrow">
+      <div><div class="stage" style="padding:20px"><div class="pcard" id="plPlain"><div class="thumb"></div><h4>การ์ดธรรมดา</h4><p>ไม่ได้ตบแต่งอะไรเลย</p></div></div><div class="pcaption">ก่อน (ดิบ ๆ)</div></div>
+      <div><div class="stage" style="padding:20px"><div class="pcard" id="plFancy"><div class="thumb"></div><h4>การ์ดตบแต่งแล้ว</h4><p>เปิดสวิตช์ข้างบนดู</p></div></div><div class="pcaption">หลัง (เอาเมาส์ชี้ด้วย)</div></div>
+    </div>
+    <div class="labcode" id="plCode"></div>
+    <div class="card" style="margin-top:12px">
+      <h3>🎓 กฎทองของนักตบแต่ง</h3>
+      <ul>
+        <li><b>ระยะห่างใช้บันได</b> 4 / 8 / 16 / 24 / 32 px เท่านั้น — อย่ามั่ว 13px 27px เว็บจะดูเลอะ</li>
+        <li><b>เงาต้องนุ่ม</b> เบลอเยอะ ทึบน้อย: <code>0 8px 24px rgba(0,0,0,.12)</code> — เงาคมทึบ = ดูเชย</li>
+        <li><b>มุมโค้งให้เท่ากันทั้งเว็บ</b> เลือก 8px หรือ 12px แล้วใช้ยาว</li>
+        <li><b>สี 3 ตัวพอ</b> หลัก + เน้น + พื้นอ่อน ประกาศเป็นตัวแปรที่ <code>:root</code></li>
+        <li><b>ตัวหนังสือหายใจได้</b> <code>line-height: 1.7</code> และเนื้อหากว้างไม่เกิน 700px</li>
+        <li><b>ขยับต้องนุ่ม</b> <code>transition: .3s</code> ทุกอย่างที่มี hover</li>
+        <li><b>ที่ว่างคือพระเอก</b> เว้นรอบ ๆ เยอะ ๆ ดูแพงกว่ายัดแน่น</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 8 recipes -->
+  <div class="lab" id="lab8">
+    <h3>8 · สูตร Layout สำเร็จรูป — กดส่งเข้าสนามลองแล้วแกะเลย</h3>
+    <div class="why"><b>วิธีใช้:</b> ดูตัวอย่าง → กด "เปิดในสนามลอง" → โค้ดเต็มไปโผล่ในสนามลอง แก้เล่นได้ทันที. โครงพวกนี้คือ 90% ของเว็บที่โจทย์แข่งต้องการ</div>
+    <div class="recgrid" id="recGrid"></div>
+  </div>
+</section>
+
 <!-- ================= BLOCK CODING ================= -->
 <section id="blocks" class="page">
   <h2>🧩 บล็อกโค้ด — จับ ลาก วาง</h2>
@@ -810,7 +972,11 @@ const store = (()=>{ try {
   getItem:k=>k in m?m[k]:null, setItem:(k,v)=>{m[k]=String(v)}, removeItem:k=>{delete m[k]}
 };}})();
 // ---------- nav ----------
+function navBtn(id){
+  return [...document.querySelectorAll('nav button')].find(b=>(b.getAttribute('onclick')||'').indexOf("'"+id+"'")>=0);
+}
 function go(id, btn){
+  btn = btn || navBtn(id);
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
   document.getElementById(id).classList.add('show');
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
@@ -991,7 +1157,7 @@ function run(){ document.getElementById('frame').srcdoc = ed.value; }
 function resetPlay(){ ed.value = defaultCode; run(); }
 function tryCode(key){
   ed.value = samples[key];
-  go('play', document.querySelectorAll('nav button')[3]);
+  go('play');
   run();
 }
 ed.value = defaultCode;
@@ -2411,6 +2577,211 @@ function enhanceEditor(ta, opts){
 }
 enhanceEditor(mEd, {gutter:'mGut', status:true, onSave:()=>{ checkMission(); showToast('เซฟให้อัตโนมัติอยู่แล้ว ✓ ตรวจคำตอบให้เลย'); }});
 enhanceEditor(ed, {onSave:()=>{ run(); showToast('รันโค้ดแล้ว ▶ (Ctrl+S)'); }});
+
+// ---------- layout lab ----------
+function labJump(id){ document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}); }
+function btnRow(host, opts, cur, cb){
+  host.innerHTML='';
+  opts.forEach(o=>{
+    const v = Array.isArray(o)?o[0]:o, lb = Array.isArray(o)?o[1]:o;
+    const b=document.createElement('button');
+    b.textContent=lb; if(v===cur) b.classList.add('on');
+    b.onclick=()=>cb(v); host.appendChild(b);
+  });
+}
+// --- 1 box model ---
+let bmSizing='content-box';
+function bmDraw(){
+  const p=+bmP.value, b=+bmB.value, m=+bmM.value;
+  bmPv.textContent=p+'px'; bmBv.textContent=b+'px'; bmMv.textContent=m+'px';
+  btnRow(bmSz, [['content-box','content-box (ปกติ)'],['border-box','border-box (แนะนำ)']], bmSizing, v=>{bmSizing=v;bmDraw();});
+  bmStage.innerHTML =
+   '<div class="bm-m" style="padding:'+m+'px"><span class="bmtag">margin '+m+'px</span>'+
+   '<div class="bm-b" style="padding:'+b+'px"><span class="bmtag">border '+b+'px</span>'+
+   '<div class="bm-p" style="padding:'+p+'px"><span class="bmtag">padding '+p+'px</span>'+
+   '<div class="bm-c">width: 200px</div></div></div></div>';
+  const inner = bmSizing==='border-box' ? 200 : 200+2*p+2*b;
+  bmTotal.innerHTML = 'กล่องกินพื้นที่จริง = <b>'+inner+'px</b>'+(m?' + margin ซ้ายขวา '+(2*m)+'px = '+(inner+2*m)+'px':'')+
+    (bmSizing==='border-box'?' <span style="color:#6ee7b7">(border-box: padding+border ถูกนับรวมใน 200 แล้ว จึงไม่บวม)</span>':' <span style="color:#fda4af">(content-box: padding+border บวกเพิ่มจาก 200 → กล่องบวม!)</span>');
+  bmCode.innerHTML = hl('.box {\n    width: 200px;\n    padding: '+p+'px;\n    border: '+b+'px solid #7c3aed;\n    margin: '+m+'px;\n    box-sizing: '+bmSizing+';\n}');
+}
+['bmP','bmB','bmM'].forEach(id=>document.getElementById(id).addEventListener('input',bmDraw));
+bmDraw();
+// --- 2 display ---
+let dpMode='inline';
+function dpDraw(){
+  btnRow(dpBtns, ['block','inline','inline-block'], dpMode, v=>{dpMode=v;dpDraw();});
+  const st='display:'+dpMode+';width:150px;height:52px;background:linear-gradient(160deg,#7c3aed,#a855f7);color:#fff;border-radius:8px;text-align:center;padding:6px;font:bold .8rem Consolas,monospace;';
+  dpStage.innerHTML='<div style="color:#8b8fc7;font:.8rem Consolas,monospace">ข้อความก่อน '+
+   '<span style="'+st+'">.item 1</span><span style="'+st+'">.item 2</span> ข้อความหลัง</div>'+
+   '<div style="color:#6b6e9e;font-size:.78rem;margin-top:10px">'+
+   (dpMode==='block'?'→ block: จองเต็มบรรทัด ดันข้อความลงล่าง กำหนด width/height ได้':
+    dpMode==='inline'?'→ inline: อยู่ในบรรทัดเดียวกับข้อความ แต่ <b>width/height ไม่มีผล</b> (กล่องไม่ยอมสูง 52px)':
+    '→ inline-block: อยู่ในบรรทัดเดียวกัน <b>และ</b> กำหนดขนาดได้ = ดีที่สุดของสองโลก')+'</div>';
+  dpCode.innerHTML=hl('.item {\n    display: '+dpMode+';\n    width: 150px;\n    height: 52px;\n}');
+}
+dpDraw();
+// --- 3 flexbox ---
+const fx={dir:'row',jc:'flex-start',ai:'stretch',wrap:'nowrap',gap:12,n:3};
+function fxDraw(){
+  fxCtrl.innerHTML=
+   '<div class="ctrl"><span class="lbl2">flex-direction</span><span id="fx1"></span></div>'+
+   '<div class="ctrl"><span class="lbl2">justify-content</span><span id="fx2"></span></div>'+
+   '<div class="ctrl"><span class="lbl2">align-items</span><span id="fx3"></span></div>'+
+   '<div class="ctrl"><span class="lbl2">flex-wrap</span><span id="fx4"></span>'+
+   '<span class="lbl2" style="min-width:44px">gap</span><input type="range" id="fx5" min="0" max="40" value="'+fx.gap+'"><span class="val" id="fx5v">'+fx.gap+'px</span>'+
+   '<span class="lbl2" style="min-width:70px">จำนวนกล่อง</span><span id="fx6"></span></div>';
+  btnRow(document.getElementById('fx1'), ['row','column','row-reverse'], fx.dir, v=>{fx.dir=v;fxDraw();});
+  btnRow(document.getElementById('fx2'), ['flex-start','center','flex-end','space-between','space-around'], fx.jc, v=>{fx.jc=v;fxDraw();});
+  btnRow(document.getElementById('fx3'), ['stretch','center','flex-start','flex-end'], fx.ai, v=>{fx.ai=v;fxDraw();});
+  btnRow(document.getElementById('fx4'), ['nowrap','wrap'], fx.wrap, v=>{fx.wrap=v;fxDraw();});
+  btnRow(document.getElementById('fx6'), [[3,'3'],[6,'6'],[10,'10']], fx.n, v=>{fx.n=v;fxDraw();});
+  document.getElementById('fx5').addEventListener('input',e=>{fx.gap=+e.target.value;fxPaint();});
+  fxPaint();
+}
+function fxPaint(){
+  const v=document.getElementById('fx5v'); if(v) v.textContent=fx.gap+'px';
+  let items='';
+  for(let i=1;i<=fx.n;i++) items+='<div class="bx'+(i%3===2?' alt':i%3===0?' alt2':'')+'">'+i+'</div>';
+  fxStage.innerHTML='<div style="display:flex;flex-direction:'+fx.dir+';justify-content:'+fx.jc+';align-items:'+fx.ai+';flex-wrap:'+fx.wrap+';gap:'+fx.gap+'px;height:200px;border:1px dashed #34366b;border-radius:8px;padding:8px">'+items+'</div>';
+  fxCode.innerHTML=hl('.row {\n    display: flex;\n    flex-direction: '+fx.dir+';\n    justify-content: '+fx.jc+';\n    align-items: '+fx.ai+';\n    flex-wrap: '+fx.wrap+';\n    gap: '+fx.gap+'px;\n}');
+}
+fxDraw();
+// --- 4 grid ---
+const gd={cols:'repeat(3, 1fr)',gap:12,span:false};
+function gdDraw(){
+  gdCtrl.innerHTML='<div class="ctrl"><span class="lbl2">grid-template-columns</span><span id="gd1"></span></div>'+
+   '<div class="ctrl"><span class="lbl2">gap</span><input type="range" id="gd2" min="0" max="30" value="'+gd.gap+'"><span class="val" id="gd2v">'+gd.gap+'px</span>'+
+   '<span class="lbl2" style="min-width:150px">ให้กล่อง 1 กว้าง 2 ช่อง</span><span id="gd3"></span></div>';
+  btnRow(document.getElementById('gd1'), [['repeat(2, 1fr)','2 คอลัมน์'],['repeat(3, 1fr)','3 คอลัมน์'],['2fr 1fr','2fr 1fr'],['repeat(auto-fit, minmax(120px, 1fr))','auto-fit ✨']], gd.cols, v=>{gd.cols=v;gdDraw();});
+  btnRow(document.getElementById('gd3'), [[false,'ไม่'],[true,'ใช่ (span 2)']], gd.span, v=>{gd.span=v;gdDraw();});
+  document.getElementById('gd2').addEventListener('input',e=>{gd.gap=+e.target.value;gdPaint();});
+  gdPaint();
+}
+function gdPaint(){
+  const v=document.getElementById('gd2v'); if(v) v.textContent=gd.gap+'px';
+  let items='';
+  for(let i=1;i<=6;i++) items+='<div class="bx'+(i%3===2?' alt':i%3===0?' alt2':'')+'"'+(i===1&&gd.span?' style="grid-column: span 2"':'')+'>'+i+'</div>';
+  gdStage.innerHTML='<div style="display:grid;grid-template-columns:'+gd.cols+';gap:'+gd.gap+'px">'+items+'</div>';
+  gdCode.innerHTML=hl('.grid {\n    display: grid;\n    grid-template-columns: '+gd.cols+';\n    gap: '+gd.gap+'px;\n}'+(gd.span?'\n\n.grid .item1 {\n    grid-column: span 2;\n}':''));
+}
+gdDraw();
+// --- 5 position ---
+let ps='static';
+function psDraw(){
+  const t=+psT.value, l=+psL.value;
+  psTv.textContent=t+'px'; psLv.textContent=l+'px';
+  btnRow(psBtns, ['static','relative','absolute','fixed','sticky'], ps, v=>{ps=v;psDraw();});
+  psWrap.style.position = (ps==='absolute') ? 'relative' : 'relative';
+  const b=posBox;
+  b.style.position=ps;
+  b.style.top = (ps==='static')?'':t+'px';
+  b.style.left = (ps==='static'||ps==='sticky')?'':l+'px';
+  b.style.marginTop = (ps==='sticky')?'40px':'0';
+  psCode.innerHTML=hl('.parent {\n    position: relative;   /* จุดอ้างอิงของลูก absolute */\n}\n\n.box {\n    position: '+ps+';'+(ps!=='static'?'\n    top: '+t+'px;'+(ps!=='sticky'?'\n    left: '+l+'px;':''):'')+'\n}');
+}
+[psT,psL].forEach(el=>el.addEventListener('input',psDraw));
+psDraw();
+// --- 6 responsive ---
+function rsDraw(){
+  const w=+rsW.value;
+  rsWv.textContent=w+'px';
+  rsVp.style.maxWidth=w+'px';
+  const narrow = w < 700;
+  rsBar.innerHTML = narrow
+    ? '📱 จอ '+w+'px → เข้าเงื่อนไข <b>@media (max-width: 700px)</b> → 1 คอลัมน์'
+    : '💻 จอ '+w+'px → ใช้กฎปกติ → 3 คอลัมน์';
+  let items='';
+  for(let i=1;i<=3;i++) items+='<div class="bx'+(i%3===2?' alt':i%3===0?' alt2':'')+'" style="padding:22px 10px">การ์ด '+i+'</div>';
+  rsVp.innerHTML='<div style="display:grid;grid-template-columns:'+(narrow?'1fr':'repeat(3, 1fr)')+';gap:12px">'+items+'</div>';
+  rsCode.innerHTML=hl('.cards {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 12px;\n}\n\n@media (max-width: 700px) {\n    .cards {\n        grid-template-columns: 1fr;\n    }\n}');
+}
+rsW.addEventListener('input',rsDraw);
+rsDraw();
+// --- 7 polish ---
+const pl={space:false,shadow:false,radius:false,grad:false,hover:false,type:false};
+const PL_LABEL={space:'ระยะห่างเป็นระบบ',shadow:'เงานุ่ม',radius:'มุมโค้ง',grad:'สีไล่เฉด',hover:'ขยับตอนชี้',type:'ตัวหนังสือหายใจ'};
+function plDraw(){
+  plCtrl.innerHTML='<div class="ctrl"><span class="lbl2">เปิดสวิตช์ทีละอัน</span><span id="pl1"></span>'+
+    '<button id="plAll" style="border-color:#22d3ee;color:#67e8f9">เปิดทั้งหมด ✨</button></div>';
+  const host=document.getElementById('pl1'); host.innerHTML='';
+  Object.keys(pl).forEach(k=>{
+    const b=document.createElement('button');
+    b.textContent=PL_LABEL[k]; if(pl[k]) b.classList.add('on');
+    b.onclick=()=>{pl[k]=!pl[k];plDraw();}; host.appendChild(b);
+  });
+  document.getElementById('plAll').onclick=()=>{Object.keys(pl).forEach(k=>pl[k]=true);plDraw();};
+  const f=plFancy;
+  f.style.padding = pl.space?'24px':'18px';
+  f.style.boxShadow = pl.shadow?'0 12px 30px rgba(76,29,149,.22)':'none';
+  f.style.borderRadius = pl.radius?'16px':'0';
+  f.style.overflow = pl.radius?'hidden':'visible';
+  f.style.transition='.3s';
+  f.querySelector('.thumb').style.background = pl.grad
+    ? 'linear-gradient(135deg,#7c3aed,#ec4899,#f59e0b)' : '#7c3aed';
+  f.querySelector('.thumb').style.borderRadius = pl.radius?'10px':'0';
+  f.querySelector('.thumb').style.marginBottom = pl.space?'16px':'0';
+  f.querySelector('h4').style.margin = pl.space?'0 0 8px':'8px 0 4px';
+  f.style.lineHeight = pl.type?'1.75':'normal';
+  f.style.letterSpacing = pl.type?'.2px':'normal';
+  f.onmouseenter=()=>{ if(pl.hover){ f.style.transform='translateY(-8px)'; f.style.boxShadow='0 20px 40px rgba(76,29,149,.32)'; } };
+  f.onmouseleave=()=>{ f.style.transform='none'; f.style.boxShadow=pl.shadow?'0 12px 30px rgba(76,29,149,.22)':'none'; };
+  let css='.card {\n';
+  css += pl.space?'    padding: 24px;          /* ระยะห่างจากบันได 8/16/24 */\n':'    padding: 18px;\n';
+  if(pl.radius) css+='    border-radius: 16px;\n    overflow: hidden;       /* กันรูปล้นมุมโค้ง */\n';
+  if(pl.shadow) css+='    box-shadow: 0 12px 30px rgba(76, 29, 149, .22);   /* เบลอเยอะ ทึบน้อย */\n';
+  if(pl.type) css+='    line-height: 1.75;\n    letter-spacing: .2px;\n';
+  if(pl.hover) css+='    transition: .3s;\n';
+  css+='}\n';
+  if(pl.grad) css+='\n.card .thumb {\n    background: linear-gradient(135deg, #7c3aed, #ec4899, #f59e0b);\n}\n';
+  if(pl.hover) css+='\n.card:hover {\n    transform: translateY(-8px);\n    box-shadow: 0 20px 40px rgba(76, 29, 149, .32);\n}\n';
+  plCode.innerHTML=hl(css);
+}
+plDraw();
+// --- 8 recipes ---
+const RC_CSS_BASE='* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: Tahoma; background: #faf5ff; color: #1f2937; }\n.container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 1rem; }\n';
+const RECIPES=[
+{n:'Navbar + Hero',d:'แถบบนติดหนึบ + หน้าปกเต็มจอ',
+ css:RC_CSS_BASE+'nav { position: sticky; top: 0; background: #4c1d95; padding: 1rem 0; z-index: 10; }\n.nav-con { display: flex; justify-content: space-between; align-items: center; }\n.logo a { color: aliceblue; font-size: 1.5rem; text-decoration: none; }\n.menu { display: flex; gap: 1.5rem; }\n.menu li { list-style: none; }\n.menu li a { color: rgb(214, 217, 220); text-decoration: none; }\n.menu li a:hover { color: #fbbf24; }\n.hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #7c3aed, #ec4899); color: #fff; gap: 1rem; }\n.btn { background: #fbbf24; color: #422006; padding: .8rem 2rem; border-radius: 2rem; text-decoration: none; font-weight: bold; transition: .3s; }\n.btn:hover { transform: translateY(-3px); }',
+ body:'<nav><div class="container"><div class="nav-con"><div class="logo"><a href="#">Bloom</a></div><ul class="menu"><li><a href="#">Home</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul></div></div></nav>\n<section class="hero"><h1>ยินดีต้อนรับ</h1><p>เว็บสวยเริ่มจาก layout ที่ดี</p><a class="btn" href="#">เริ่มเลย</a></section>'},
+{n:'การ์ดยืดเอง (auto-fit)',d:'แกลเลอรีที่ตัดบรรทัดเองทุกจอ ไม่ต้องเขียน media query',
+ css:RC_CSS_BASE+'.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding: 2rem 0; }\n.card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.1); transition: .3s; }\n.card:hover { transform: translateY(-6px); box-shadow: 0 16px 34px rgba(0,0,0,.16); }\n.card img { width: 100%; height: 150px; object-fit: cover; display: block; }\n.card .info { padding: 1rem; }\nh2 { padding-top: 1.5rem; }',
+ body:'<div class="container"><h2>ผลงานของเรา</h2><div class="grid">'+
+   [237,1015,1035,1080].map(function(id){return '<div class="card"><img src="https://picsum.photos/id/'+id+'/400/300" alt="รูป"><div class="info"><h3>หัวข้อ</h3><p>คำอธิบายสั้น ๆ</p></div></div>';}).join('')+
+   '</div></div>'},
+{n:'Sidebar + เนื้อหา',d:'เมนูข้าง 1 ส่วน เนื้อหา 3 ส่วน จอเล็กซ้อนกัน',
+ css:RC_CSS_BASE+'.layout { display: grid; grid-template-columns: 1fr 3fr; gap: 1.5rem; padding: 2rem 0; }\n.side { background: #ede9fe; border-radius: 12px; padding: 1.5rem; height: fit-content; }\n.side li { list-style: none; margin: .6rem 0; }\n.side a { color: #5b21b6; text-decoration: none; }\n.main { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 18px rgba(0,0,0,.07); line-height: 1.75; }\n@media (max-width: 700px) { .layout { grid-template-columns: 1fr; } }',
+ body:'<div class="container"><div class="layout"><aside class="side"><h3>หมวดหมู่</h3><ul><li><a href="#">บทที่ 1</a></li><li><a href="#">บทที่ 2</a></li><li><a href="#">บทที่ 3</a></li></ul></aside><main class="main"><h2>เนื้อหาหลัก</h2><p>เลย์เอาต์นี้เจอบ่อยในเว็บบทเรียนและเว็บเอกสาร จอเล็กเมื่อไหร่ sidebar จะไปอยู่ข้างบนแทน</p></main></div></div>'},
+{n:'Holy Grail',d:'หัว-กลาง-ท้าย เต็มจอ ท้ายติดล่างเสมอ',
+ css:RC_CSS_BASE+'body { min-height: 100vh; display: flex; flex-direction: column; }\nheader { background: linear-gradient(135deg, #0891b2, #22d3ee); color: #04222a; padding: 2rem 0; }\nmain { flex: 1; padding: 2rem 0; }\nfooter { background: #164e63; color: #cffafe; padding: 1.2rem 0; text-align: center; }\n.cols { display: grid; grid-template-columns: 200px 1fr; gap: 1.5rem; }\n@media (max-width: 700px) { .cols { grid-template-columns: 1fr; } }',
+ body:'<header><div class="container"><h1>เว็บของฉัน</h1></div></header>\n<main><div class="container"><div class="cols"><nav><b>เมนู</b><p>ลิงก์ต่าง ๆ</p></nav><div><h2>เนื้อหา</h2><p>flex: 1 ที่ main ทำให้ footer ถูกดันไปติดล่างเสมอ แม้เนื้อหาสั้น</p></div></div></div></main>\n<footer>จัดทำโดย นักเรียน ม.ต้น</footer>'},
+{n:'Section สลับสี',d:'จังหวะของหน้ายาว ๆ แบบเว็บบริษัท',
+ css:RC_CSS_BASE+'section { padding: 3rem 0; }\nsection:nth-child(even) { background: #fff; }\n.head { text-align: center; max-width: 620px; margin: 0 auto 2rem; line-height: 1.75; }\n.row { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }\n.item { background: #fff; border: 1px solid #ede9fe; border-radius: 14px; padding: 1.5rem; width: 260px; text-align: center; transition: .3s; }\nsection:nth-child(even) .item { background: #faf5ff; }\n.item:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(124,58,237,.15); }\n.ico { font-size: 2.2rem; }',
+ body:'<section><div class="container"><div class="head"><h2>บริการของเรา</h2><p>ระยะห่าง 3rem ระหว่าง section คือหัวใจของเว็บที่ดูแพง</p></div><div class="row"><div class="item"><div class="ico">🚀</div><h3>รวดเร็ว</h3><p>โหลดไว</p></div><div class="item"><div class="ico">🎨</div><h3>สวยงาม</h3><p>ดีไซน์สะอาด</p></div><div class="item"><div class="ico">📱</div><h3>ทุกจอ</h3><p>มือถือก็สวย</p></div></div></div></section>\n<section><div class="container"><div class="head"><h2>ทำไมต้องเรา</h2><p>สังเกตพื้นหลังสลับสีอัตโนมัติด้วย :nth-child(even)</p></div></div></section>'},
+{n:'ฟอร์มติดต่อ 2 คอลัมน์',d:'ข้อมูลซ้าย ฟอร์มขวา + ปุ่มสวย',
+ css:RC_CSS_BASE+'.wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 0; align-items: center; }\n.info { line-height: 1.8; }\n.info h2 { margin-bottom: .5rem; }\nform { background: #fff; padding: 1.8rem; border-radius: 16px; box-shadow: 0 12px 30px rgba(76,29,149,.12); }\nlabel { display: block; font-size: .9rem; margin-bottom: .3rem; color: #4b5563; }\ninput, textarea { width: 100%; padding: .7rem; border: 1px solid #ddd6fe; border-radius: 8px; margin-bottom: 1rem; font-family: inherit; }\ninput:focus, textarea:focus { outline: 2px solid #a78bfa; border-color: transparent; }\nbutton { background: #7c3aed; color: #fff; border: 0; padding: .8rem 2rem; border-radius: 2rem; cursor: pointer; transition: .3s; }\nbutton:hover { background: #6d28d9; transform: translateY(-2px); }\n@media (max-width: 700px) { .wrap { grid-template-columns: 1fr; } }',
+ body:'<div class="container"><div class="wrap"><div class="info"><h2>ติดต่อเรา</h2><p>📍 123 ถนนตัวอย่าง<br>📞 08x-xxx-xxxx<br>✉️ hello@example.com</p></div><form><label>ชื่อของคุณ</label><input type="text" placeholder="พิมพ์ชื่อ"><label>ข้อความ</label><textarea rows="4" placeholder="อยากบอกอะไรเรา"></textarea><button type="button">ส่งข้อความ</button></form></div></div>'}
+];
+function recDoc(r){
+  return '<!DOCTYPE html>\n<html lang="th">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>'+r.n+'</title>\n<style>\n'+r.css+'\n<\/style>\n</head>\n<body>\n'+r.body+'\n</body>\n</html>';
+}
+function recOpen(i){
+  ed.value = recDoc(RECIPES[i]);
+  run();
+  go('play');
+  showToast('ส่ง "'+RECIPES[i].n+'" เข้าสนามลองแล้ว — แก้เล่นได้เลย');
+}
+(function recInit(){
+  const g=document.getElementById('recGrid');
+  RECIPES.forEach((r,i)=>{
+    const d=document.createElement('div');
+    d.className='rec';
+    d.innerHTML='<iframe></iframe><div class="rbody"><h4>'+r.n+'</h4><p>'+r.d+'</p><button>เปิดในสนามลอง ▶</button></div>';
+    d.querySelector('iframe').srcdoc=recDoc(r).replace('<body>','<body style="zoom:.42">');
+    d.querySelector('button').onclick=()=>recOpen(i);
+    g.appendChild(d);
+  });
+})();
 
 // ---------- day 3: topics + timer ----------
 const topics = [
