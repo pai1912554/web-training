@@ -166,6 +166,14 @@
   .statusbar b{color:#93c5fd;font-weight:normal}
   .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:#065f46;color:#d1fae5;padding:10px 22px;border-radius:22px;z-index:300;box-shadow:0 8px 20px rgba(0,0,0,.5);opacity:0;transition:.3s;pointer-events:none;font-size:.9rem}
   .toast.on{opacity:1}
+  /* ---- file tabs ---- */
+  .ftabs{display:flex;gap:2px;margin-top:6px}
+  .ftabs button{background:#12122a;border:1px solid var(--line);border-bottom:0;color:var(--dim);padding:7px 16px;border-radius:8px 8px 0 0;cursor:pointer;font-family:Consolas,monospace;font-size:.82rem;display:flex;align-items:center;gap:7px}
+  .ftabs button:hover{color:#fff}
+  .ftabs button.on{background:#0a0a18;color:#fff;border-color:var(--acc);border-bottom:1px solid #0a0a18;margin-bottom:-1px}
+  .ftabs .dot{width:8px;height:8px;border-radius:50%;background:#e34c26}
+  .ftabs .dot.css{background:#2965f1}
+  .edwrap{border-radius:0 10px 10px 10px}
 </style>
 </head>
 <body>
@@ -505,7 +513,8 @@ nav a:hover { color: #fbbf24; }</code></pre>
       </div>
     </div>
 
-    <div class="lbl">⌨️ เขียนโค้ดตรงนี้ — ตัวช่วยแบบ VS Code: <code>!</code>+Tab = โครง HTML5 (เหมือน VS Code เป๊ะ) · <code>!!</code>+Tab = โครงเต็ม reset+container+nav · <code>&lt;</code> เด้ง tag · Emmet <code>ul&gt;li*3</code> · <code>&gt;</code> ปิด tag ให้เอง</div>
+    <div class="lbl">⌨️ 2 ไฟล์แบบโปรเจกต์จริง — สลับแท็บข้างบน · ใน <b>index.html</b>: <code>!</code>+Tab โครง+link · <code>!!</code>+Tab โครง nav · <code>link:css</code>+Tab สาย CSS · ใน <b>style.css</b>: <code>!</code>+Tab reset+.container · พิมพ์ชื่อคำสั่งเด้ง suggest ทั้งสองไฟล์</div>
+    <div class="ftabs" id="mTabs"></div>
     <div class="edwrap">
       <div class="gutter"><div class="gin" id="mGut">1</div></div>
       <pre id="mHl" aria-hidden="true"><code id="mHlc"></code></pre>
@@ -767,8 +776,15 @@ body { font-family: 'Kanit', sans-serif; }</code></pre>
 }
 .top     { background: var(--main); }
 .card    { border: 2px solid var(--accent); }</code></pre>
-    <p class="dim">ในภารกิจฝึก/สนามลอง: <code>!</code>+Tab = โครง VS Code เป๊ะ · <code>!!</code>+Tab = โครงเต็มสไตล์ฉัน (reset + .container + nav + hero)</p>
-    <p class="dim">โปรเจกต์จริงใน VS Code: แยก CSS เป็นไฟล์ <code>style.css</code> แล้วดึงด้วย <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> — เว็บซ้อมนี้เป็นไฟล์เดียวเลยรวมใน &lt;style&gt; แทน หลักการเดียวกัน</p>
+    <h3 style="margin-top:16px">🔗 External Style — CSS อยู่คนละไฟล์ (วิธีที่ฉันใช้)</h3>
+    <p>โครงโปรเจกต์: <code>index.html</code> + <code>style.css</code> อยู่โฟลเดอร์เดียวกัน เชื่อมด้วยบรรทัดเดียวใน head</p>
+<pre><code><span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="val">"stylesheet"</span> <span class="attr">href=</span><span class="val">"style.css"</span><span class="tag">&gt;</span></code></pre>
+    <ul>
+      <li><b>ทำไมดีกว่า:</b> HTML เหลือแต่โครงสร้างอ่านง่าย · CSS ชุดเดียวใช้ได้ทั้ง 3 หน้า (แก้ที่เดียวเปลี่ยนทั้งเว็บ) · กรรมการเห็นว่าแยกไฟล์เป็น = คะแนน Code/Layout</li>
+      <li><b>กับดัก:</b> สะกดชื่อไฟล์ผิด (styles.css ≠ style.css) หรือลืม <code>rel="stylesheet"</code> = เว็บจืดสนิทแบบไม่มี error เตือน</li>
+      <li><b>ตอน FTP:</b> ต้องอัป <code>style.css</code> ขึ้นด้วย ไม่ใช่แค่ไฟล์ .html</li>
+    </ul>
+    <p class="dim">ในภารกิจฝึก: มีแท็บ <b>index.html</b> / <b>style.css</b> ให้สลับเหมือน VS Code · <code>!</code>+Tab ในแท็บ html = โครงพร้อม link · <code>!</code>+Tab ในแท็บ css = reset + .container</p>
   </div>
 
   <div class="card">
@@ -994,7 +1010,8 @@ const CH = [
   {n:'ตกแต่งขั้นโปร', ic:'✨', c:'#a855f7'},
   {n:'โปรเจกต์จริง', ic:'🏆', c:'#ef4444'},
   {n:'JavaScript โชว์กรรมการ', ic:'⚡', c:'#eab308'},
-  {n:'อนิเมชันและสี', ic:'🎬', c:'#06b6d4'}
+  {n:'อนิเมชันและสี', ic:'🎬', c:'#06b6d4'},
+  {n:'แยกไฟล์ CSS (External)', ic:'🔗', c:'#f43f5e'}
 ];
 const M = [
 // ============ บท 1: พื้นฐาน HTML ============
@@ -1485,7 +1502,76 @@ const M = [
   ['header มี animation infinite',(d,s)=>/header\s*{[^}]*animation\s*:[^}]*infinite/is.test(s)],
   ['h1 มี fade-in (opacity keyframes)',(d,s)=>/@keyframes[\s\S]*opacity\s*:\s*0/i.test(s)&&/h1\s*{[^}]*animation/is.test(s)]
  ]}
+,
+// ============ บท 10: แยกไฟล์ CSS (External Style) ============
+{ch:9,ty:'fix',xp:20,dual:true,
+ t:'ด่าน 43: 🔧 ซ่อมสายเชื่อม style.css',
+ goal:'HTML เชื่อม CSS ไม่ติด สีเลยไม่มา — ซ่อม <link> ให้ถูก (rel + href ตรงชื่อไฟล์จริง)',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> External Style = CSS อยู่คนละไฟล์ browser ต้องไป "โหลดเพิ่ม" ตามที่ &lt;link&gt; บอก. ต้องครบ 2 ค่า: <b>rel="stylesheet"</b> บอกว่าไฟล์นี้คือสไตล์ชีต, <b>href</b> บอกที่อยู่ไฟล์. พลาดตัวเดียว browser ไม่ error แต่เว็บจืดสนิท — สะกดชื่อไฟล์ผิดแม้แต่ s ตัวเดียวก็จบ',
+ startHtml:'<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <link href="styles.css">\n</head>\n<body>\n    <div class="container">\n        <h1>เชื่อม CSS ให้ติดสิ</h1>\n    </div>\n</body>\n</html>',
+ startCss:'* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.container {\n    width: 100%;\n    max-width: 1120px;\n    margin: 0 auto;\n    padding: 2rem;\n    background-color: #333;\n    color: aliceblue;\n}',
+ solHtml:'<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <link rel="stylesheet" href="style.css">\n</head>\n<body>\n    <div class="container">\n        <h1>เชื่อม CSS ให้ติดสิ</h1>\n    </div>\n</body>\n</html>',
+ solCss:'* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.container {\n    width: 100%;\n    max-width: 1120px;\n    margin: 0 auto;\n    padding: 2rem;\n    background-color: #333;\n    color: aliceblue;\n}',
+ checks:[
+  ['<link> มี rel="stylesheet"',(d,s,f)=>/<link[^>]*rel\s*=\s*["']stylesheet["'][^>]*>/i.test(f.html)],
+  ['href ชี้ไป style.css (ชื่อไฟล์ตรงเป๊ะ)',(d,s,f)=>/<link[^>]*href\s*=\s*["']style\.css["'][^>]*>/i.test(f.html)],
+  ['<link> อยู่ใน <head>',(d,s,f)=>/<head>[\s\S]*<link[\s\S]*<\/head>/i.test(f.html)],
+  ['ไม่มี <style> ใน HTML (CSS อยู่คนละไฟล์)',(d,s,f)=>!/<style[\s>]/i.test(f.html)]
+ ]},
+{ch:9,ty:'boss',xp:35,dual:true,
+ t:'ด่าน 44: 👑 บอส — Navbar สไตล์ Bloom (2 ไฟล์)',
+ goal:'index.html: nav > .container > .nav-con มี .logo กับ ul.menu 4 ลิงก์ | style.css: reset *, .container max-width 1120px margin 0 auto, .nav-con flex space-between, .menu flex, li list-style none',
+ how:'<b>มันเกิดขึ้นได้ยังไง:</b> นี่คือโครง navbar มาตรฐานที่เว็บจริงใช้กันทั้งโลก — <b>3 ชั้น</b>: <code>nav</code> คุมพื้นหลังเต็มจอ → <code>.container</code> คุมความกว้างเนื้อหาให้อยู่กลาง (max-width + margin auto) → <code>.nav-con</code> เป็น flex จับโลโก้ซ้าย เมนูขวา. reset <code>*</code> ลบ margin/padding ที่ browser แถมมา + <code>box-sizing: border-box</code> ทำให้ padding ไม่ดันกล่องบวม. จำโครงนี้ได้ = ทำ navbar ได้ทุกโจทย์ใน 10 นาที',
+ startHtml:'<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <link rel="stylesheet" href="style.css">\n</head>\n<body>\n    <!-- nav > .container > .nav-con > (.logo + ul.menu) -->\n    \n</body>\n</html>',
+ startCss:'/* reset ก่อน แล้วค่อย .container .nav-con .logo .menu */\n',
+ solHtml:'<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <link rel="stylesheet" href="style.css">\n</head>\n<body>\n    <nav>\n        <div class="container">\n            <div class="nav-con">\n                <div class="logo">\n                    <a href="#">Bloom</a>\n                </div>\n                <ul class="menu">\n                    <li><a href="#">Home</a></li>\n                    <li><a href="#">About</a></li>\n                    <li><a href="#">Services</a></li>\n                    <li><a href="#">Contact</a></li>\n                </ul>\n            </div>\n        </div>\n    </nav>\n    <section class="hero">\n    </section>\n</body>\n</html>',
+ solCss:'* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.container {\n    width: 100%;\n    max-width: 1120px;\n    margin: 0 auto;\n}\n\nnav {\n    padding: 1rem;\n    background-color: #333;\n}\n\n.nav-con {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.logo a {\n    font-size: 1.5rem;\n    color: aliceblue;\n    text-decoration: none;\n}\n\n.menu {\n    display: flex;\n}\n\n.menu li {\n    margin: 0 1rem;\n    list-style: none;\n}\n\n.menu li a {\n    color: rgb(214, 217, 220);\n    text-decoration: none;\n}\n\n.hero {\n    min-height: 60vh;\n}',
+ checks:[
+  ['HTML: nav > .container > .nav-con ครบ 3 ชั้น',d=>!!d.querySelector('nav .container .nav-con')],
+  ['HTML: มี .logo และ ul.menu ใน .nav-con',d=>!!d.querySelector('.nav-con .logo')&&!!d.querySelector('.nav-con ul.menu')],
+  ['HTML: เมนู 4 ลิงก์',d=>d.querySelectorAll('.menu li a').length>=4],
+  ['CSS: reset * (margin+padding+box-sizing)',(d,s,f)=>/\*\s*{[^}]*margin[^}]*padding[^}]*box-sizing\s*:\s*border-box/is.test(f.css)],
+  ['CSS: .container max-width + margin: 0 auto',(d,s,f)=>/\.container\s*{[^}]*max-width[^}]*}/is.test(f.css)&&/\.container\s*{[^}]*margin\s*:\s*0\s+auto/is.test(f.css)],
+  ['CSS: .nav-con flex + space-between',(d,s,f)=>/\.nav-con\s*{[^}]*display\s*:\s*flex[^}]*}/is.test(f.css)&&/\.nav-con\s*{[^}]*space-between/is.test(f.css)],
+  ['CSS: .menu เป็น flex และ li ไม่มีจุด (list-style: none)',(d,s,f)=>/\.menu\s*{[^}]*display\s*:\s*flex/is.test(f.css)&&/list-style\s*:\s*none/i.test(f.css)],
+  ['CSS: ลิงก์ไม่มีขีดเส้นใต้',(d,s,f)=>/text-decoration\s*:\s*none/i.test(f.css)]
+ ]}
 ];
+
+// ---------- แปลงทุกด่านเป็น External Style: ดึง <style> ออกไปเป็น style.css ----------
+function splitExternal(src){
+  const m = src.match(/([ \t]*)<style>[ \t]*\n?([\s\S]*?)\n?[ \t]*<\/style>[ \t]*\n?/i);
+  if(!m) return null;
+  const indent = m[1]||'';
+  let lines = m[2].split('\n');
+  const pads = lines.filter(l=>l.trim()).map(l=>(l.match(/^[ \t]*/)||[''])[0].length);
+  const cut = pads.length ? Math.min.apply(null,pads) : 0;
+  const css = lines.map(l=>l.slice(cut)).join('\n');
+  const html = src.slice(0,m.index) + indent + '<link rel="stylesheet" href="style.css">\n' + src.slice(m.index+m[0].length);
+  return {html, css};
+}
+M.forEach(m=>{
+  if(m.solHtml) return;
+  const b = splitExternal(m.sol), a = splitExternal(m.start);
+  if(b){
+    m.dual = true;
+    m.solHtml = b.html; m.solCss = b.css;
+    m.startHtml = a ? a.html : m.start;
+    m.startCss = a ? a.css : '/* เขียน CSS ตรงนี้ */\n';
+  } else {
+    m.dual = false;
+    m.startHtml = m.start; m.solHtml = m.sol;
+    m.startCss = ''; m.solCss = '';
+  }
+});
+function combineFiles(html, css){
+  if(!css || !css.trim()) return html;
+  const block = '<style>\n' + css + '\n</style>';
+  if(/<link[^>]*href\s*=\s*["']style\.css["'][^>]*>/i.test(html))
+    return html.replace(/[ \t]*<link[^>]*href\s*=\s*["']style\.css["'][^>]*>/i, '  ' + block);
+  if(/<\/head>/i.test(html)) return html.replace(/<\/head>/i, block + '\n</head>');
+  return block + '\n' + html;
+}
 
 // ---------- syntax highlighter ----------
 const escHl = t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -1586,6 +1672,23 @@ function renderPills(){
     el.appendChild(b);
   });
 }
+let mFiles = {html:'', css:''}, mCur = 'html';
+function renderTabs(){
+  const el = document.getElementById('mTabs'); el.innerHTML='';
+  const files = M[mi].dual ? [['html','index.html'],['css','style.css']] : [['html','index.html']];
+  files.forEach(([k,name])=>{
+    const b=document.createElement('button');
+    b.className = (k===mCur?'on':'');
+    b.innerHTML = '<span class="dot'+(k==='css'?' css':'')+'"></span>'+name;
+    b.onclick = ()=>{ mFiles[mCur]=mEd.value; mCur=k; mEd.value=mFiles[k];
+      renderTabs(); syncHl(); if(mEd._upd) mEd._upd(); mEd.focus(); };
+    el.appendChild(b);
+  });
+}
+function mPreview(){
+  mFiles[mCur] = mEd.value;
+  document.getElementById('mFrame').srcdoc = combineFiles(mFiles.html, mFiles.css);
+}
 function loadMission(i){
   mi = i; curCh = M[i].ch;
   const m = M[i];
@@ -1593,13 +1696,16 @@ function loadMission(i){
   document.getElementById('mTitle').innerHTML = m.t + badge;
   document.getElementById('mGoal').textContent = '🎯 ' + m.goal;
   document.getElementById('mHow').innerHTML = m.how;
-  document.getElementById('mTarget').srcdoc = m.sol;
-  const saved = store.getItem('mcode_'+i);
-  mEd.value = saved !== null ? saved : m.start;
-  document.getElementById('mFrame').srcdoc = mEd.value;
+  document.getElementById('mTarget').srcdoc = combineFiles(m.solHtml, m.solCss);
+  const sh = store.getItem('mcode_'+i), sc = store.getItem('mcss_'+i);
+  mFiles.html = sh !== null ? sh : m.startHtml;
+  mFiles.css  = sc !== null ? sc : m.startCss;
+  mCur = 'html';
+  mEd.value = mFiles.html;
+  document.getElementById('mFrame').srcdoc = combineFiles(mFiles.html, mFiles.css);
   document.getElementById('mWin').style.display = 'none';
   renderChecks(m.checks.map(()=>null));
-  renderPills(); renderChapters(); syncHl();
+  renderPills(); renderChapters(); renderTabs(); syncHl();
 }
 function renderChecks(results){
   const m = M[mi];
@@ -1627,10 +1733,11 @@ function confettiBoom(){
   }
 }
 function checkMission(){
-  const src = mEd.value;
+  mFiles[mCur] = mEd.value;
+  const src = combineFiles(mFiles.html, mFiles.css);
   const doc = new DOMParser().parseFromString(src, 'text/html');
   const m = M[mi];
-  const results = m.checks.map(c=>{ try { return !!c[1](doc, src); } catch(e){ return false; } });
+  const results = m.checks.map(c=>{ try { return !!c[1](doc, src, mFiles); } catch(e){ return false; } });
   renderChecks(results);
   document.getElementById('mFrame').srcdoc = src;
   if (results.every(r=>r)){
@@ -1644,19 +1751,21 @@ function checkMission(){
 }
 function showHint(){
   if (confirm('ดูเฉลยจริงหรอ? ลองอีกสักรอบก่อนไหม 😏')) {
-    mEd.value = M[mi].sol;
-    document.getElementById('mFrame').srcdoc = mEd.value;
+    mFiles.html = M[mi].solHtml; mFiles.css = M[mi].solCss;
+    mEd.value = mFiles[mCur];
+    document.getElementById('mFrame').srcdoc = combineFiles(mFiles.html, mFiles.css);
     syncHl();
   }
 }
 function resetMission(){
-  store.removeItem('mcode_'+mi);
+  store.removeItem('mcode_'+mi); store.removeItem('mcss_'+mi);
   loadMission(mi);
 }
 function nextMission(){ if (mi < M.length-1) loadMission(mi+1); }
 mEd.addEventListener('input', ()=>{
-  document.getElementById('mFrame').srcdoc = mEd.value;
-  store.setItem('mcode_'+mi, mEd.value);
+  mFiles[mCur] = mEd.value;
+  document.getElementById('mFrame').srcdoc = combineFiles(mFiles.html, mFiles.css);
+  store.setItem(mCur==='css' ? 'mcss_'+mi : 'mcode_'+mi, mEd.value);
   syncHl();
 });
 mEd.addEventListener('scroll', ()=>{ mHl.scrollTop=mEd.scrollTop; mHl.scrollLeft=mEd.scrollLeft; });
@@ -1926,10 +2035,13 @@ const AC_VALS = {
  'box-sizing':['border-box'],
  'list-style':['none']
 };
-// ! = โครง VS Code เป๊ะทุกตัวอักษร
-const AC_SNIP_BOILER = '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n</head>\n<body>\n    \n</body>\n</html>';
-// !! = โครงเต็มสไตล์ฉัน: reset + container + nav + hero (เว็บนี้รวม CSS ใน <style> — โปรเจกต์จริงแยกเป็น style.css แล้วใช้ <link>)
-const AC_SNIP_FULL = '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        .container {\n            width: 100%;\n            max-width: 1120px;\n            margin: 0 auto;\n        }\n\n        nav {\n            padding: 1rem;\n            background-color: #333;\n        }\n\n        .nav-con {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n\n        .logo a {\n            font-size: 1.5rem;\n            color: aliceblue;\n            text-decoration: none;\n        }\n\n        .menu {\n            display: flex;\n        }\n\n        .menu li {\n            margin: 0 1rem;\n            list-style: none;\n        }\n\n        .menu li a {\n            color: rgb(214, 217, 220);\n            text-decoration: none;\n        }\n\n        .hero {\n            min-height: 60vh;\n        }\n    </style>\n</head>\n<body>\n    <nav>\n        <div class="container">\n            <div class="nav-con">\n                <div class="logo">\n                    <a href="#">Bloom</a>\n                </div>\n                <ul class="menu">\n                    <li><a href="#">Home</a></li>\n                    <li><a href="#">About</a></li>\n                    <li><a href="#">Services</a></li>\n                    <li><a href="#">Contact</a></li>\n                </ul>\n            </div>\n        </div>\n    </nav>\n    <section class="hero">\n    </section>\n</body>\n</html>';
+// ! = โครง VS Code เป๊ะ + สาย link ไป style.css (External Style)
+const AC_SNIP_BOILER = '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <link rel="stylesheet" href="style.css">\n</head>\n<body>\n    \n</body>\n</html>';
+// !! ในไฟล์ style.css = ชุด reset + container สไตล์ฉัน
+const AC_SNIP_CSS = '* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.container {\n    width: 100%;\n    max-width: 1120px;\n    margin: 0 auto;\n}\n';
+// !! ในไฟล์ index.html = โครงเต็มสไตล์ฉัน (nav Bloom) — CSS อยู่ style.css แยกไฟล์
+const AC_SNIP_FULL_HTML = '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <link rel="stylesheet" href="style.css">\n</head>\n<body>\n    <nav>\n        <div class="container">\n            <div class="nav-con">\n                <div class="logo">\n                    <a href="#">Bloom</a>\n                </div>\n                <ul class="menu">\n                    <li><a href="#">Home</a></li>\n                    <li><a href="#">About</a></li>\n                    <li><a href="#">Services</a></li>\n                    <li><a href="#">Contact</a></li>\n                </ul>\n            </div>\n        </div>\n    </nav>\n    <section class="hero">\n    </section>\n</body>\n</html>';
+const AC_SNIP_FULL_OLD ='<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        .container {\n            width: 100%;\n            max-width: 1120px;\n            margin: 0 auto;\n        }\n\n        nav {\n            padding: 1rem;\n            background-color: #333;\n        }\n\n        .nav-con {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n\n        .logo a {\n            font-size: 1.5rem;\n            color: aliceblue;\n            text-decoration: none;\n        }\n\n        .menu {\n            display: flex;\n        }\n\n        .menu li {\n            margin: 0 1rem;\n            list-style: none;\n        }\n\n        .menu li a {\n            color: rgb(214, 217, 220);\n            text-decoration: none;\n        }\n\n        .hero {\n            min-height: 60vh;\n        }\n    </style>\n</head>\n<body>\n    <nav>\n        <div class="container">\n            <div class="nav-con">\n                <div class="logo">\n                    <a href="#">Bloom</a>\n                </div>\n                <ul class="menu">\n                    <li><a href="#">Home</a></li>\n                    <li><a href="#">About</a></li>\n                    <li><a href="#">Services</a></li>\n                    <li><a href="#">Contact</a></li>\n                </ul>\n            </div>\n        </div>\n    </nav>\n    <section class="hero">\n    </section>\n</body>\n</html>';
 const acBox = document.createElement('div');
 acBox.className='ac-box'; acBox.style.display='none';
 document.body.appendChild(acBox);
@@ -1951,11 +2063,12 @@ function acCaretXY(ta){
   document.body.removeChild(div);
   return {x:Math.min(x, innerWidth-260), y:Math.min(y, innerHeight-240)};
 }
+function isCssFile(ta){ return ta===mEd && typeof mCur!=='undefined' && mCur==='css'; }
 function acContext(ta){
   const S = ta.value.slice(0, ta.selectionStart);
   const w = (S.match(/[\w!.฀-๿-]*$/)||[''])[0];
   const styleOpen = (S.match(/<style[^>]*>/gi)||[]).length, styleClose = (S.match(/<\/style>/gi)||[]).length;
-  const inStyle = styleOpen > styleClose;
+  const inStyle = isCssFile(ta) || styleOpen > styleClose;
   const lt = S.lastIndexOf('<'), gt = S.lastIndexOf('>');
   if(!inStyle && lt > gt){
     const tagPart = S.slice(lt+1);
@@ -1996,11 +2109,11 @@ function acCollect(ctx, ta){
     const vars=[...new Set((ta.value.match(/--[\w-]+(?=\s*:)/g)||[]))];
     return mk(vars.map(v=>({label:v, hint:'ตัวแปรของคุณ', cls:'vr', tpl:'var('+v+')', off:v.length+5, eat:/^var\(\s*[-\w]*$/.test(ta.value.slice(0,ctx.start))?0:0})));
   }
-  if(ctx.mode==='plain' && q.startsWith('!')){
-    const sn=[
-      {label:'!', hint:'โครง HTML5 (เหมือน VS Code)', cls:'', tpl:AC_SNIP_BOILER, off:AC_SNIP_BOILER.indexOf('<body>')+11},
-      {label:'!!', hint:'โครงเต็ม: reset + container + nav + hero', cls:'vr', tpl:AC_SNIP_FULL, off:AC_SNIP_FULL.indexOf('class="hero"')+18}
-    ];
+  if(q.startsWith('!')){
+    const sn = isCssFile(ta)
+      ? [{label:'!!', hint:'reset * + .container (style.css)', cls:'vr', tpl:AC_SNIP_CSS, off:AC_SNIP_CSS.length}]
+      : [{label:'!', hint:'โครง HTML5 + link style.css', cls:'', tpl:AC_SNIP_BOILER, off:AC_SNIP_BOILER.indexOf('<body>')+11},
+         {label:'!!', hint:'โครงเต็ม: nav Bloom + hero', cls:'vr', tpl:AC_SNIP_FULL_HTML, off:AC_SNIP_FULL_HTML.indexOf('class="hero"')+18}];
     return sn.filter(it=>it.label.startsWith(ctx.word));
   }
   return [];
@@ -2075,15 +2188,18 @@ function emmetExpand(expr, baseInd){
 }
 function acSnippet(ta){
   const S = ta.value.slice(0, ta.selectionStart);
-  const w = (S.match(/[\w!.#>*-]+$/)||[''])[0];
+  const w = (S.match(/[\w!.#>*:-]+$/)||[''])[0];
   if(!w) return false;
   const start = ta.selectionStart - w.length;
-  if(w==='!!'){ ta.setRangeText(AC_SNIP_FULL, start, ta.selectionStart, 'end');
-    ta.selectionStart=ta.selectionEnd=start + AC_SNIP_FULL.indexOf('class="hero"')+18;
-    ta.dispatchEvent(new Event('input')); return true; }
-  if(w==='!'){ ta.setRangeText(AC_SNIP_BOILER, start, ta.selectionStart, 'end');
-    const p = start + AC_SNIP_BOILER.indexOf('<body>')+11;
-    ta.selectionStart=ta.selectionEnd=p; ta.dispatchEvent(new Event('input')); return true; }
+  const put=(tpl,off)=>{ ta.setRangeText(tpl, start, ta.selectionStart, 'end');
+    ta.selectionStart=ta.selectionEnd=start+off; ta.dispatchEvent(new Event('input')); return true; };
+  if(w==='link:css') return put('<link rel="stylesheet" href="style.css">', 40);
+  if(w==='!!'){ return isCssFile(ta)
+    ? put(AC_SNIP_CSS, AC_SNIP_CSS.length)
+    : put(AC_SNIP_FULL_HTML, AC_SNIP_FULL_HTML.indexOf('class="hero"')+18); }
+  if(w==='!'){ return isCssFile(ta)
+    ? put(AC_SNIP_CSS, AC_SNIP_CSS.length)
+    : put(AC_SNIP_BOILER, AC_SNIP_BOILER.indexOf('<body>')+11); }
   // Emmet เมื่อมี . # > * ในนิพจน์
   if(/[.#>*]/.test(w)){
     const lineStart = S.lastIndexOf('\n')+1;
@@ -2157,6 +2273,7 @@ function showToast(msg){
   clearTimeout(toastT); toastT=setTimeout(()=>toast.classList.remove('on'), 1800);
 }
 function edInStyle(ta, pos){
+  if(isCssFile(ta)) return true;
   const S=ta.value.slice(0,pos);
   return (S.match(/<style[^>]*>/gi)||[]).length > (S.match(/<\/style>/gi)||[]).length;
 }
@@ -2196,6 +2313,7 @@ function enhanceEditor(ta, opts){
       document.getElementById('stMode').textContent = edInStyle(ta,ta.selectionStart)?'CSS':'HTML';
     }
   };
+  ta._upd = upd;
   ta.addEventListener('input', upd);
   ta.addEventListener('click', upd);
   ta.addEventListener('keyup', upd);
